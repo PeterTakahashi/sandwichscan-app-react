@@ -18,7 +18,6 @@ import {
   SidebarRail,
   SidebarMenuButton,
 } from "@/components/atoms/Sidebar";
-// import { OrganizationSwitcher } from "@/components/organisms/OrganizationSwitcher";
 
 import { Link } from "react-router-dom";
 
@@ -116,7 +115,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-        {/* <OrganizationSwitcher /> */}
         <Link to="/">
           <SidebarMenuButton
             size="lg"
