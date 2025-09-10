@@ -372,23 +372,6 @@ export interface paths {
         patch: operations["user_api_keys_update_user_api_key_user_api_keys__user_api_key_id__patch"];
         trace?: never;
     };
-    "/user-api-keys/verify": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** User Api Keys:Verify User Api Key */
-        post: operations["user_api_keys_verify_user_api_key_user_api_keys_verify_post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
     "/organizations": {
         parameters: {
             query?: never;
@@ -616,6 +599,63 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api-keys/verify": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Organization Api Keys:Verify Organization Api Key */
+        post: operations["organization_api_keys_verify_organization_api_key_api_keys_verify_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/chains": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Chains:List Chains
+         * @description Retrieve a list of chains with filtering, sorting, and pagination.
+         */
+        get: operations["chains_list_chains_chains_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/chains/{chain_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Chains:Get Chain
+         * @description Retrieve an chain by its ID.
+         */
+        get: operations["chains_get_chain_chains__chain_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -739,6 +779,25 @@ export interface components {
              */
             updated_at: string;
         };
+        /**
+         * ApiKeyVerifyResponse
+         * @description Response model for verifying an API key.
+         */
+        ApiKeyVerifyResponse: {
+            /**
+             * Is Valid
+             * @description Indicates whether the API key is valid
+             * @example true
+             */
+            is_valid: boolean;
+            /**
+             * Owner Type
+             * @description Type of the owner (user or organization)
+             * @example user
+             * @enum {string}
+             */
+            owner_type: "user" | "organization";
+        };
         /** BearerResponse */
         BearerResponse: {
             /** Access Token */
@@ -752,10 +811,7 @@ export interface components {
             grant_type?: string | null;
             /** Username */
             username: string;
-            /**
-             * Password
-             * Format: password
-             */
+            /** Password */
             password: string;
             /**
              * Scope
@@ -764,10 +820,7 @@ export interface components {
             scope: string;
             /** Client Id */
             client_id?: string | null;
-            /**
-             * Client Secret
-             * Format: password
-             */
+            /** Client Secret */
             client_secret?: string | null;
         };
         /** Body_auth_jwt_login_auth_jwt_login_post */
@@ -776,10 +829,7 @@ export interface components {
             grant_type?: string | null;
             /** Username */
             username: string;
-            /**
-             * Password
-             * Format: password
-             */
+            /** Password */
             password: string;
             /**
              * Scope
@@ -788,10 +838,7 @@ export interface components {
             scope: string;
             /** Client Id */
             client_id?: string | null;
-            /**
-             * Client Secret
-             * Format: password
-             */
+            /** Client Secret */
             client_secret?: string | null;
         };
         /** Body_reset_forgot_password_auth_forgot_password_post */
@@ -821,6 +868,53 @@ export interface components {
         Body_verify_verify_auth_verify_post: {
             /** Token */
             token: string;
+        };
+        /** ChainListRead */
+        ChainListRead: {
+            meta: components["schemas"]["ListResponseMeta"];
+            /** Data */
+            data: components["schemas"]["ChainRead"][];
+        };
+        /** ChainRead */
+        ChainRead: {
+            /**
+             * Id
+             * @description The ID of the object
+             * @example abcd1234xyzc
+             */
+            id: string;
+            /**
+             * Chain Id
+             * @description Chain ID.
+             */
+            chain_id: number;
+            /**
+             * Name
+             * @description Chain name.
+             */
+            name: string;
+            /**
+             * Native Symbol
+             * @description Native currency symbol.
+             */
+            native_symbol: string;
+            /**
+             * Native Decimals
+             * @description Native currency decimals.
+             */
+            native_decimals: number;
+            /**
+             * Created At
+             * Format: date-time
+             * @description Record creation timestamp.
+             */
+            created_at: string;
+            /**
+             * Updated At
+             * Format: date-time
+             * @description Record update timestamp.
+             */
+            updated_at: string;
         };
         /** ErrorDetail */
         ErrorDetail: {
@@ -1392,15 +1486,6 @@ export interface components {
              * @example 192.168.1.1
              */
             allowed_ip?: string | null;
-        };
-        /** UserApiKeyVerifyResponse */
-        UserApiKeyVerifyResponse: {
-            /**
-             * Is Valid
-             * @description Indicates whether the API key is valid
-             * @example true
-             */
-            is_valid: boolean;
         };
         /** UserCreate */
         UserCreate: {
@@ -2601,46 +2686,6 @@ export interface operations {
             };
         };
     };
-    user_api_keys_verify_user_api_key_user_api_keys_verify_post: {
-        parameters: {
-            query?: never;
-            header?: {
-                "X-API-KEY"?: string | null;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UserApiKeyVerifyResponse"];
-                };
-            };
-            /** @description Unauthorized access. */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ErrorResponse"];
-                };
-            };
-            /** @description Validation error. */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ErrorResponse"];
-                };
-            };
-        };
-    };
     organizations_list_organizations_organizations_get: {
         parameters: {
             query?: {
@@ -3422,6 +3467,134 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["PaymentIntentCreateResponse"];
+                };
+            };
+            /** @description Unauthorized access. */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Validation error. */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+        };
+    };
+    organization_api_keys_verify_organization_api_key_api_keys_verify_post: {
+        parameters: {
+            query?: never;
+            header: {
+                "X-API-KEY": string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiKeyVerifyResponse"];
+                };
+            };
+            /** @description Unauthorized access. */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Validation error. */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+        };
+    };
+    chains_list_chains_chains_get: {
+        parameters: {
+            query?: {
+                limit?: number;
+                offset?: number;
+                sorted_by?: string | null;
+                sorted_order?: string;
+                name__icontains?: string | null;
+                created_at__gte?: string | null;
+                created_at__lte?: string | null;
+                updated_at__gte?: string | null;
+                updated_at__lte?: string | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ChainListRead"];
+                };
+            };
+            /** @description Unauthorized access. */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Validation error. */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+        };
+    };
+    chains_get_chain_chains__chain_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                chain_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ChainRead"];
                 };
             };
             /** @description Unauthorized access. */

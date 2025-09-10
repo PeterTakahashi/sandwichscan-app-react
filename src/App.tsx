@@ -20,6 +20,8 @@ import { UserApiKeysPage } from "@/pages/UserApiKeysPage";
 import { UserApiKeyNewPage } from "@/pages/UserApiKeyNewPage";
 import { UserApiKeyEditPage } from "@/pages/UserApiKeyEditPage";
 
+import { ChainsPage } from "@/pages/ChainsPage";
+
 const routes = [
   { path: "/", element: <HomePage />, isPrivate: true },
   { path: "/signin", element: <SigninPage />, isPrivate: false },
@@ -88,6 +90,11 @@ const routes = [
   {
     path: "/user-api-keys/:id/edit",
     element: <UserApiKeyEditPage />,
+    isPrivate: true,
+  },
+  {
+    path: "/chains",
+    element: <ChainsPage />,
     isPrivate: true,
   },
 ];

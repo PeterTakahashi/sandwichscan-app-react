@@ -1,7 +1,7 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "Service Base FastAPI",
+    "title": "Sandwich Scan FastAPI",
     "description": "Version 1 of the FastAPI Application",
     "version": "1.0.0"
   },
@@ -2138,160 +2138,6 @@
         }
       }
     },
-    "/user-api-keys/verify": {
-      "post": {
-        "tags": ["User API Keys"],
-        "summary": "User Api Keys:Verify User Api Key",
-        "operationId": "user_api_keys_verify_user_api_key_user_api_keys_verify_post",
-        "security": [{ "OAuth2PasswordBearer": [] }, { "APIKeyCookie": [] }],
-        "parameters": [
-          {
-            "name": "X-API-KEY",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [{ "type": "string" }, { "type": "null" }],
-              "title": "X-Api-Key"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UserApiKeyVerifyResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation error.",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "validation_error": {
-                    "summary": "Validation failed on input data.",
-                    "value": {
-                      "type": "about:blank",
-                      "title": "Unprocessable Entity",
-                      "status": 422,
-                      "instance": "http://127.0.0.1:8000/app/v1/user-api-keys/verify",
-                      "errors": [
-                        {
-                          "status": "422",
-                          "code": "validation_error",
-                          "title": "Validation Error",
-                          "detail": "The input data did not pass validation checks.",
-                          "source": { "pointer": "#/body" }
-                        }
-                      ]
-                    }
-                  }
-                },
-                "schema": { "$ref": "#/components/schemas/ErrorResponse" }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "unauthorized": {
-                    "summary": "Authentication credentials missing or invalid.",
-                    "value": {
-                      "type": "about:blank",
-                      "title": "Unauthorized",
-                      "status": 401,
-                      "instance": "http://127.0.0.1:8000/app/v1/user-api-keys/verify",
-                      "errors": [
-                        {
-                          "status": "401",
-                          "code": "unauthorized",
-                          "title": "Unauthorized",
-                          "detail": "Authentication credentials were not provided or are invalid."
-                        }
-                      ]
-                    }
-                  },
-                  "invalid_api_key": {
-                    "summary": "API key is invalid.",
-                    "value": {
-                      "type": "about:blank",
-                      "title": "Unauthorized",
-                      "status": 401,
-                      "instance": "http://127.0.0.1:8000/app/v1/user-api-keys/verify",
-                      "errors": [
-                        {
-                          "status": "401",
-                          "code": "invalid_api_key",
-                          "title": "Invalid API Key",
-                          "detail": "The provided API key is invalid. Please check your API key and try again."
-                        }
-                      ]
-                    }
-                  },
-                  "invalid_ip": {
-                    "summary": "Request IP address not allowed.",
-                    "value": {
-                      "type": "about:blank",
-                      "title": "Unauthorized",
-                      "status": 401,
-                      "instance": "http://127.0.0.1:8000/app/v1/user-api-keys/verify",
-                      "errors": [
-                        {
-                          "status": "401",
-                          "code": "invalid_ip",
-                          "title": "Invalid IP Address",
-                          "detail": "The request IP address is not allowed. Please check your request IP address."
-                        }
-                      ]
-                    }
-                  },
-                  "invalid_origin": {
-                    "summary": "Request origin not allowed.",
-                    "value": {
-                      "type": "about:blank",
-                      "title": "Unauthorized",
-                      "status": 401,
-                      "instance": "http://127.0.0.1:8000/app/v1/user-api-keys/verify",
-                      "errors": [
-                        {
-                          "status": "401",
-                          "code": "invalid_origin",
-                          "title": "Invalid Origin",
-                          "detail": "The request origin is not allowed. Please check your request origin."
-                        }
-                      ]
-                    }
-                  },
-                  "expired_api_key": {
-                    "summary": "API key has expired.",
-                    "value": {
-                      "type": "about:blank",
-                      "title": "Unauthorized",
-                      "status": 401,
-                      "instance": "http://127.0.0.1:8000/app/v1/user-api-keys/verify",
-                      "errors": [
-                        {
-                          "status": "401",
-                          "code": "expired_api_key",
-                          "title": "Expired API Key",
-                          "detail": "The provided API key has expired. Please obtain a new API key."
-                        }
-                      ]
-                    }
-                  }
-                },
-                "schema": { "$ref": "#/components/schemas/ErrorResponse" }
-              }
-            }
-          }
-        }
-      }
-    },
     "/organizations": {
       "get": {
         "tags": ["Organizations"],
@@ -4403,6 +4249,394 @@
           }
         }
       }
+    },
+    "/api-keys/verify": {
+      "post": {
+        "tags": ["API Keys"],
+        "summary": "Organization Api Keys:Verify Organization Api Key",
+        "operationId": "organization_api_keys_verify_organization_api_key_api_keys_verify_post",
+        "parameters": [
+          {
+            "name": "X-API-KEY",
+            "in": "header",
+            "required": true,
+            "schema": { "type": "string", "title": "X-Api-Key" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiKeyVerifyResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "validation_error": {
+                    "summary": "Validation failed on input data.",
+                    "value": {
+                      "type": "about:blank",
+                      "title": "Unprocessable Entity",
+                      "status": 422,
+                      "instance": "http://127.0.0.1:8000/app/v1/api-keys/verify",
+                      "errors": [
+                        {
+                          "status": "422",
+                          "code": "validation_error",
+                          "title": "Validation Error",
+                          "detail": "The input data did not pass validation checks.",
+                          "source": { "pointer": "#/body" }
+                        }
+                      ]
+                    }
+                  }
+                },
+                "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "unauthorized": {
+                    "summary": "Authentication credentials missing or invalid.",
+                    "value": {
+                      "type": "about:blank",
+                      "title": "Unauthorized",
+                      "status": 401,
+                      "instance": "http://127.0.0.1:8000/app/v1/api-keys/verify",
+                      "errors": [
+                        {
+                          "status": "401",
+                          "code": "unauthorized",
+                          "title": "Unauthorized",
+                          "detail": "Authentication credentials were not provided or are invalid."
+                        }
+                      ]
+                    }
+                  },
+                  "invalid_ip": {
+                    "summary": "Request IP address not allowed.",
+                    "value": {
+                      "type": "about:blank",
+                      "title": "Unauthorized",
+                      "status": 401,
+                      "instance": "http://127.0.0.1:8000/app/v1/api-keys/verify",
+                      "errors": [
+                        {
+                          "status": "401",
+                          "code": "invalid_ip",
+                          "title": "Invalid IP Address",
+                          "detail": "The request IP address is not allowed. Please check your request IP address."
+                        }
+                      ]
+                    }
+                  },
+                  "invalid_origin": {
+                    "summary": "Request origin not allowed.",
+                    "value": {
+                      "type": "about:blank",
+                      "title": "Unauthorized",
+                      "status": 401,
+                      "instance": "http://127.0.0.1:8000/app/v1/api-keys/verify",
+                      "errors": [
+                        {
+                          "status": "401",
+                          "code": "invalid_origin",
+                          "title": "Invalid Origin",
+                          "detail": "The request origin is not allowed. Please check your request origin."
+                        }
+                      ]
+                    }
+                  },
+                  "expired_api_key": {
+                    "summary": "API key has expired.",
+                    "value": {
+                      "type": "about:blank",
+                      "title": "Unauthorized",
+                      "status": 401,
+                      "instance": "http://127.0.0.1:8000/app/v1/api-keys/verify",
+                      "errors": [
+                        {
+                          "status": "401",
+                          "code": "expired_api_key",
+                          "title": "Expired API Key",
+                          "detail": "The provided API key has expired. Please obtain a new API key."
+                        }
+                      ]
+                    }
+                  }
+                },
+                "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/chains": {
+      "get": {
+        "tags": ["Chains"],
+        "summary": "Chains:List Chains",
+        "description": "Retrieve a list of chains with filtering, sorting, and pagination.",
+        "operationId": "chains_list_chains_chains_get",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 100,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0,
+              "title": "Offset"
+            }
+          },
+          {
+            "name": "sorted_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [{ "type": "string" }, { "type": "null" }],
+              "default": "id",
+              "title": "Sorted By"
+            }
+          },
+          {
+            "name": "sorted_order",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "asc",
+              "title": "Sorted Order"
+            }
+          },
+          {
+            "name": "name__icontains",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [{ "type": "string" }, { "type": "null" }],
+              "title": "Name  Icontains"
+            }
+          },
+          {
+            "name": "created_at__gte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "string", "format": "date-time" },
+                { "type": "null" }
+              ],
+              "title": "Created At  Gte"
+            }
+          },
+          {
+            "name": "created_at__lte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "string", "format": "date-time" },
+                { "type": "null" }
+              ],
+              "title": "Created At  Lte"
+            }
+          },
+          {
+            "name": "updated_at__gte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "string", "format": "date-time" },
+                { "type": "null" }
+              ],
+              "title": "Updated At  Gte"
+            }
+          },
+          {
+            "name": "updated_at__lte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "string", "format": "date-time" },
+                { "type": "null" }
+              ],
+              "title": "Updated At  Lte"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ChainListRead" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "validation_error": {
+                    "summary": "Validation failed on input data.",
+                    "value": {
+                      "type": "about:blank",
+                      "title": "Unprocessable Entity",
+                      "status": 422,
+                      "instance": "http://127.0.0.1:8000/app/v1/chains",
+                      "errors": [
+                        {
+                          "status": "422",
+                          "code": "validation_error",
+                          "title": "Validation Error",
+                          "detail": "The input data did not pass validation checks.",
+                          "source": { "pointer": "#/body" }
+                        }
+                      ]
+                    }
+                  }
+                },
+                "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "unauthorized": {
+                    "summary": "Authentication credentials missing or invalid.",
+                    "value": {
+                      "type": "about:blank",
+                      "title": "Unauthorized",
+                      "status": 401,
+                      "instance": "http://127.0.0.1:8000/app/v1/chains",
+                      "errors": [
+                        {
+                          "status": "401",
+                          "code": "unauthorized",
+                          "title": "Unauthorized",
+                          "detail": "Authentication credentials were not provided or are invalid."
+                        }
+                      ]
+                    }
+                  }
+                },
+                "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/chains/{chain_id}": {
+      "get": {
+        "tags": ["Chains"],
+        "summary": "Chains:Get Chain",
+        "description": "Retrieve an chain by its ID.",
+        "operationId": "chains_get_chain_chains__chain_id__get",
+        "parameters": [
+          {
+            "name": "chain_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "Chain Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ChainRead" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "validation_error": {
+                    "summary": "Validation failed on input data.",
+                    "value": {
+                      "type": "about:blank",
+                      "title": "Unprocessable Entity",
+                      "status": 422,
+                      "instance": "http://127.0.0.1:8000/app/v1/chains/{chain_id}",
+                      "errors": [
+                        {
+                          "status": "422",
+                          "code": "validation_error",
+                          "title": "Validation Error",
+                          "detail": "The input data did not pass validation checks.",
+                          "source": { "pointer": "#/body" }
+                        }
+                      ]
+                    }
+                  }
+                },
+                "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized access.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "unauthorized": {
+                    "summary": "Authentication credentials missing or invalid.",
+                    "value": {
+                      "type": "about:blank",
+                      "title": "Unauthorized",
+                      "status": 401,
+                      "instance": "http://127.0.0.1:8000/app/v1/chains/{chain_id}",
+                      "errors": [
+                        {
+                          "status": "401",
+                          "code": "unauthorized",
+                          "title": "Unauthorized",
+                          "detail": "Authentication credentials were not provided or are invalid."
+                        }
+                      ]
+                    }
+                  }
+                },
+                "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -4547,6 +4781,27 @@
         "required": ["id", "name", "api_key", "created_at", "updated_at"],
         "title": "ApiKeyRead"
       },
+      "ApiKeyVerifyResponse": {
+        "properties": {
+          "is_valid": {
+            "type": "boolean",
+            "title": "Is Valid",
+            "description": "Indicates whether the API key is valid",
+            "example": true
+          },
+          "owner_type": {
+            "type": "string",
+            "enum": ["user", "organization"],
+            "title": "Owner Type",
+            "description": "Type of the owner (user or organization)",
+            "example": "user"
+          }
+        },
+        "type": "object",
+        "required": ["is_valid", "owner_type"],
+        "title": "ApiKeyVerifyResponse",
+        "description": "Response model for verifying an API key."
+      },
       "BearerResponse": {
         "properties": {
           "access_token": { "type": "string", "title": "Access Token" },
@@ -4566,11 +4821,7 @@
             "title": "Grant Type"
           },
           "username": { "type": "string", "title": "Username" },
-          "password": {
-            "type": "string",
-            "format": "password",
-            "title": "Password"
-          },
+          "password": { "type": "string", "title": "Password" },
           "scope": { "type": "string", "title": "Scope", "default": "" },
           "client_id": {
             "anyOf": [{ "type": "string" }, { "type": "null" }],
@@ -4578,7 +4829,6 @@
           },
           "client_secret": {
             "anyOf": [{ "type": "string" }, { "type": "null" }],
-            "format": "password",
             "title": "Client Secret"
           }
         },
@@ -4596,11 +4846,7 @@
             "title": "Grant Type"
           },
           "username": { "type": "string", "title": "Username" },
-          "password": {
-            "type": "string",
-            "format": "password",
-            "title": "Password"
-          },
+          "password": { "type": "string", "title": "Password" },
           "scope": { "type": "string", "title": "Scope", "default": "" },
           "client_id": {
             "anyOf": [{ "type": "string" }, { "type": "null" }],
@@ -4608,7 +4854,6 @@
           },
           "client_secret": {
             "anyOf": [{ "type": "string" }, { "type": "null" }],
-            "format": "password",
             "title": "Client Secret"
           }
         },
@@ -4646,6 +4891,72 @@
         "type": "object",
         "required": ["token"],
         "title": "Body_verify_verify_auth_verify_post"
+      },
+      "ChainListRead": {
+        "properties": {
+          "meta": { "$ref": "#/components/schemas/ListResponseMeta" },
+          "data": {
+            "items": { "$ref": "#/components/schemas/ChainRead" },
+            "type": "array",
+            "title": "Data"
+          }
+        },
+        "type": "object",
+        "required": ["meta", "data"],
+        "title": "ChainListRead"
+      },
+      "ChainRead": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "The ID of the object",
+            "example": "abcd1234xyzc"
+          },
+          "chain_id": {
+            "type": "integer",
+            "title": "Chain Id",
+            "description": "Chain ID."
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "Chain name."
+          },
+          "native_symbol": {
+            "type": "string",
+            "title": "Native Symbol",
+            "description": "Native currency symbol."
+          },
+          "native_decimals": {
+            "type": "integer",
+            "title": "Native Decimals",
+            "description": "Native currency decimals."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Record creation timestamp."
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At",
+            "description": "Record update timestamp."
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "chain_id",
+          "name",
+          "native_symbol",
+          "native_decimals",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "ChainRead"
       },
       "ErrorDetail": {
         "properties": {
@@ -5408,19 +5719,6 @@
         "type": "object",
         "required": ["name"],
         "title": "UserApiKeyUpdate"
-      },
-      "UserApiKeyVerifyResponse": {
-        "properties": {
-          "is_valid": {
-            "type": "boolean",
-            "title": "Is Valid",
-            "description": "Indicates whether the API key is valid",
-            "example": true
-          }
-        },
-        "type": "object",
-        "required": ["is_valid"],
-        "title": "UserApiKeyVerifyResponse"
       },
       "UserCreate": {
         "properties": {
