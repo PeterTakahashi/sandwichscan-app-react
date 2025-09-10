@@ -4,7 +4,7 @@ import { sorts } from "./sorts";
 import { useDefaultSortOnLocalStorage } from "@/components/molecules/DataTable/hooks/useDefaultSortOnLocalstorage";
 import type { PaginationState } from "@tanstack/react-table";
 import { useChains } from "@/features/hooks/swr/fetcher/chains/useChains";
-import type { UserApiKeyListRequestQuery } from "@/types/api/userApiKey/userApiKey";
+import type { ChainListRequestQuery } from "@/types/api/chain/chain";
 import { buildColumns } from "./columns";
 
 const tableName = "chainsTable";
@@ -16,7 +16,7 @@ export const ChainsTable: React.FC = () => {
     pageIndex: 0,
     pageSize: 10,
   });
-  const [query, setQuery] = useState<UserApiKeyListRequestQuery>({
+  const [query, setQuery] = useState<ChainListRequestQuery>({
     sorted_by: defaultSort.sorted_by,
     sorted_order: defaultSort.sorted_order,
     limit: pagination.pageSize,
