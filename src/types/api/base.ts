@@ -4,258 +4,387 @@
  */
 
 export interface paths {
-  "/chains": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/chains": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Chains:List Chains
+         * @description Retrieve a list of chains with filtering, sorting, and pagination.
+         */
+        get: operations["chains_list_chains_chains_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /**
-     * Chains:List Chains
-     * @description Retrieve a list of chains with filtering, sorting, and pagination.
-     */
-    get: operations["chains_list_chains_chains_get"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/chains/{chain_id}": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/chains/{chain_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Chains:Get Chain
+         * @description Retrieve an chain by its ID.
+         */
+        get: operations["chains_get_chain_chains__chain_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /**
-     * Chains:Get Chain
-     * @description Retrieve an chain by its ID.
-     */
-    get: operations["chains_get_chain_chains__chain_id__get"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
+    "/defis": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Defis:List Defis
+         * @description Retrieve a list of defis with filtering, sorting, and pagination.
+         */
+        get: operations["defis_list_defis_defis_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/defis/{defi_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Defis:Get Defi
+         * @description Retrieve an defi by its ID.
+         */
+        get: operations["defis_get_defi_defis__defi_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
-  schemas: {
-    /** ChainListRead */
-    ChainListRead: {
-      meta: components["schemas"]["ListResponseMeta"];
-      /** Data */
-      data: components["schemas"]["ChainRead"][];
+    schemas: {
+        /** ChainListRead */
+        ChainListRead: {
+            meta: components["schemas"]["ListResponseMeta"];
+            /** Data */
+            data: components["schemas"]["ChainRead"][];
+        };
+        /** ChainRead */
+        ChainRead: {
+            /**
+             * Id
+             * @description The ID of the object
+             * @example abcd1234xyzc
+             */
+            id: string;
+            /**
+             * Chain Id
+             * @description Chain ID.
+             */
+            chain_id: number;
+            /**
+             * Name
+             * @description Chain name.
+             */
+            name: string;
+            /**
+             * Native Symbol
+             * @description Native currency symbol.
+             */
+            native_symbol: string;
+            /**
+             * Native Decimals
+             * @description Native currency decimals.
+             */
+            native_decimals: number;
+            /**
+             * Logo Url
+             * @description URL of the chain logo.
+             */
+            logo_url: string;
+            /**
+             * Created At
+             * Format: date-time
+             * @description Record creation timestamp.
+             */
+            created_at: string;
+            /**
+             * Updated At
+             * Format: date-time
+             * @description Record update timestamp.
+             */
+            updated_at: string;
+        };
+        /** DefiListRead */
+        DefiListRead: {
+            meta: components["schemas"]["ListResponseMeta"];
+            /** Data */
+            data: components["schemas"]["DefiRead"][];
+        };
+        /** DefiRead */
+        DefiRead: {
+            /**
+             * Id
+             * @description The ID of the object
+             * @example abcd1234xyzc
+             */
+            id: string;
+            /**
+             * Name
+             * @description The name of the DeFi protocol.
+             */
+            name: string;
+            /**
+             * Created At
+             * Format: date-time
+             * @description Record creation timestamp.
+             */
+            created_at: string;
+            /**
+             * Updated At
+             * Format: date-time
+             * @description Record update timestamp.
+             */
+            updated_at: string;
+        };
+        /** ErrorDetail */
+        ErrorDetail: {
+            /** Status */
+            status: string;
+            /** Code */
+            code: string;
+            /** Title */
+            title: string;
+            /** Detail */
+            detail: string;
+            source?: components["schemas"]["ErrorSource"] | null;
+        };
+        /** ErrorResponse */
+        ErrorResponse: {
+            /**
+             * Type
+             * @default about:blank
+             */
+            type: string;
+            /** Title */
+            title: string;
+            /** Status */
+            status: number;
+            /** Instance */
+            instance: string;
+            /** Errors */
+            errors: components["schemas"]["ErrorDetail"][];
+        };
+        /** ErrorSource */
+        ErrorSource: {
+            /** Pointer */
+            pointer?: string | null;
+        };
+        /** ListResponseMeta */
+        ListResponseMeta: {
+            /**
+             * Limit
+             * @description Maximum number of items to retrieve
+             * @default 100
+             */
+            limit: number;
+            /**
+             * Offset
+             * @description Starting position for retrieval
+             * @default 0
+             */
+            offset: number;
+            /**
+             * Sorted By
+             * @description Field name to sort by
+             * @default id
+             */
+            sorted_by: string | null;
+            /**
+             * Sorted Order
+             * @description Sort order: asc or desc
+             * @default asc
+             */
+            sorted_order: string;
+            /**
+             * Total Count
+             * @description Total number of items matching the search criteria.
+             * @example 100
+             */
+            total_count: number;
+        };
     };
-    /** ChainRead */
-    ChainRead: {
-      /**
-       * Id
-       * @description The ID of the object
-       * @example abcd1234xyzc
-       */
-      id: string;
-      /**
-       * Chain Id
-       * @description Chain ID.
-       */
-      chain_id: number;
-      /**
-       * Name
-       * @description Chain name.
-       */
-      name: string;
-      /**
-       * Native Symbol
-       * @description Native currency symbol.
-       */
-      native_symbol: string;
-      /**
-       * Native Decimals
-       * @description Native currency decimals.
-       */
-      native_decimals: number;
-      /**
-       * Created At
-       * Format: date-time
-       * @description Record creation timestamp.
-       */
-      created_at: string;
-      /**
-       * Updated At
-       * Format: date-time
-       * @description Record update timestamp.
-       */
-      updated_at: string;
-    };
-    /** ErrorDetail */
-    ErrorDetail: {
-      /** Status */
-      status: string;
-      /** Code */
-      code: string;
-      /** Title */
-      title: string;
-      /** Detail */
-      detail: string;
-      source?: components["schemas"]["ErrorSource"] | null;
-    };
-    /** ErrorResponse */
-    ErrorResponse: {
-      /**
-       * Type
-       * @default about:blank
-       */
-      type: string;
-      /** Title */
-      title: string;
-      /** Status */
-      status: number;
-      /** Instance */
-      instance: string;
-      /** Errors */
-      errors: components["schemas"]["ErrorDetail"][];
-    };
-    /** ErrorSource */
-    ErrorSource: {
-      /** Pointer */
-      pointer?: string | null;
-    };
-    /** ListResponseMeta */
-    ListResponseMeta: {
-      /**
-       * Limit
-       * @description Maximum number of items to retrieve
-       * @default 100
-       */
-      limit: number;
-      /**
-       * Offset
-       * @description Starting position for retrieval
-       * @default 0
-       */
-      offset: number;
-      /**
-       * Sorted By
-       * @description Field name to sort by
-       * @default id
-       */
-      sorted_by: string | null;
-      /**
-       * Sorted Order
-       * @description Sort order: asc or desc
-       * @default asc
-       */
-      sorted_order: string;
-      /**
-       * Total Count
-       * @description Total number of items matching the search criteria.
-       * @example 100
-       */
-      total_count: number;
-    };
-  };
-  responses: never;
-  parameters: never;
-  requestBodies: never;
-  headers: never;
-  pathItems: never;
+    responses: never;
+    parameters: never;
+    requestBodies: never;
+    headers: never;
+    pathItems: never;
 }
 export type $defs = Record<string, never>;
 export interface operations {
-  chains_list_chains_chains_get: {
-    parameters: {
-      query?: {
-        limit?: number;
-        offset?: number;
-        sorted_by?: string | null;
-        sorted_order?: string;
-        name__icontains?: string | null;
-        created_at__gte?: string | null;
-        created_at__lte?: string | null;
-        updated_at__gte?: string | null;
-        updated_at__lte?: string | null;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
+    chains_list_chains_chains_get: {
+        parameters: {
+            query?: {
+                limit?: number;
+                offset?: number;
+                sorted_by?: string | null;
+                sorted_order?: string;
+                name__icontains?: string | null;
+                created_at__gte?: string | null;
+                created_at__lte?: string | null;
+                updated_at__gte?: string | null;
+                updated_at__lte?: string | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ChainListRead"];
+                };
+            };
+            /** @description Validation error. */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+        };
     };
-    requestBody?: never;
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown;
+    chains_get_chain_chains__chain_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                chain_id: string;
+            };
+            cookie?: never;
         };
-        content: {
-          "application/json": components["schemas"]["ChainListRead"];
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ChainRead"];
+                };
+            };
+            /** @description Validation error. */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
         };
-      };
-      /** @description Unauthorized access. */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorResponse"];
-        };
-      };
-      /** @description Validation error. */
-      422: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorResponse"];
-        };
-      };
     };
-  };
-  chains_get_chain_chains__chain_id__get: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        chain_id: string;
-      };
-      cookie?: never;
+    defis_list_defis_defis_get: {
+        parameters: {
+            query?: {
+                limit?: number;
+                offset?: number;
+                sorted_by?: string | null;
+                sorted_order?: string;
+                name__icontains?: string | null;
+                created_at__gte?: string | null;
+                created_at__lte?: string | null;
+                updated_at__gte?: string | null;
+                updated_at__lte?: string | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DefiListRead"];
+                };
+            };
+            /** @description Validation error. */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+        };
     };
-    requestBody?: never;
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown;
+    defis_get_defi_defis__defi_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                defi_id: string;
+            };
+            cookie?: never;
         };
-        content: {
-          "application/json": components["schemas"]["ChainRead"];
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DefiRead"];
+                };
+            };
+            /** @description Validation error. */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
         };
-      };
-      /** @description Unauthorized access. */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorResponse"];
-        };
-      };
-      /** @description Validation error. */
-      422: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorResponse"];
-        };
-      };
     };
-  };
 }

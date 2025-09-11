@@ -11,6 +11,16 @@ export const buildColumns = (): ColumnDef<Row>[] => [
     meta: {
       defaultVisible: false,
     },
+    cell: ({ row }) => (
+      <span>
+        <img
+          src={(row.original as Row).logo_url}
+          alt={row.getValue("name")}
+          className="inline size-5 mr-2 rounded-full"
+        />
+        {row.getValue("name")}
+      </span>
+    ),
   },
   {
     id: "chain_id",
@@ -23,14 +33,12 @@ export const buildColumns = (): ColumnDef<Row>[] => [
     accessorKey: "native_symbol",
   },
   {
-    id: "native_decimals",
-    header: "Native Decimals",
-    accessorKey: "native_decimals",
-  },
-  {
     id: "created_at",
     header: "Created At",
     accessorKey: "created_at",
     cell: ({ row }) => new Date(row.getValue("created_at")).toLocaleString(),
+    meta: {
+      defaultVisible: false,
+    },
   },
 ];

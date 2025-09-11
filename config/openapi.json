@@ -150,33 +150,6 @@
                 "schema": { "$ref": "#/components/schemas/ErrorResponse" }
               }
             }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "unauthorized": {
-                    "summary": "Authentication credentials missing or invalid.",
-                    "value": {
-                      "type": "about:blank",
-                      "title": "Unauthorized",
-                      "status": 401,
-                      "instance": "http://127.0.0.1:8000/app/v1/chains",
-                      "errors": [
-                        {
-                          "status": "401",
-                          "code": "unauthorized",
-                          "title": "Unauthorized",
-                          "detail": "Authentication credentials were not provided or are invalid."
-                        }
-                      ]
-                    }
-                  }
-                },
-                "schema": { "$ref": "#/components/schemas/ErrorResponse" }
-              }
-            }
           }
         }
       }
@@ -231,25 +204,199 @@
                 "schema": { "$ref": "#/components/schemas/ErrorResponse" }
               }
             }
+          }
+        }
+      }
+    },
+    "/defis": {
+      "get": {
+        "tags": ["Defis"],
+        "summary": "Defis:List Defis",
+        "description": "Retrieve a list of defis with filtering, sorting, and pagination.",
+        "operationId": "defis_list_defis_defis_get",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 100,
+              "title": "Limit"
+            }
           },
-          "401": {
-            "description": "Unauthorized access.",
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0,
+              "title": "Offset"
+            }
+          },
+          {
+            "name": "sorted_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [{ "type": "string" }, { "type": "null" }],
+              "default": "id",
+              "title": "Sorted By"
+            }
+          },
+          {
+            "name": "sorted_order",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "asc",
+              "title": "Sorted Order"
+            }
+          },
+          {
+            "name": "name__icontains",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [{ "type": "string" }, { "type": "null" }],
+              "title": "Name  Icontains"
+            }
+          },
+          {
+            "name": "created_at__gte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "string", "format": "date-time" },
+                { "type": "null" }
+              ],
+              "title": "Created At  Gte"
+            }
+          },
+          {
+            "name": "created_at__lte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "string", "format": "date-time" },
+                { "type": "null" }
+              ],
+              "title": "Created At  Lte"
+            }
+          },
+          {
+            "name": "updated_at__gte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "string", "format": "date-time" },
+                { "type": "null" }
+              ],
+              "title": "Updated At  Gte"
+            }
+          },
+          {
+            "name": "updated_at__lte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "string", "format": "date-time" },
+                { "type": "null" }
+              ],
+              "title": "Updated At  Lte"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/DefiListRead" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error.",
             "content": {
               "application/json": {
                 "examples": {
-                  "unauthorized": {
-                    "summary": "Authentication credentials missing or invalid.",
+                  "validation_error": {
+                    "summary": "Validation failed on input data.",
                     "value": {
                       "type": "about:blank",
-                      "title": "Unauthorized",
-                      "status": 401,
-                      "instance": "http://127.0.0.1:8000/app/v1/chains/{chain_id}",
+                      "title": "Unprocessable Entity",
+                      "status": 422,
+                      "instance": "http://127.0.0.1:8000/app/v1/defis",
                       "errors": [
                         {
-                          "status": "401",
-                          "code": "unauthorized",
-                          "title": "Unauthorized",
-                          "detail": "Authentication credentials were not provided or are invalid."
+                          "status": "422",
+                          "code": "validation_error",
+                          "title": "Validation Error",
+                          "detail": "The input data did not pass validation checks.",
+                          "source": { "pointer": "#/body" }
+                        }
+                      ]
+                    }
+                  }
+                },
+                "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/defis/{defi_id}": {
+      "get": {
+        "tags": ["Defis"],
+        "summary": "Defis:Get Defi",
+        "description": "Retrieve an defi by its ID.",
+        "operationId": "defis_get_defi_defis__defi_id__get",
+        "parameters": [
+          {
+            "name": "defi_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "Defi Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/DefiRead" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "validation_error": {
+                    "summary": "Validation failed on input data.",
+                    "value": {
+                      "type": "about:blank",
+                      "title": "Unprocessable Entity",
+                      "status": 422,
+                      "instance": "http://127.0.0.1:8000/app/v1/defis/{defi_id}",
+                      "errors": [
+                        {
+                          "status": "422",
+                          "code": "validation_error",
+                          "title": "Validation Error",
+                          "detail": "The input data did not pass validation checks.",
+                          "source": { "pointer": "#/body" }
                         }
                       ]
                     }
@@ -306,6 +453,11 @@
             "title": "Native Decimals",
             "description": "Native currency decimals."
           },
+          "logo_url": {
+            "type": "string",
+            "title": "Logo Url",
+            "description": "URL of the chain logo."
+          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -326,10 +478,54 @@
           "name",
           "native_symbol",
           "native_decimals",
+          "logo_url",
           "created_at",
           "updated_at"
         ],
         "title": "ChainRead"
+      },
+      "DefiListRead": {
+        "properties": {
+          "meta": { "$ref": "#/components/schemas/ListResponseMeta" },
+          "data": {
+            "items": { "$ref": "#/components/schemas/DefiRead" },
+            "type": "array",
+            "title": "Data"
+          }
+        },
+        "type": "object",
+        "required": ["meta", "data"],
+        "title": "DefiListRead"
+      },
+      "DefiRead": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "The ID of the object",
+            "example": "abcd1234xyzc"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "The name of the DeFi protocol."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Record creation timestamp."
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At",
+            "description": "Record update timestamp."
+          }
+        },
+        "type": "object",
+        "required": ["id", "name", "created_at", "updated_at"],
+        "title": "DefiRead"
       },
       "ErrorDetail": {
         "properties": {
