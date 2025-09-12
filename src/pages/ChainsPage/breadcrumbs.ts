@@ -5,7 +5,7 @@ export function useChainsPageBreadcrumbs() {
   const { setBreadcrumbs } = useBreadcrumb();
 
   useEffect(() => {
-    setBreadcrumbs([{ label: "Chains" }]);
+    setBreadcrumbs([{ label: "Chain" }]);
     return () => setBreadcrumbs([]);
   }, [setBreadcrumbs]);
 }

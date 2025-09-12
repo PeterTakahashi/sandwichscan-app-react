@@ -5,7 +5,7 @@ export function useDefisPageBreadcrumbs() {
   const { setBreadcrumbs } = useBreadcrumb();
 
   useEffect(() => {
-    setBreadcrumbs([{ label: "Defis" }]);
+    setBreadcrumbs([{ label: "Defi" }]);
     return () => setBreadcrumbs([]);
   }, [setBreadcrumbs]);
 }

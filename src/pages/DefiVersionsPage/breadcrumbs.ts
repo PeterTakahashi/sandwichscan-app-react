@@ -5,7 +5,7 @@ export function useDefiVersionsPageBreadcrumbs() {
   const { setBreadcrumbs } = useBreadcrumb();
 
   useEffect(() => {
-    setBreadcrumbs([{ label: "DefiVersions" }]);
+    setBreadcrumbs([{ label: "Defi Version" }]);
     return () => setBreadcrumbs([]);
   }, [setBreadcrumbs]);
 }

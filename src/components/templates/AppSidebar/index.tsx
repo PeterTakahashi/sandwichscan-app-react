@@ -24,15 +24,15 @@ const data = {
       isActive: true,
       items: [
         {
-          title: "Chains",
+          title: "Chain",
           url: "/chains",
         },
         {
-          title: "Defis",
+          title: "Defi",
           url: "/defis",
         },
         {
-          title: "Defi Versions",
+          title: "Defi Version",
           url: "/defi-versions",
         },
       ],

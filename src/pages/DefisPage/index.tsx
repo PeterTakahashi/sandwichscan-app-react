@@ -8,7 +8,7 @@ export const DefisPage: FC = () => {
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
-        <h1 className="text-2xl sm:text-2xl font-bold">Defis</h1>
+        <h1 className="text-2xl sm:text-2xl font-bold">Defi</h1>
       </div>
 
       <DefisTable />
