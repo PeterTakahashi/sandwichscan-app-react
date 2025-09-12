@@ -5,12 +5,17 @@ import { ToastMessageHandler } from "@/components/common/ToastMessageHandler";
 import { PublicRoute } from "@/components/routes/PublicRoute";
 
 import { ChainsPage } from "@/pages/ChainsPage";
+import { DefisPage } from "@/pages/DefisPage";
 
 const routes = [
   { path: "/", element: <HomePage /> },
   {
     path: "/chains",
     element: <ChainsPage />,
+  },
+  {
+    path: "/defis",
+    element: <DefisPage />,
   },
 ];
 

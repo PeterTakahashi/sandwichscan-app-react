@@ -1,7 +1,7 @@
 import type { ColumnDef } from "@tanstack/react-table";
-import type { ChainRead } from "@/types/api/chain/chain";
+import type { DefiRead } from "@/types/api/defi/defi";
 
-type Row = ChainRead;
+type Row = DefiRead;
 
 export const buildColumns = (): ColumnDef<Row>[] => [
   {
@@ -18,16 +18,6 @@ export const buildColumns = (): ColumnDef<Row>[] => [
         {row.getValue("name")}
       </span>
     ),
-  },
-  {
-    id: "chain_id",
-    header: "Chain ID",
-    accessorKey: "chain_id",
-  },
-  {
-    id: "native_symbol",
-    header: "Native Symbol",
-    accessorKey: "native_symbol",
   },
   {
     id: "created_at",

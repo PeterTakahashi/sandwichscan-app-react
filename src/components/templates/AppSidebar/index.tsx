@@ -33,6 +33,10 @@ const data = {
           title: "Chains",
           url: "/chains",
         },
+        {
+          title: "Defis",
+          url: "/defis",
+        },
       ],
     },
     {

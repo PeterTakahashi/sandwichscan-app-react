@@ -160,6 +160,11 @@ export interface components {
              */
             name: string;
             /**
+             * Logo Url
+             * @description URL of the DeFi protocol logo.
+             */
+            logo_url: string;
+            /**
              * Created At
              * Format: date-time
              * @description Record creation timestamp.
