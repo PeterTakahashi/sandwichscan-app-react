@@ -28,7 +28,7 @@ export function SortSelect({
         onSortChange(selectedSort);
       }}
     >
-      <SelectTrigger className="w-[180px] bg-white">
+      <SelectTrigger className="w-[130px] bg-white">
         <SelectValue placeholder="Select a sort option" />
       </SelectTrigger>
       <SelectContent>

@@ -84,6 +84,86 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/defi_versions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Defi Versions:List Defi Versions
+         * @description Retrieve a list of defi_versions with filtering, sorting, and pagination.
+         */
+        get: operations["defi_versions_list_defi_versions_defi_versions_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/defi_versions/{defi_version_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Defi Versions:Get Defi Version
+         * @description Retrieve an defi_version by its ID.
+         */
+        get: operations["defi_versions_get_defi_version_defi_versions__defi_version_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/defi_pools": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Defi Pools:List Defi Pools
+         * @description Retrieve a list of defi_pools with filtering, sorting, and pagination.
+         */
+        get: operations["defi_pools_list_defi_pools_defi_pools_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/defi_pools/{defi_pool_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Defi Pools:Get Defi Pool
+         * @description Retrieve an defi_pool by its ID.
+         */
+        get: operations["defi_pools_get_defi_pool_defi_pools__defi_pool_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -146,6 +226,58 @@ export interface components {
             /** Data */
             data: components["schemas"]["DefiRead"][];
         };
+        /** DefiPoolListRead */
+        DefiPoolListRead: {
+            meta: components["schemas"]["ListResponseMeta"];
+            /** Data */
+            data: components["schemas"]["DefiPoolRead"][];
+        };
+        /** DefiPoolRead */
+        DefiPoolRead: {
+            /**
+             * Id
+             * @description The ID of the object
+             * @example abcd1234xyzc
+             */
+            id: string;
+            /**
+             * Name
+             * @description The name of the DeFi protocol.
+             */
+            name: string;
+            /**
+             * Address
+             * @description The contract address of the DeFi protocol.
+             */
+            address: string;
+            /**
+             * Created Block Number
+             * @description The block number when the DeFi protocol was created.
+             */
+            created_block_number: number;
+            /**
+             * Tick Spacing
+             * @description The tick spacing of the DeFi pool.
+             */
+            tick_spacing: number;
+            /**
+             * Fee Tier Bps
+             * @description The fee tier in basis points of the DeFi pool.
+             */
+            fee_tier_bps: number;
+            /**
+             * Created At
+             * Format: date-time
+             * @description Record creation timestamp.
+             */
+            created_at: string;
+            /**
+             * Updated At
+             * Format: date-time
+             * @description Record update timestamp.
+             */
+            updated_at: string;
+        };
         /** DefiRead */
         DefiRead: {
             /**
@@ -164,6 +296,38 @@ export interface components {
              * @description URL of the DeFi protocol logo.
              */
             logo_url: string;
+            /**
+             * Created At
+             * Format: date-time
+             * @description Record creation timestamp.
+             */
+            created_at: string;
+            /**
+             * Updated At
+             * Format: date-time
+             * @description Record update timestamp.
+             */
+            updated_at: string;
+        };
+        /** DefiVersionListRead */
+        DefiVersionListRead: {
+            meta: components["schemas"]["ListResponseMeta"];
+            /** Data */
+            data: components["schemas"]["DefiVersionRead"][];
+        };
+        /** DefiVersionRead */
+        DefiVersionRead: {
+            /**
+             * Id
+             * @description The ID of the object
+             * @example abcd1234xyzc
+             */
+            id: string;
+            /**
+             * Name
+             * @description The name of the DeFi protocol.
+             */
+            name: string;
             /**
              * Created At
              * Format: date-time
@@ -379,6 +543,147 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["DefiRead"];
+                };
+            };
+            /** @description Validation error. */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+        };
+    };
+    defi_versions_list_defi_versions_defi_versions_get: {
+        parameters: {
+            query?: {
+                limit?: number;
+                offset?: number;
+                sorted_by?: string | null;
+                sorted_order?: string;
+                name__icontains?: string | null;
+                defi_id__exact?: number | null;
+                created_at__gte?: string | null;
+                created_at__lte?: string | null;
+                updated_at__gte?: string | null;
+                updated_at__lte?: string | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DefiVersionListRead"];
+                };
+            };
+            /** @description Validation error. */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+        };
+    };
+    defi_versions_get_defi_version_defi_versions__defi_version_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                defi_version_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DefiVersionRead"];
+                };
+            };
+            /** @description Validation error. */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+        };
+    };
+    defi_pools_list_defi_pools_defi_pools_get: {
+        parameters: {
+            query?: {
+                limit?: number;
+                offset?: number;
+                sorted_by?: string | null;
+                sorted_order?: string;
+                name__icontains?: string | null;
+                created_at__gte?: string | null;
+                created_at__lte?: string | null;
+                updated_at__gte?: string | null;
+                updated_at__lte?: string | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DefiPoolListRead"];
+                };
+            };
+            /** @description Validation error. */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+        };
+    };
+    defi_pools_get_defi_pool_defi_pools__defi_pool_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                defi_pool_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DefiPoolRead"];
                 };
             };
             /** @description Validation error. */

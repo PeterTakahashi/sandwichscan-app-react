@@ -6,8 +6,8 @@ import {
   Settings2,
   SquareTerminal,
 } from "lucide-react";
+import Logo from "@/assets/img/logo.png";
 import { serviceName } from "@/config";
-
 import { NavMain } from "@/components/organisms/NavMain";
 import { NavUser } from "@/components/organisms/NavUser";
 import {
@@ -117,7 +117,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
           >
             <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
-              <Database className="size-4" />
+              <img
+                src={Logo}
+                alt="Logo"
+                className="block mx-auto size-6 rounded-full"
+              />
             </div>
             <div className="grid flex-1 text-left text-sm leading-tight">
               <span className="truncate font-medium">{serviceName}</span>

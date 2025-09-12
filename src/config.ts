@@ -1,1 +1,1 @@
-export const serviceName = "Service Base";
+export const serviceName = "SandwichScan";
