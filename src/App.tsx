@@ -7,6 +7,7 @@ import { PublicRoute } from "@/components/routes/PublicRoute";
 import { ChainsPage } from "@/pages/ChainsPage";
 import { DefisPage } from "@/pages/DefisPage";
 import { DefiVersionsPage } from "@/pages/DefiVersionsPage";
+import { DefiPoolsPage } from "@/pages/DefiPoolsPage";
 
 const routes = [
   { path: "/", element: <HomePage /> },
@@ -21,6 +22,10 @@ const routes = [
   {
     path: "/defi-versions",
     element: <DefiVersionsPage />,
+  },
+  {
+    path: "/defi-pools",
+    element: <DefiPoolsPage />,
   },
 ];
 

@@ -35,6 +35,10 @@ const data = {
           title: "Defi Version",
           url: "/defi-versions",
         },
+        {
+          title: "Defi Pool",
+          url: "/defi-pools",
+        },
       ],
     },
     {
