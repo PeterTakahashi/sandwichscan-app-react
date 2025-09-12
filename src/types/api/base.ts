@@ -241,11 +241,6 @@ export interface components {
              */
             id: string;
             /**
-             * Name
-             * @description The name of the DeFi protocol.
-             */
-            name: string;
-            /**
              * Address
              * @description The contract address of the DeFi protocol.
              */
@@ -328,6 +323,8 @@ export interface components {
              * @description The name of the DeFi protocol.
              */
             name: string;
+            /** @description The DeFi protocol this version belongs to. */
+            defi: components["schemas"]["DefiRead"];
             /**
              * Created At
              * Format: date-time
@@ -634,7 +631,9 @@ export interface operations {
                 offset?: number;
                 sorted_by?: string | null;
                 sorted_order?: string;
-                name__icontains?: string | null;
+                address__exact?: string | null;
+                created_block_number__gte?: number | null;
+                created_block_number__lte?: number | null;
                 created_at__gte?: string | null;
                 created_at__lte?: string | null;
                 updated_at__gte?: string | null;

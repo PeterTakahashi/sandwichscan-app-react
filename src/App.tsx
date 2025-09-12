@@ -6,6 +6,7 @@ import { PublicRoute } from "@/components/routes/PublicRoute";
 
 import { ChainsPage } from "@/pages/ChainsPage";
 import { DefisPage } from "@/pages/DefisPage";
+import { DefiVersionsPage } from "@/pages/DefiVersionsPage";
 
 const routes = [
   { path: "/", element: <HomePage /> },
@@ -16,6 +17,10 @@ const routes = [
   {
     path: "/defis",
     element: <DefisPage />,
+  },
+  {
+    path: "/defi-versions",
+    element: <DefiVersionsPage />,
   },
 ];
 

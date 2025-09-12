@@ -669,12 +669,30 @@
             }
           },
           {
-            "name": "name__icontains",
+            "name": "address__exact",
             "in": "query",
             "required": false,
             "schema": {
               "anyOf": [{ "type": "string" }, { "type": "null" }],
-              "title": "Name  Icontains"
+              "title": "Address  Exact"
+            }
+          },
+          {
+            "name": "created_block_number__gte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [{ "type": "integer" }, { "type": "null" }],
+              "title": "Created Block Number  Gte"
+            }
+          },
+          {
+            "name": "created_block_number__lte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [{ "type": "integer" }, { "type": "null" }],
+              "title": "Created Block Number  Lte"
             }
           },
           {
@@ -929,11 +947,6 @@
             "description": "The ID of the object",
             "example": "abcd1234xyzc"
           },
-          "name": {
-            "type": "string",
-            "title": "Name",
-            "description": "The name of the DeFi protocol."
-          },
           "address": {
             "type": "string",
             "title": "Address",
@@ -970,7 +983,6 @@
         "type": "object",
         "required": [
           "id",
-          "name",
           "address",
           "created_block_number",
           "tick_spacing",
@@ -1041,6 +1053,10 @@
             "title": "Name",
             "description": "The name of the DeFi protocol."
           },
+          "defi": {
+            "$ref": "#/components/schemas/DefiRead",
+            "description": "The DeFi protocol this version belongs to."
+          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -1055,7 +1071,7 @@
           }
         },
         "type": "object",
-        "required": ["id", "name", "created_at", "updated_at"],
+        "required": ["id", "name", "defi", "created_at", "updated_at"],
         "title": "DefiVersionRead"
       },
       "ErrorDetail": {
