@@ -1,5 +1,5 @@
 import * as React from "react";
-import { BookOpen, Bot, Settings2, SquareTerminal } from "lucide-react";
+import { BookOpen, Bot, SquareTerminal } from "lucide-react";
 import Logo from "@/assets/img/logo.png";
 import { serviceName } from "@/config";
 import { NavMain } from "@/components/organisms/NavMain";

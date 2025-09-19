@@ -27,7 +27,6 @@ export const buildColumns = ({
     header: "Symbol",
     accessorKey: "symbol",
     cell: ({ row }) => {
-      console.log(row.original.logo_url);
       return (
         <span>
           <img
