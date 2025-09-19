@@ -13,7 +13,7 @@ export const buildColumns = (): ColumnDef<Row>[] => [
         <img
           src={(row.original as Row).logo_url}
           alt={row.getValue("name")}
-          className="inline size-5 mr-2 rounded-full"
+          className="inline size-5 mr-1 rounded-full"
         />
         {row.getValue("name")}
       </span>

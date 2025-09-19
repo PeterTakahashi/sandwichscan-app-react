@@ -1,8 +1,11 @@
 import type { ColumnDef } from "@tanstack/react-table";
-import type { DefiPoolRead } from "@/types/api/defi_pool/defi_pool";
+import type { TokenRead } from "@/types/api/token/token";
 import type { ChainRead } from "@/types/api/chain/chain";
 
-type Row = DefiPoolRead;
+type Row = TokenRead;
+
+const DEFAULT_LOGO_URL =
+  "https://raw.githubusercontent.com/PeterTakahashi/crypto-logos/refs/heads/main/undefined.png";
 
 export const buildColumns = ({
   chains,
@@ -10,28 +13,40 @@ export const buildColumns = ({
   chains: ChainRead[];
 }): ColumnDef<Row>[] => [
   {
+    id: "token_type",
+    header: "Type",
+    accessorKey: "token_type",
+  },
+  {
     id: "address",
     header: "Address",
     accessorKey: "address",
   },
   {
-    id: "fee_tier_bps",
-    header: "Fee Tier (bps)",
-    accessorKey: "fee_tier_bps",
-    cell: ({ row }) => `${(row.getValue("fee_tier_bps") as number) / 10000} %`,
+    id: "symbol",
+    header: "Symbol",
+    accessorKey: "symbol",
+    cell: ({ row }) => {
+      console.log(row.original.logo_url);
+      return (
+        <span>
+          <img
+            src={row.original.logo_url ?? DEFAULT_LOGO_URL}
+            alt={row.getValue("symbol")}
+            className="inline size-5 mr-1 rounded-full"
+          />
+          {row.original.symbol}
+        </span>
+      );
+    },
   },
   {
-    id: "tokens",
-    header: "Tokens",
-    accessorKey: "tokens",
-    cell: ({ row }) => (
-      <span>
-        {row.original.token0.symbol} / {row.original.token1.symbol}
-      </span>
-    ),
+    id: "decimals",
+    header: "Decimals",
+    accessorKey: "decimals",
   },
   {
-    id: "chain",
+    id: "chain.name",
     header: "Chain",
     accessorKey: "chain.name",
     meta: {

@@ -18,7 +18,18 @@ import { Link } from "react-router-dom";
 const data = {
   navMain: [
     {
-      title: "Playground",
+      title: "Dashboard",
+      url: "#",
+      icon: Bot,
+      items: [
+        {
+          title: "Transactions",
+          url: "#",
+        },
+      ],
+    },
+    {
+      title: "Configuration",
       url: "#",
       icon: SquareTerminal,
       isActive: true,
@@ -39,24 +50,9 @@ const data = {
           title: "Defi Pool",
           url: "/defi-pools",
         },
-      ],
-    },
-    {
-      title: "Models",
-      url: "#",
-      icon: Bot,
-      items: [
         {
-          title: "Genesis",
-          url: "#",
-        },
-        {
-          title: "Explorer",
-          url: "#",
-        },
-        {
-          title: "Quantum",
-          url: "#",
+          title: "Token",
+          url: "/tokens",
         },
       ],
     },
@@ -79,29 +75,6 @@ const data = {
         },
         {
           title: "Changelog",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Settings",
-      url: "#",
-      icon: Settings2,
-      items: [
-        {
-          title: "General",
-          url: "#",
-        },
-        {
-          title: "Team",
-          url: "#",
-        },
-        {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
           url: "#",
         },
       ],

@@ -3,21 +3,21 @@ import { DataTable } from "@/components/molecules/DataTable";
 import { sorts } from "./sorts";
 import { useDefaultSortOnLocalStorage } from "@/components/molecules/DataTable/hooks/useDefaultSortOnLocalstorage";
 import type { PaginationState } from "@tanstack/react-table";
-import { useDefiPools } from "@/features/hooks/swr/fetcher/defi_pools/useDefiPools";
-import type { DefiPoolListRequestQuery } from "@/types/api/defi_pool/defi_pool";
+import { useTokens } from "@/features/hooks/swr/fetcher/tokens/useTokens";
+import type { TokenListRequestQuery } from "@/types/api/token/token";
 import { buildColumns } from "./columns";
 import { useChains } from "@/features/hooks/swr/fetcher/chains/useChains";
 
-const tableName = "defi_poolsTable";
+const tableName = "tokensTable";
 
-export const DefiPoolsTable: React.FC = () => {
+export const TokensTable: React.FC = () => {
   const [defaultSort, setDefaultSortOnLocalStorage] =
     useDefaultSortOnLocalStorage(tableName, sorts, sorts[0]);
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
     pageSize: 10,
   });
-  const [query, setQuery] = useState<DefiPoolListRequestQuery>({
+  const [query, setQuery] = useState<TokenListRequestQuery>({
     sorted_by: defaultSort.sorted_by,
     sorted_order: defaultSort.sorted_order,
     limit: pagination.pageSize,
@@ -25,7 +25,7 @@ export const DefiPoolsTable: React.FC = () => {
   });
   const { chains } = useChains();
 
-  const { defi_pools, meta, isLoading } = useDefiPools(query);
+  const { tokens, meta, isLoading } = useTokens(query);
   const totalCount = meta?.total_count || 0;
   const pageCount = Math.ceil(totalCount / pagination.pageSize);
 
@@ -43,7 +43,7 @@ export const DefiPoolsTable: React.FC = () => {
     <DataTable
       tableName={tableName}
       columns={columns}
-      data={defi_pools}
+      data={tokens}
       pagination={pagination}
       totalCount={totalCount}
       setPagination={setPagination}
