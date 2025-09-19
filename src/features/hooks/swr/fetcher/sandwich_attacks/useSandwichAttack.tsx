@@ -9,13 +9,14 @@ export function useSandwichAttack(id?: string) {
     fetcher
   );
   const navigate = useNavigate();
+  console.log("useSandwichAttack id:", id);
 
   if (!id) {
     navigate("/not-found", { replace: true });
   }
 
   return {
-    sandwich_attack: data ?? null,
+    sandwichAttack: data ?? null,
     isLoading,
     isError: error,
     mutate,

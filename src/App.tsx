@@ -9,7 +9,8 @@ import { DefisPage } from "@/pages/DefisPage";
 import { DefiVersionsPage } from "@/pages/DefiVersionsPage";
 import { DefiPoolsPage } from "@/pages/DefiPoolsPage";
 import { TokensPage } from "@/pages/TokensPage";
-import { SandwichAttacksPage } from "@/pages/SandwichAttack";
+import { SandwichAttacksPage } from "@/pages/SandwichAttacksPage";
+import { SandwichAttackPage } from "@/pages/SandwichAttackPage";
 
 const routes = [
   { path: "/", element: <HomePage /> },
@@ -36,6 +37,10 @@ const routes = [
   {
     path: "/sandwich-attacks",
     element: <SandwichAttacksPage />,
+  },
+  {
+    path: "/sandwich-attacks/:id",
+    element: <SandwichAttackPage />,
   },
 ];
 

@@ -33,7 +33,7 @@ const data = {
       ],
     },
     {
-      title: "Configuration",
+      title: "Target Data",
       url: "#",
       icon: SquareTerminal,
       isActive: true,
