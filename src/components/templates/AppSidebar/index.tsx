@@ -23,6 +23,10 @@ const data = {
       icon: Bot,
       items: [
         {
+          title: "Sandwich Attacks",
+          url: "/sandwich-attacks",
+        },
+        {
           title: "Transactions",
           url: "#",
         },
