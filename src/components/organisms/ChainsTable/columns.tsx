@@ -29,13 +29,4 @@ export const buildColumns = (): ColumnDef<Row>[] => [
     header: "Native Symbol",
     accessorKey: "native_symbol",
   },
-  {
-    id: "created_at",
-    header: "Created At",
-    accessorKey: "created_at",
-    cell: ({ row }) => new Date(row.getValue("created_at")).toLocaleString(),
-    meta: {
-      defaultVisible: false,
-    },
-  },
 ];

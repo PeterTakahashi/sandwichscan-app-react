@@ -53,13 +53,4 @@ export const buildColumns = ({
       </span>
     ),
   },
-  {
-    id: "created_at",
-    header: "Created At",
-    accessorKey: "created_at",
-    cell: ({ row }) => new Date(row.getValue("created_at")).toLocaleString(),
-    meta: {
-      defaultVisible: false,
-    },
-  },
 ];
