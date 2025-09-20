@@ -1,11 +1,11 @@
 import type { ColumnDef } from "@tanstack/react-table";
 import type { TokenRead } from "@/types/api/token/token";
 import type { ChainRead } from "@/types/api/chain/chain";
+import { defaultTokenLogoUrl } from "@/config";
 
 type Row = TokenRead;
 
-const DEFAULT_LOGO_URL =
-  "https://raw.githubusercontent.com/PeterTakahashi/crypto-logos/refs/heads/main/undefined.png";
+const DEFAULT_LOGO_URL = defaultTokenLogoUrl;
 
 export const buildColumns = ({
   chains,

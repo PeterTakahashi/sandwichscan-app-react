@@ -870,7 +870,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/DefiPoolRead" }
+                "schema": {
+                  "$ref": "#/components/schemas/app__v1__schemas__defi_pool__read__DefiPoolRead"
+                }
               }
             }
           },
@@ -1205,7 +1207,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "default": "created_at",
+              "default": "front_attack_swap__transaction__block_timestamp",
               "title": "Sorted By"
             }
           },
@@ -1217,6 +1219,18 @@
               "type": "string",
               "default": "desc",
               "title": "Sorted Order"
+            }
+          },
+          {
+            "name": "chain_id__in",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "array", "items": { "type": "string" } },
+                { "type": "null" }
+              ],
+              "title": "Chain Id  In"
             }
           },
           {
@@ -1622,7 +1636,9 @@
         "properties": {
           "meta": { "$ref": "#/components/schemas/ListResponseMeta" },
           "data": {
-            "items": { "$ref": "#/components/schemas/DefiPoolRead" },
+            "items": {
+              "$ref": "#/components/schemas/app__v1__schemas__defi_pool__read__DefiPoolRead"
+            },
             "type": "array",
             "title": "Data"
           }
@@ -1630,79 +1646,6 @@
         "type": "object",
         "required": ["meta", "data"],
         "title": "DefiPoolListRead"
-      },
-      "DefiPoolRead": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "title": "Id",
-            "description": "The ID of the object",
-            "example": "abcd1234xyzc"
-          },
-          "address": {
-            "type": "string",
-            "title": "Address",
-            "description": "The contract address of the DeFi protocol."
-          },
-          "created_block_number": {
-            "type": "integer",
-            "title": "Created Block Number",
-            "description": "The block number when the DeFi protocol was created."
-          },
-          "tick_spacing": {
-            "type": "integer",
-            "title": "Tick Spacing",
-            "description": "The tick spacing of the DeFi pool."
-          },
-          "fee_tier_bps": {
-            "type": "integer",
-            "title": "Fee Tier Bps",
-            "description": "The fee tier in basis points of the DeFi pool."
-          },
-          "chain": {
-            "$ref": "#/components/schemas/ChainRead",
-            "description": "The chain this pool belongs to."
-          },
-          "defi_factory": {
-            "$ref": "#/components/schemas/DefiFactoryRead",
-            "description": "The factory this pool belongs to."
-          },
-          "token0": {
-            "$ref": "#/components/schemas/app__v1__schemas__defi_pool__token__read__TokenRead",
-            "description": "The first token of the pool."
-          },
-          "token1": {
-            "$ref": "#/components/schemas/app__v1__schemas__defi_pool__token__read__TokenRead",
-            "description": "The second token of the pool."
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time",
-            "title": "Created At",
-            "description": "Record creation timestamp."
-          },
-          "updated_at": {
-            "type": "string",
-            "format": "date-time",
-            "title": "Updated At",
-            "description": "Record update timestamp."
-          }
-        },
-        "type": "object",
-        "required": [
-          "id",
-          "address",
-          "created_block_number",
-          "tick_spacing",
-          "fee_tier_bps",
-          "chain",
-          "defi_factory",
-          "token0",
-          "token1",
-          "created_at",
-          "updated_at"
-        ],
-        "title": "DefiPoolRead"
       },
       "DefiRead": {
         "properties": {
@@ -1932,6 +1875,15 @@
             "$ref": "#/components/schemas/DefiVersionRead",
             "description": "The DeFi version associated with the sandwich attack."
           },
+          "defi_pool": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/app__v1__schemas__sandwich_attack__defi_pool__read__DefiPoolRead"
+              },
+              { "type": "null" }
+            ],
+            "description": "The DeFi pool where the sandwich attack occurred."
+          },
           "revenue_base_raw": {
             "type": "integer",
             "title": "Revenue Base Raw",
@@ -1974,6 +1926,7 @@
           "back_attack_swap",
           "attacker_address",
           "defi_version",
+          "defi_pool",
           "revenue_base_raw",
           "gas_fee_wei_attacker",
           "profit_base_raw",
@@ -2196,6 +2149,79 @@
         ],
         "title": "TransactionRead"
       },
+      "app__v1__schemas__defi_pool__read__DefiPoolRead": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "The ID of the object",
+            "example": "abcd1234xyzc"
+          },
+          "address": {
+            "type": "string",
+            "title": "Address",
+            "description": "The contract address of the DeFi protocol."
+          },
+          "created_block_number": {
+            "type": "integer",
+            "title": "Created Block Number",
+            "description": "The block number when the DeFi protocol was created."
+          },
+          "tick_spacing": {
+            "type": "integer",
+            "title": "Tick Spacing",
+            "description": "The tick spacing of the DeFi pool."
+          },
+          "fee_tier_bps": {
+            "type": "integer",
+            "title": "Fee Tier Bps",
+            "description": "The fee tier in basis points of the DeFi pool."
+          },
+          "chain": {
+            "$ref": "#/components/schemas/ChainRead",
+            "description": "The chain this pool belongs to."
+          },
+          "defi_factory": {
+            "$ref": "#/components/schemas/DefiFactoryRead",
+            "description": "The factory this pool belongs to."
+          },
+          "token0": {
+            "$ref": "#/components/schemas/app__v1__schemas__defi_pool__token__read__TokenRead",
+            "description": "The first token of the pool."
+          },
+          "token1": {
+            "$ref": "#/components/schemas/app__v1__schemas__defi_pool__token__read__TokenRead",
+            "description": "The second token of the pool."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Record creation timestamp."
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At",
+            "description": "Record update timestamp."
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "address",
+          "created_block_number",
+          "tick_spacing",
+          "fee_tier_bps",
+          "chain",
+          "defi_factory",
+          "token0",
+          "token1",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "DefiPoolRead"
+      },
       "app__v1__schemas__defi_pool__token__read__TokenRead": {
         "properties": {
           "id": {
@@ -2258,6 +2284,57 @@
           "updated_at"
         ],
         "title": "TokenRead"
+      },
+      "app__v1__schemas__sandwich_attack__defi_pool__read__DefiPoolRead": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "The ID of the object",
+            "example": "abcd1234xyzc"
+          },
+          "address": {
+            "type": "string",
+            "title": "Address",
+            "description": "The contract address of the DeFi protocol."
+          },
+          "created_block_number": {
+            "type": "integer",
+            "title": "Created Block Number",
+            "description": "The block number when the DeFi protocol was created."
+          },
+          "tick_spacing": {
+            "type": "integer",
+            "title": "Tick Spacing",
+            "description": "The tick spacing of the DeFi pool."
+          },
+          "fee_tier_bps": {
+            "type": "integer",
+            "title": "Fee Tier Bps",
+            "description": "The fee tier in basis points of the DeFi pool."
+          },
+          "token0_id": {
+            "type": "string",
+            "title": "Token0 Id",
+            "description": "The ID of token0."
+          },
+          "token1_id": {
+            "type": "string",
+            "title": "Token1 Id",
+            "description": "The ID of token1."
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "address",
+          "created_block_number",
+          "tick_spacing",
+          "fee_tier_bps",
+          "token0_id",
+          "token1_id"
+        ],
+        "title": "DefiPoolRead"
       },
       "app__v1__schemas__token__read__TokenRead": {
         "properties": {

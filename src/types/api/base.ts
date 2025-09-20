@@ -348,56 +348,7 @@ export interface components {
         DefiPoolListRead: {
             meta: components["schemas"]["ListResponseMeta"];
             /** Data */
-            data: components["schemas"]["DefiPoolRead"][];
-        };
-        /** DefiPoolRead */
-        DefiPoolRead: {
-            /**
-             * Id
-             * @description The ID of the object
-             * @example abcd1234xyzc
-             */
-            id: string;
-            /**
-             * Address
-             * @description The contract address of the DeFi protocol.
-             */
-            address: string;
-            /**
-             * Created Block Number
-             * @description The block number when the DeFi protocol was created.
-             */
-            created_block_number: number;
-            /**
-             * Tick Spacing
-             * @description The tick spacing of the DeFi pool.
-             */
-            tick_spacing: number;
-            /**
-             * Fee Tier Bps
-             * @description The fee tier in basis points of the DeFi pool.
-             */
-            fee_tier_bps: number;
-            /** @description The chain this pool belongs to. */
-            chain: components["schemas"]["ChainRead"];
-            /** @description The factory this pool belongs to. */
-            defi_factory: components["schemas"]["DefiFactoryRead"];
-            /** @description The first token of the pool. */
-            token0: components["schemas"]["app__v1__schemas__defi_pool__token__read__TokenRead"];
-            /** @description The second token of the pool. */
-            token1: components["schemas"]["app__v1__schemas__defi_pool__token__read__TokenRead"];
-            /**
-             * Created At
-             * Format: date-time
-             * @description Record creation timestamp.
-             */
-            created_at: string;
-            /**
-             * Updated At
-             * Format: date-time
-             * @description Record update timestamp.
-             */
-            updated_at: string;
+            data: components["schemas"]["app__v1__schemas__defi_pool__read__DefiPoolRead"][];
         };
         /** DefiRead */
         DefiRead: {
@@ -566,6 +517,8 @@ export interface components {
             base_token?: components["schemas"]["app__v1__schemas__token__read__TokenRead"] | null;
             /** @description The DeFi version associated with the sandwich attack. */
             defi_version: components["schemas"]["DefiVersionRead"];
+            /** @description The DeFi pool where the sandwich attack occurred. */
+            defi_pool: components["schemas"]["app__v1__schemas__sandwich_attack__defi_pool__read__DefiPoolRead"] | null;
             /**
              * Revenue Base Raw
              * @description The revenue of the sandwich attack in base token (raw amount).
@@ -759,6 +712,55 @@ export interface components {
              */
             updated_at: string;
         };
+        /** DefiPoolRead */
+        app__v1__schemas__defi_pool__read__DefiPoolRead: {
+            /**
+             * Id
+             * @description The ID of the object
+             * @example abcd1234xyzc
+             */
+            id: string;
+            /**
+             * Address
+             * @description The contract address of the DeFi protocol.
+             */
+            address: string;
+            /**
+             * Created Block Number
+             * @description The block number when the DeFi protocol was created.
+             */
+            created_block_number: number;
+            /**
+             * Tick Spacing
+             * @description The tick spacing of the DeFi pool.
+             */
+            tick_spacing: number;
+            /**
+             * Fee Tier Bps
+             * @description The fee tier in basis points of the DeFi pool.
+             */
+            fee_tier_bps: number;
+            /** @description The chain this pool belongs to. */
+            chain: components["schemas"]["ChainRead"];
+            /** @description The factory this pool belongs to. */
+            defi_factory: components["schemas"]["DefiFactoryRead"];
+            /** @description The first token of the pool. */
+            token0: components["schemas"]["app__v1__schemas__defi_pool__token__read__TokenRead"];
+            /** @description The second token of the pool. */
+            token1: components["schemas"]["app__v1__schemas__defi_pool__token__read__TokenRead"];
+            /**
+             * Created At
+             * Format: date-time
+             * @description Record creation timestamp.
+             */
+            created_at: string;
+            /**
+             * Updated At
+             * Format: date-time
+             * @description Record update timestamp.
+             */
+            updated_at: string;
+        };
         /** TokenRead */
         app__v1__schemas__defi_pool__token__read__TokenRead: {
             /**
@@ -806,6 +808,45 @@ export interface components {
              * @description Record update timestamp.
              */
             updated_at: string;
+        };
+        /** DefiPoolRead */
+        app__v1__schemas__sandwich_attack__defi_pool__read__DefiPoolRead: {
+            /**
+             * Id
+             * @description The ID of the object
+             * @example abcd1234xyzc
+             */
+            id: string;
+            /**
+             * Address
+             * @description The contract address of the DeFi protocol.
+             */
+            address: string;
+            /**
+             * Created Block Number
+             * @description The block number when the DeFi protocol was created.
+             */
+            created_block_number: number;
+            /**
+             * Tick Spacing
+             * @description The tick spacing of the DeFi pool.
+             */
+            tick_spacing: number;
+            /**
+             * Fee Tier Bps
+             * @description The fee tier in basis points of the DeFi pool.
+             */
+            fee_tier_bps: number;
+            /**
+             * Token0 Id
+             * @description The ID of token0.
+             */
+            token0_id: string;
+            /**
+             * Token1 Id
+             * @description The ID of token1.
+             */
+            token1_id: string;
         };
         /** TokenRead */
         app__v1__schemas__token__read__TokenRead: {
@@ -1140,7 +1181,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["DefiPoolRead"];
+                    "application/json": components["schemas"]["app__v1__schemas__defi_pool__read__DefiPoolRead"];
                 };
             };
             /** @description Validation error. */
@@ -1236,6 +1277,7 @@ export interface operations {
                 offset?: number;
                 sorted_by?: string;
                 sorted_order?: string;
+                chain_id__in?: string[] | null;
                 victim_address__exact?: string | null;
                 attacker_address__exact?: string | null;
                 revenue_base_raw__gte?: number | null;
