@@ -503,9 +503,60 @@ export interface components {
         };
         /** SandwichAttackListRead */
         SandwichAttackListRead: {
-            meta: components["schemas"]["ListResponseMeta"];
+            meta: components["schemas"]["SandwichAttackListResponseMeta"];
             /** Data */
             data: components["schemas"]["SandwichAttackRead"][];
+        };
+        /** SandwichAttackListResponseMeta */
+        SandwichAttackListResponseMeta: {
+            /**
+             * Limit
+             * @description Maximum number of items to retrieve
+             * @default 100
+             */
+            limit: number;
+            /**
+             * Offset
+             * @description Starting position for retrieval
+             * @default 0
+             */
+            offset: number;
+            /**
+             * Sorted By
+             * @description Field name to sort by
+             * @default id
+             */
+            sorted_by: string | null;
+            /**
+             * Sorted Order
+             * @description Sort order: asc or desc
+             * @default asc
+             */
+            sorted_order: string;
+            /**
+             * Total Count
+             * @description Total number of items matching the search criteria.
+             * @example 100
+             */
+            total_count: number;
+            /**
+             * Total Revenue Usd
+             * @description Total revenue in USD for the current query.
+             * @example 100
+             */
+            total_revenue_usd: number;
+            /**
+             * Total Profit Usd
+             * @description Total profit in USD for the current query.
+             * @example 100
+             */
+            total_profit_usd: number;
+            /**
+             * Total Harm Usd
+             * @description Total harm in USD for the current query.
+             * @example 100
+             */
+            total_harm_usd: number;
         };
         /** SandwichAttackRead */
         SandwichAttackRead: {

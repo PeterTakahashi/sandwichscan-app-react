@@ -11,6 +11,7 @@ import type { SandwichAttackListRequestQuery } from "@/types/api/sandwich_attack
 import { buildColumns } from "./columns";
 import { useChains } from "@/features/hooks/swr/fetcher/chains/useChains";
 import { FilterInput } from "./filterInput";
+import { SandwichAttackSectionCards } from "@/components/organisms/SandwichAttackSectionCards";
 
 const tableName = "sandwich_attacksTable";
 
@@ -58,21 +59,29 @@ export const SandwichAttacksTable: React.FC = () => {
   const columns = buildColumns({ chains });
 
   return (
-    <DataTable
-      tableName={tableName}
-      columns={columns}
-      filterInput={<FilterInput setColumnFilters={setColumnFilters} />}
-      data={sandwich_attacks}
-      pagination={pagination}
-      totalCount={totalCount}
-      setPagination={setPagination}
-      pageCount={pageCount}
-      query={query as Record<string, string>}
-      setQuery={setQuery}
-      sorts={sorts}
-      defaultSort={defaultSort}
-      isLoading={isLoading}
-      setDefaultSortOnLocalStorage={setDefaultSortOnLocalStorage}
-    />
+    <>
+      <SandwichAttackSectionCards
+        totalCount={totalCount}
+        totalRevenueUsd={meta?.total_revenue_usd || 0}
+        totalProfitUsd={meta?.total_profit_usd || 0}
+        totalHarmUsd={meta?.total_harm_usd || 0}
+      />
+      <DataTable
+        tableName={tableName}
+        columns={columns}
+        filterInput={<FilterInput setColumnFilters={setColumnFilters} />}
+        data={sandwich_attacks}
+        pagination={pagination}
+        totalCount={totalCount}
+        setPagination={setPagination}
+        pageCount={pageCount}
+        query={query as Record<string, string>}
+        setQuery={setQuery}
+        sorts={sorts}
+        defaultSort={defaultSort}
+        isLoading={isLoading}
+        setDefaultSortOnLocalStorage={setDefaultSortOnLocalStorage}
+      />
+    </>
   );
 };

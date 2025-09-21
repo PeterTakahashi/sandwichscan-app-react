@@ -1906,7 +1906,9 @@
       },
       "SandwichAttackListRead": {
         "properties": {
-          "meta": { "$ref": "#/components/schemas/ListResponseMeta" },
+          "meta": {
+            "$ref": "#/components/schemas/SandwichAttackListResponseMeta"
+          },
           "data": {
             "items": { "$ref": "#/components/schemas/SandwichAttackRead" },
             "type": "array",
@@ -1916,6 +1918,68 @@
         "type": "object",
         "required": ["meta", "data"],
         "title": "SandwichAttackListRead"
+      },
+      "SandwichAttackListResponseMeta": {
+        "properties": {
+          "limit": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Limit",
+            "description": "Maximum number of items to retrieve",
+            "default": 100
+          },
+          "offset": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Offset",
+            "description": "Starting position for retrieval",
+            "default": 0
+          },
+          "sorted_by": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Sorted By",
+            "description": "Field name to sort by",
+            "default": "id"
+          },
+          "sorted_order": {
+            "type": "string",
+            "title": "Sorted Order",
+            "description": "Sort order: asc or desc",
+            "default": "asc"
+          },
+          "total_count": {
+            "type": "integer",
+            "title": "Total Count",
+            "description": "Total number of items matching the search criteria.",
+            "example": 100
+          },
+          "total_revenue_usd": {
+            "type": "number",
+            "title": "Total Revenue Usd",
+            "description": "Total revenue in USD for the current query.",
+            "example": 100.0
+          },
+          "total_profit_usd": {
+            "type": "number",
+            "title": "Total Profit Usd",
+            "description": "Total profit in USD for the current query.",
+            "example": 100.0
+          },
+          "total_harm_usd": {
+            "type": "number",
+            "title": "Total Harm Usd",
+            "description": "Total harm in USD for the current query.",
+            "example": 100.0
+          }
+        },
+        "type": "object",
+        "required": [
+          "total_count",
+          "total_revenue_usd",
+          "total_profit_usd",
+          "total_harm_usd"
+        ],
+        "title": "SandwichAttackListResponseMeta"
       },
       "SandwichAttackRead": {
         "properties": {

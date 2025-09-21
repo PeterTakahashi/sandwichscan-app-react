@@ -3,7 +3,12 @@ import type { SandwichAttackRead } from "@/types/api/sandwich_attack/sandwich_at
 import { defaultTokenLogoUrl } from "@/config";
 import AttackerLogo from "@/assets/img/attacker.png";
 import VictimLogo from "@/assets/img/victim.png";
-import { BanknoteArrowDown, BanknoteArrowUp, Fuel } from "lucide-react";
+import {
+  BanknoteArrowDown,
+  BanknoteArrowUp,
+  Fuel,
+  Landmark,
+} from "lucide-react";
 import { SwapCard } from "@/components/molecules/SwapCard";
 import { TokenIcon } from "@/components/atoms/TokenIcon";
 import { omitAddress } from "@/lib/utils/omitAddress";
@@ -113,6 +118,29 @@ export const SandwichAttackDetails: FC<SandwichAttackDetailsProps> = ({
                   </a>
                 </div>
               </div>
+
+              {/* Defi Pool */}
+              {sandwichAttack.defi_pool && (
+                <div className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700">
+                  <div className="flex items-center gap-3 min-w-0">
+                    <Landmark className="size-8 text-slate-400 dark:text-slate-500" />
+                    <span className="shrink-0 px-2 py-0.5 rounded-full text-xs font-semibold bg-gradient-to-r from-violet-500/10 to-indigo-500/10 text-violet-600 dark:text-violet-300 border border-violet-200/60 dark:border-violet-500/30">
+                      DeFi Pool
+                    </span>
+                    <a
+                      href={`${sandwichAttack.chain.explorer_url}/address/${sandwichAttack.defi_pool.address}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="min-w-0"
+                      title={sandwichAttack.defi_pool.address}
+                    >
+                      <span className="px-2 py-1 rounded-md bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-700 font-mono text-sm text-slate-800 dark:text-slate-100 block max-w-[12rem] md:max-w-[16rem] break-all md:truncate">
+                        {omitAddress(sandwichAttack.defi_pool.address)}
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -141,14 +169,26 @@ export const SandwichAttackDetails: FC<SandwichAttackDetailsProps> = ({
                       style: "currency",
                       currency: "USD",
                       maximumFractionDigits: 2,
-                    }).format(
-                      Number(
-                        sandwichAttack.revenue_base_raw /
-                          10 **
-                            (sandwichAttack.front_attack_swap.sell_token
-                              ?.decimals || 18) || 0
-                      )
-                    )}
+                    }).format(Number(sandwichAttack.revenue_usd || 0))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Profit */}
+              <div className="flex items-center gap-3 p-3 rounded-xl bg-blue-50 dark:bg-blue-900/20 border border-blue-200/60 dark:border-blue-700/40">
+                <div className="flex items-center justify-center shrink-0 size-10 rounded-full bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-300">
+                  <BanknoteArrowUp className="size-5" />
+                </div>
+                <div className="min-w-0">
+                  <div className="text-xs font-medium text-blue-700 dark:text-blue-300">
+                    Attacker's Profit
+                  </div>
+                  <div className="text-base font-semibold text-slate-800 dark:text-slate-100 truncate">
+                    {new Intl.NumberFormat("en-US", {
+                      style: "currency",
+                      currency: "USD",
+                      maximumFractionDigits: 2,
+                    }).format(Number(sandwichAttack.profit_usd || 0))}
                   </div>
                 </div>
               </div>
@@ -167,14 +207,7 @@ export const SandwichAttackDetails: FC<SandwichAttackDetailsProps> = ({
                       style: "currency",
                       currency: "USD",
                       maximumFractionDigits: 2,
-                    }).format(
-                      Number(
-                        sandwichAttack.harm_base_raw /
-                          10 **
-                            (sandwichAttack.front_attack_swap.sell_token
-                              ?.decimals || 18) || 0
-                      )
-                    )}
+                    }).format(Number(sandwichAttack.harm_usd || 0))}
                   </div>
                 </div>
               </div>

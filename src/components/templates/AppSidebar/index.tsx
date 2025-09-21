@@ -1,5 +1,10 @@
 import * as React from "react";
-import { BookOpen, Bot, SquareTerminal } from "lucide-react";
+import {
+  BookOpen,
+  Database,
+  SquareTerminal,
+  ChartBarIncreasing,
+} from "lucide-react";
 import Logo from "@/assets/img/logo.png";
 import { serviceName } from "@/config";
 import { NavMain } from "@/components/organisms/NavMain";
@@ -20,22 +25,19 @@ const data = {
     {
       title: "Dashboard",
       url: "#",
-      icon: Bot,
+      isActive: true,
+      icon: ChartBarIncreasing,
       items: [
         {
           title: "Sandwich Attacks",
           url: "/sandwich-attacks",
-        },
-        {
-          title: "Transactions",
-          url: "#",
         },
       ],
     },
     {
       title: "Target Data",
       url: "#",
-      icon: SquareTerminal,
+      icon: Database,
       isActive: true,
       items: [
         {

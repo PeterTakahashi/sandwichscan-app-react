@@ -4,7 +4,6 @@ import type { ChainRead } from "@/types/api/chain/chain";
 import { Button } from "@/components/atoms/Button";
 import { Eye } from "lucide-react";
 import { Link } from "react-router-dom";
-import { omitAddress } from "@/lib/utils/omitAddress";
 
 type Row = SandwichAttackRead;
 
@@ -17,13 +16,13 @@ export const buildColumns = ({
     id: "attacker_address",
     header: "Attacker Address",
     accessorKey: "attacker_address",
-    cell: ({ row }) => omitAddress(row.original.attacker_address),
+    cell: ({ row }) => row.original.attacker_address,
   },
   {
     id: "victim_address",
     header: "Victim Address",
     accessorKey: "victim_address",
-    cell: ({ row }) => omitAddress(row.original.victim_address),
+    cell: ({ row }) => row.original.victim_address,
   },
   {
     id: "token_pair",
