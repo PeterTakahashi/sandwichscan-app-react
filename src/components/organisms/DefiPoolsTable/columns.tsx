@@ -33,7 +33,7 @@ export const buildColumns = ({
   {
     id: "chain",
     header: "Chain",
-    accessorKey: "chain.name",
+    accessorKey: "chain_name",
     meta: {
       filterType: "checkbox",
       filterKey: "chain_id__in",
@@ -46,7 +46,7 @@ export const buildColumns = ({
       <span>
         <img
           src={row.original.chain.logo_url}
-          alt={row.getValue("chain.name")}
+          alt={row.original.chain.name}
           className="inline size-5 mr-1 rounded-full"
         />
         {row.original.chain.name}

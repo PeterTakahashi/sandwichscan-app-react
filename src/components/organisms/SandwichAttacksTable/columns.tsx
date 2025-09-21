@@ -76,7 +76,7 @@ export const buildColumns = ({
   {
     id: "chain.name",
     header: "Blockchain",
-    accessorKey: "chain.name",
+    accessorKey: "chain_name",
     meta: {
       filterType: "checkbox",
       filterKey: "chain_id__in",
