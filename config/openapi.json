@@ -1207,7 +1207,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "default": "front_attack_swap__transaction__block_timestamp",
+              "default": "block_timestamp",
               "title": "Sorted By"
             }
           },
@@ -1231,6 +1231,15 @@
                 { "type": "null" }
               ],
               "title": "Chain Id  In"
+            }
+          },
+          {
+            "name": "victim_address__exact__or__attacker_address__exact",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [{ "type": "string" }, { "type": "null" }],
+              "title": "Victim Address  Exact  Or  Attacker Address  Exact"
             }
           },
           {
@@ -1394,6 +1403,30 @@
               ],
               "title": "Updated At  Lte"
             }
+          },
+          {
+            "name": "block_timestamp__gte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "string", "format": "date-time" },
+                { "type": "null" }
+              ],
+              "title": "Block Timestamp  Gte"
+            }
+          },
+          {
+            "name": "block_timestamp__lte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "string", "format": "date-time" },
+                { "type": "null" }
+              ],
+              "title": "Block Timestamp  Lte"
+            }
           }
         ],
         "responses": {
@@ -1473,6 +1506,62 @@
                       "title": "Unprocessable Entity",
                       "status": 422,
                       "instance": "http://127.0.0.1:8000/app/v1/sandwich_attacks/{sandwich_attack_id}",
+                      "errors": [
+                        {
+                          "status": "422",
+                          "code": "validation_error",
+                          "title": "Validation Error",
+                          "detail": "The input data did not pass validation checks.",
+                          "source": { "pointer": "#/body" }
+                        }
+                      ]
+                    }
+                  }
+                },
+                "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/swaps/{swap_id}": {
+      "get": {
+        "tags": ["Swaps"],
+        "summary": "Swaps:Get Swap",
+        "description": "Retrieve an swap by its ID.",
+        "operationId": "swaps_get_swap_swaps__swap_id__get",
+        "parameters": [
+          {
+            "name": "swap_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "Swap Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/app__v1__schemas__swap__read__SwapRead"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "validation_error": {
+                    "summary": "Validation failed on input data.",
+                    "value": {
+                      "type": "about:blank",
+                      "title": "Unprocessable Entity",
+                      "status": 422,
+                      "instance": "http://127.0.0.1:8000/app/v1/swaps/{swap_id}",
                       "errors": [
                         {
                           "status": "422",
@@ -1841,15 +1930,15 @@
             "description": "The chain this pool belongs to."
           },
           "front_attack_swap": {
-            "$ref": "#/components/schemas/SwapRead",
+            "$ref": "#/components/schemas/app__v1__schemas__sandwich_attack__swap__read__SwapRead",
             "description": "The front-running swap of the sandwich attack."
           },
           "victim_swap": {
-            "$ref": "#/components/schemas/SwapRead",
+            "$ref": "#/components/schemas/app__v1__schemas__sandwich_attack__swap__read__SwapRead",
             "description": "The victim swap of the sandwich attack."
           },
           "back_attack_swap": {
-            "$ref": "#/components/schemas/SwapRead",
+            "$ref": "#/components/schemas/app__v1__schemas__sandwich_attack__swap__read__SwapRead",
             "description": "The back-running swap of the sandwich attack."
           },
           "attacker_address": {
@@ -1858,7 +1947,7 @@
             "description": "The address of the attacker."
           },
           "victim_address": {
-            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "type": "string",
             "title": "Victim Address",
             "description": "The address of the victim."
           },
@@ -1889,6 +1978,11 @@
             "title": "Revenue Base Raw",
             "description": "The revenue of the sandwich attack in base token (raw amount)."
           },
+          "gas_fee_base_raw": {
+            "type": "integer",
+            "title": "Gas Fee Base Raw",
+            "description": "The gas fee paid by the attacker in base token (raw amount)."
+          },
           "gas_fee_wei_attacker": {
             "type": "integer",
             "title": "Gas Fee Wei Attacker",
@@ -1903,6 +1997,32 @@
             "type": "integer",
             "title": "Harm Base Raw",
             "description": "The harm caused to the victim in base token (raw amount)."
+          },
+          "revenue_usd": {
+            "anyOf": [{ "type": "number" }, { "type": "null" }],
+            "title": "Revenue Usd",
+            "description": "The revenue of the sandwich attack in USD."
+          },
+          "cost_usd": {
+            "anyOf": [{ "type": "number" }, { "type": "null" }],
+            "title": "Cost Usd",
+            "description": "The cost of the sandwich attack in USD."
+          },
+          "profit_usd": {
+            "anyOf": [{ "type": "number" }, { "type": "null" }],
+            "title": "Profit Usd",
+            "description": "The profit of the sandwich attack in USD."
+          },
+          "harm_usd": {
+            "anyOf": [{ "type": "number" }, { "type": "null" }],
+            "title": "Harm Usd",
+            "description": "The harm caused to the victim in USD."
+          },
+          "block_timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Block Timestamp",
+            "description": "The block timestamp of the sandwich attack (from the front-running swap)."
           },
           "created_at": {
             "type": "string",
@@ -1925,123 +2045,19 @@
           "victim_swap",
           "back_attack_swap",
           "attacker_address",
+          "victim_address",
           "defi_version",
           "defi_pool",
           "revenue_base_raw",
+          "gas_fee_base_raw",
           "gas_fee_wei_attacker",
           "profit_base_raw",
           "harm_base_raw",
+          "block_timestamp",
           "created_at",
           "updated_at"
         ],
         "title": "SandwichAttackRead"
-      },
-      "SwapRead": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "title": "Id",
-            "description": "The ID of the object",
-            "example": "abcd1234xyzc"
-          },
-          "log_index": {
-            "type": "integer",
-            "title": "Log Index",
-            "description": "The log index of the swap event."
-          },
-          "sender": {
-            "anyOf": [{ "type": "string" }, { "type": "null" }],
-            "title": "Sender",
-            "description": "The address of the sender."
-          },
-          "recipient": {
-            "anyOf": [{ "type": "string" }, { "type": "null" }],
-            "title": "Recipient",
-            "description": "The address of the recipient."
-          },
-          "amount0_in_raw": {
-            "type": "integer",
-            "title": "Amount0 In Raw",
-            "description": "The raw amount of token0 input."
-          },
-          "amount1_in_raw": {
-            "type": "integer",
-            "title": "Amount1 In Raw",
-            "description": "The raw amount of token1 input."
-          },
-          "amount0_out_raw": {
-            "type": "integer",
-            "title": "Amount0 Out Raw",
-            "description": "The raw amount of token0 output."
-          },
-          "amount1_out_raw": {
-            "type": "integer",
-            "title": "Amount1 Out Raw",
-            "description": "The raw amount of token1 output."
-          },
-          "sqrt_price_x96": {
-            "anyOf": [{ "type": "integer" }, { "type": "null" }],
-            "title": "Sqrt Price X96",
-            "description": "The square root price in Q96 format."
-          },
-          "liquidity_raw": {
-            "anyOf": [{ "type": "integer" }, { "type": "null" }],
-            "title": "Liquidity Raw",
-            "description": "The liquidity of the pool (raw units)."
-          },
-          "tick": {
-            "anyOf": [{ "type": "integer" }, { "type": "null" }],
-            "title": "Tick",
-            "description": "The tick of the pool."
-          },
-          "sell_token": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/app__v1__schemas__token__read__TokenRead"
-              },
-              { "type": "null" }
-            ],
-            "description": "The token being sold in the swap."
-          },
-          "buy_token": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/app__v1__schemas__token__read__TokenRead"
-              },
-              { "type": "null" }
-            ],
-            "description": "The token being bought in the swap."
-          },
-          "transaction": {
-            "$ref": "#/components/schemas/TransactionRead",
-            "description": "The transaction associated with the swap."
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time",
-            "title": "Created At",
-            "description": "Record creation timestamp."
-          },
-          "updated_at": {
-            "type": "string",
-            "format": "date-time",
-            "title": "Updated At",
-            "description": "Record update timestamp."
-          }
-        },
-        "type": "object",
-        "required": [
-          "id",
-          "log_index",
-          "amount0_in_raw",
-          "amount1_in_raw",
-          "amount0_out_raw",
-          "amount1_out_raw",
-          "transaction",
-          "created_at",
-          "updated_at"
-        ],
-        "title": "SwapRead"
       },
       "TokenListRead": {
         "properties": {
@@ -2335,6 +2351,225 @@
           "token1_id"
         ],
         "title": "DefiPoolRead"
+      },
+      "app__v1__schemas__sandwich_attack__swap__read__SwapRead": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "The ID of the object",
+            "example": "abcd1234xyzc"
+          },
+          "log_index": {
+            "type": "integer",
+            "title": "Log Index",
+            "description": "The log index of the swap event."
+          },
+          "sender": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Sender",
+            "description": "The address of the sender."
+          },
+          "recipient": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Recipient",
+            "description": "The address of the recipient."
+          },
+          "amount0_in_raw": {
+            "type": "integer",
+            "title": "Amount0 In Raw",
+            "description": "The raw amount of token0 input."
+          },
+          "amount1_in_raw": {
+            "type": "integer",
+            "title": "Amount1 In Raw",
+            "description": "The raw amount of token1 input."
+          },
+          "amount0_out_raw": {
+            "type": "integer",
+            "title": "Amount0 Out Raw",
+            "description": "The raw amount of token0 output."
+          },
+          "amount1_out_raw": {
+            "type": "integer",
+            "title": "Amount1 Out Raw",
+            "description": "The raw amount of token1 output."
+          },
+          "sqrt_price_x96": {
+            "anyOf": [{ "type": "integer" }, { "type": "null" }],
+            "title": "Sqrt Price X96",
+            "description": "The square root price in Q96 format."
+          },
+          "liquidity_raw": {
+            "anyOf": [{ "type": "integer" }, { "type": "null" }],
+            "title": "Liquidity Raw",
+            "description": "The liquidity of the pool (raw units)."
+          },
+          "tick": {
+            "anyOf": [{ "type": "integer" }, { "type": "null" }],
+            "title": "Tick",
+            "description": "The tick of the pool."
+          },
+          "sell_token": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/app__v1__schemas__token__read__TokenRead"
+              },
+              { "type": "null" }
+            ],
+            "description": "The token being sold in the swap."
+          },
+          "buy_token": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/app__v1__schemas__token__read__TokenRead"
+              },
+              { "type": "null" }
+            ],
+            "description": "The token being bought in the swap."
+          },
+          "transaction": {
+            "$ref": "#/components/schemas/TransactionRead",
+            "description": "The transaction associated with the swap."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Record creation timestamp."
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At",
+            "description": "Record update timestamp."
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "log_index",
+          "amount0_in_raw",
+          "amount1_in_raw",
+          "amount0_out_raw",
+          "amount1_out_raw",
+          "transaction",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "SwapRead"
+      },
+      "app__v1__schemas__swap__read__SwapRead": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "The ID of the object",
+            "example": "abcd1234xyzc"
+          },
+          "log_index": {
+            "type": "integer",
+            "title": "Log Index",
+            "description": "The log index of the swap event."
+          },
+          "sender": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Sender",
+            "description": "The address of the sender."
+          },
+          "recipient": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Recipient",
+            "description": "The address of the recipient."
+          },
+          "amount0_in_raw": {
+            "type": "integer",
+            "title": "Amount0 In Raw",
+            "description": "The raw amount of token0 input."
+          },
+          "amount1_in_raw": {
+            "type": "integer",
+            "title": "Amount1 In Raw",
+            "description": "The raw amount of token1 input."
+          },
+          "amount0_out_raw": {
+            "type": "integer",
+            "title": "Amount0 Out Raw",
+            "description": "The raw amount of token0 output."
+          },
+          "amount1_out_raw": {
+            "type": "integer",
+            "title": "Amount1 Out Raw",
+            "description": "The raw amount of token1 output."
+          },
+          "sqrt_price_x96": {
+            "anyOf": [{ "type": "integer" }, { "type": "null" }],
+            "title": "Sqrt Price X96",
+            "description": "The square root price in Q96 format."
+          },
+          "liquidity_raw": {
+            "anyOf": [{ "type": "integer" }, { "type": "null" }],
+            "title": "Liquidity Raw",
+            "description": "The liquidity of the pool (raw units)."
+          },
+          "tick": {
+            "anyOf": [{ "type": "integer" }, { "type": "null" }],
+            "title": "Tick",
+            "description": "The tick of the pool."
+          },
+          "sell_token": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/app__v1__schemas__defi_pool__token__read__TokenRead"
+              },
+              { "type": "null" }
+            ],
+            "description": "The token being sold in the swap."
+          },
+          "buy_token": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/app__v1__schemas__defi_pool__token__read__TokenRead"
+              },
+              { "type": "null" }
+            ],
+            "description": "The token being bought in the swap."
+          },
+          "transaction": {
+            "$ref": "#/components/schemas/TransactionRead",
+            "description": "The transaction associated with the swap."
+          },
+          "chain": {
+            "$ref": "#/components/schemas/ChainRead",
+            "description": "The chain this swap belongs to."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Record creation timestamp."
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At",
+            "description": "Record update timestamp."
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "log_index",
+          "amount0_in_raw",
+          "amount1_in_raw",
+          "amount0_out_raw",
+          "amount1_out_raw",
+          "transaction",
+          "chain",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "SwapRead"
       },
       "app__v1__schemas__token__read__TokenRead": {
         "properties": {

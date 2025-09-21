@@ -4,6 +4,7 @@ import type { ChainRead } from "@/types/api/chain/chain";
 import { Button } from "@/components/atoms/Button";
 import { Eye } from "lucide-react";
 import { Link } from "react-router-dom";
+import { omitAddress } from "@/lib/utils/omitAddress";
 
 type Row = SandwichAttackRead;
 
@@ -16,11 +17,13 @@ export const buildColumns = ({
     id: "attacker_address",
     header: "Attacker Address",
     accessorKey: "attacker_address",
+    cell: ({ row }) => omitAddress(row.original.attacker_address),
   },
   {
     id: "victim_address",
     header: "Victim Address",
     accessorKey: "victim_address",
+    cell: ({ row }) => omitAddress(row.original.victim_address),
   },
   {
     id: "token_pair",
@@ -36,21 +39,36 @@ export const buildColumns = ({
   {
     id: "revenue_usd",
     header: "Revenue (USD)",
-    accessorKey: "revenue_base_raw",
-    cell: ({ row }) =>
-      `$${row.original.revenue_base_raw / 10 ** (row.original.base_token?.decimals || 18)}`,
+    accessorKey: "revenue_usd",
+    cell: ({ row }) => `$${row.original.revenue_usd}`,
+  },
+  {
+    id: "cost_usd",
+    header: "Cost (USD)",
+    accessorKey: "cost_usd",
+    cell: ({ row }) => `$${row.original.cost_usd}`,
+  },
+  {
+    id: "profit_usd",
+    header: "Profit (USD)",
+    accessorKey: "profit_usd",
+    cell: ({ row }) => `$${row.original.profit_usd}`,
   },
   {
     id: "harm_usd",
     header: "Harm (USD)",
-    accessorKey: "harm_base_raw",
-    cell: ({ row }) =>
-      `$${row.original.harm_base_raw / 10 ** (row.original.base_token?.decimals || 18)}`,
+    accessorKey: "harm_usd",
+    cell: ({ row }) => `$${row.original.harm_usd}`,
   },
   {
     id: "block_timestamp",
     header: "Block Timestamp",
     accessorKey: "block_timestamp",
+    meta: {
+      filterType: "dateRange",
+      filterStartDateKey: "block_timestamp__gte",
+      filterEndDateKey: "block_timestamp__lte",
+    },
     cell: ({ row }) =>
       new Date(
         row.original.front_attack_swap.transaction.block_timestamp

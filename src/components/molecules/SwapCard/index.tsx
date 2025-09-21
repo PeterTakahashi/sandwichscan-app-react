@@ -1,6 +1,7 @@
 import { type SwapRead } from "@/types/api/swap/swap";
 import { type ChainRead } from "@/types/api/chain/chain";
 import { TokenIcon } from "@/components/atoms/TokenIcon";
+import { omitAddress } from "@/lib/utils/omitAddress";
 
 type Props = {
   title: string;
@@ -9,7 +10,7 @@ type Props = {
   base_token0: boolean;
 };
 
-const MAX_DISPLAY_DIGITS = 3;
+const MAX_DISPLAY_DIGITS = 6;
 
 function SwapCard({ title, chain, swap, base_token0 = true }: Props) {
   const amountIn = base_token0 ? swap.amount1_in_raw : swap.amount0_in_raw;
@@ -123,10 +124,7 @@ function SwapCard({ title, chain, swap, base_token0 = true }: Props) {
         <div className="mt-4">
           <div className="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-300">
             <span className="px-2 py-1 rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono">
-              {(() => {
-                const h = swap.transaction.tx_hash || "";
-                return h ? `${h.slice(0, 10)}...${h.slice(-8)}` : "-";
-              })()}
+              {omitAddress(swap.transaction.tx_hash)}
             </span>
             <a
               href={`${chain.explorer_url}/tx/${swap.transaction.tx_hash}`}

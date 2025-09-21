@@ -244,6 +244,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/swaps/{swap_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Swaps:Get Swap
+         * @description Retrieve an swap by its ID.
+         */
+        get: operations["swaps_get_swap_swaps__swap_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -498,11 +518,11 @@ export interface components {
             /** @description The chain this pool belongs to. */
             chain: components["schemas"]["ChainRead"];
             /** @description The front-running swap of the sandwich attack. */
-            front_attack_swap: components["schemas"]["SwapRead"];
+            front_attack_swap: components["schemas"]["app__v1__schemas__sandwich_attack__swap__read__SwapRead"];
             /** @description The victim swap of the sandwich attack. */
-            victim_swap: components["schemas"]["SwapRead"];
+            victim_swap: components["schemas"]["app__v1__schemas__sandwich_attack__swap__read__SwapRead"];
             /** @description The back-running swap of the sandwich attack. */
-            back_attack_swap: components["schemas"]["SwapRead"];
+            back_attack_swap: components["schemas"]["app__v1__schemas__sandwich_attack__swap__read__SwapRead"];
             /**
              * Attacker Address
              * @description The address of the attacker.
@@ -512,7 +532,7 @@ export interface components {
              * Victim Address
              * @description The address of the victim.
              */
-            victim_address?: string | null;
+            victim_address: string;
             /** @description The base token of the sandwich attack. */
             base_token?: components["schemas"]["app__v1__schemas__token__read__TokenRead"] | null;
             /** @description The DeFi version associated with the sandwich attack. */
@@ -524,6 +544,11 @@ export interface components {
              * @description The revenue of the sandwich attack in base token (raw amount).
              */
             revenue_base_raw: number;
+            /**
+             * Gas Fee Base Raw
+             * @description The gas fee paid by the attacker in base token (raw amount).
+             */
+            gas_fee_base_raw: number;
             /**
              * Gas Fee Wei Attacker
              * @description The gas fee paid by the attacker in wei.
@@ -540,82 +565,31 @@ export interface components {
              */
             harm_base_raw: number;
             /**
-             * Created At
+             * Revenue Usd
+             * @description The revenue of the sandwich attack in USD.
+             */
+            revenue_usd?: number | null;
+            /**
+             * Cost Usd
+             * @description The cost of the sandwich attack in USD.
+             */
+            cost_usd?: number | null;
+            /**
+             * Profit Usd
+             * @description The profit of the sandwich attack in USD.
+             */
+            profit_usd?: number | null;
+            /**
+             * Harm Usd
+             * @description The harm caused to the victim in USD.
+             */
+            harm_usd?: number | null;
+            /**
+             * Block Timestamp
              * Format: date-time
-             * @description Record creation timestamp.
+             * @description The block timestamp of the sandwich attack (from the front-running swap).
              */
-            created_at: string;
-            /**
-             * Updated At
-             * Format: date-time
-             * @description Record update timestamp.
-             */
-            updated_at: string;
-        };
-        /** SwapRead */
-        SwapRead: {
-            /**
-             * Id
-             * @description The ID of the object
-             * @example abcd1234xyzc
-             */
-            id: string;
-            /**
-             * Log Index
-             * @description The log index of the swap event.
-             */
-            log_index: number;
-            /**
-             * Sender
-             * @description The address of the sender.
-             */
-            sender?: string | null;
-            /**
-             * Recipient
-             * @description The address of the recipient.
-             */
-            recipient?: string | null;
-            /**
-             * Amount0 In Raw
-             * @description The raw amount of token0 input.
-             */
-            amount0_in_raw: number;
-            /**
-             * Amount1 In Raw
-             * @description The raw amount of token1 input.
-             */
-            amount1_in_raw: number;
-            /**
-             * Amount0 Out Raw
-             * @description The raw amount of token0 output.
-             */
-            amount0_out_raw: number;
-            /**
-             * Amount1 Out Raw
-             * @description The raw amount of token1 output.
-             */
-            amount1_out_raw: number;
-            /**
-             * Sqrt Price X96
-             * @description The square root price in Q96 format.
-             */
-            sqrt_price_x96?: number | null;
-            /**
-             * Liquidity Raw
-             * @description The liquidity of the pool (raw units).
-             */
-            liquidity_raw?: number | null;
-            /**
-             * Tick
-             * @description The tick of the pool.
-             */
-            tick?: number | null;
-            /** @description The token being sold in the swap. */
-            sell_token?: components["schemas"]["app__v1__schemas__token__read__TokenRead"] | null;
-            /** @description The token being bought in the swap. */
-            buy_token?: components["schemas"]["app__v1__schemas__token__read__TokenRead"] | null;
-            /** @description The transaction associated with the swap. */
-            transaction: components["schemas"]["TransactionRead"];
+            block_timestamp: string;
             /**
              * Created At
              * Format: date-time
@@ -847,6 +821,162 @@ export interface components {
              * @description The ID of token1.
              */
             token1_id: string;
+        };
+        /** SwapRead */
+        app__v1__schemas__sandwich_attack__swap__read__SwapRead: {
+            /**
+             * Id
+             * @description The ID of the object
+             * @example abcd1234xyzc
+             */
+            id: string;
+            /**
+             * Log Index
+             * @description The log index of the swap event.
+             */
+            log_index: number;
+            /**
+             * Sender
+             * @description The address of the sender.
+             */
+            sender?: string | null;
+            /**
+             * Recipient
+             * @description The address of the recipient.
+             */
+            recipient?: string | null;
+            /**
+             * Amount0 In Raw
+             * @description The raw amount of token0 input.
+             */
+            amount0_in_raw: number;
+            /**
+             * Amount1 In Raw
+             * @description The raw amount of token1 input.
+             */
+            amount1_in_raw: number;
+            /**
+             * Amount0 Out Raw
+             * @description The raw amount of token0 output.
+             */
+            amount0_out_raw: number;
+            /**
+             * Amount1 Out Raw
+             * @description The raw amount of token1 output.
+             */
+            amount1_out_raw: number;
+            /**
+             * Sqrt Price X96
+             * @description The square root price in Q96 format.
+             */
+            sqrt_price_x96?: number | null;
+            /**
+             * Liquidity Raw
+             * @description The liquidity of the pool (raw units).
+             */
+            liquidity_raw?: number | null;
+            /**
+             * Tick
+             * @description The tick of the pool.
+             */
+            tick?: number | null;
+            /** @description The token being sold in the swap. */
+            sell_token?: components["schemas"]["app__v1__schemas__token__read__TokenRead"] | null;
+            /** @description The token being bought in the swap. */
+            buy_token?: components["schemas"]["app__v1__schemas__token__read__TokenRead"] | null;
+            /** @description The transaction associated with the swap. */
+            transaction: components["schemas"]["TransactionRead"];
+            /**
+             * Created At
+             * Format: date-time
+             * @description Record creation timestamp.
+             */
+            created_at: string;
+            /**
+             * Updated At
+             * Format: date-time
+             * @description Record update timestamp.
+             */
+            updated_at: string;
+        };
+        /** SwapRead */
+        app__v1__schemas__swap__read__SwapRead: {
+            /**
+             * Id
+             * @description The ID of the object
+             * @example abcd1234xyzc
+             */
+            id: string;
+            /**
+             * Log Index
+             * @description The log index of the swap event.
+             */
+            log_index: number;
+            /**
+             * Sender
+             * @description The address of the sender.
+             */
+            sender?: string | null;
+            /**
+             * Recipient
+             * @description The address of the recipient.
+             */
+            recipient?: string | null;
+            /**
+             * Amount0 In Raw
+             * @description The raw amount of token0 input.
+             */
+            amount0_in_raw: number;
+            /**
+             * Amount1 In Raw
+             * @description The raw amount of token1 input.
+             */
+            amount1_in_raw: number;
+            /**
+             * Amount0 Out Raw
+             * @description The raw amount of token0 output.
+             */
+            amount0_out_raw: number;
+            /**
+             * Amount1 Out Raw
+             * @description The raw amount of token1 output.
+             */
+            amount1_out_raw: number;
+            /**
+             * Sqrt Price X96
+             * @description The square root price in Q96 format.
+             */
+            sqrt_price_x96?: number | null;
+            /**
+             * Liquidity Raw
+             * @description The liquidity of the pool (raw units).
+             */
+            liquidity_raw?: number | null;
+            /**
+             * Tick
+             * @description The tick of the pool.
+             */
+            tick?: number | null;
+            /** @description The token being sold in the swap. */
+            sell_token?: components["schemas"]["app__v1__schemas__defi_pool__token__read__TokenRead"] | null;
+            /** @description The token being bought in the swap. */
+            buy_token?: components["schemas"]["app__v1__schemas__defi_pool__token__read__TokenRead"] | null;
+            /** @description The transaction associated with the swap. */
+            transaction: components["schemas"]["TransactionRead"];
+            /** @description The chain this swap belongs to. */
+            chain: components["schemas"]["ChainRead"];
+            /**
+             * Created At
+             * Format: date-time
+             * @description Record creation timestamp.
+             */
+            created_at: string;
+            /**
+             * Updated At
+             * Format: date-time
+             * @description Record update timestamp.
+             */
+            updated_at: string;
         };
         /** TokenRead */
         app__v1__schemas__token__read__TokenRead: {
@@ -1278,6 +1408,7 @@ export interface operations {
                 sorted_by?: string;
                 sorted_order?: string;
                 chain_id__in?: string[] | null;
+                victim_address__exact__or__attacker_address__exact?: string | null;
                 victim_address__exact?: string | null;
                 attacker_address__exact?: string | null;
                 revenue_base_raw__gte?: number | null;
@@ -1292,6 +1423,8 @@ export interface operations {
                 created_at__lte?: string | null;
                 updated_at__gte?: string | null;
                 updated_at__lte?: string | null;
+                block_timestamp__gte?: string | null;
+                block_timestamp__lte?: string | null;
             };
             header?: never;
             path?: never;
@@ -1337,6 +1470,37 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["SandwichAttackRead"];
+                };
+            };
+            /** @description Validation error. */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+        };
+    };
+    swaps_get_swap_swaps__swap_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                swap_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["app__v1__schemas__swap__read__SwapRead"];
                 };
             };
             /** @description Validation error. */

@@ -6,6 +6,7 @@ import VictimLogo from "@/assets/img/victim.png";
 import { BanknoteArrowDown, BanknoteArrowUp, Fuel } from "lucide-react";
 import { SwapCard } from "@/components/molecules/SwapCard";
 import { TokenIcon } from "@/components/atoms/TokenIcon";
+import { omitAddress } from "@/lib/utils/omitAddress";
 
 interface SandwichAttackDetailsProps {
   sandwichAttack: SandwichAttackRead;
@@ -83,10 +84,7 @@ export const SandwichAttackDetails: FC<SandwichAttackDetailsProps> = ({
                     title={sandwichAttack.attacker_address}
                   >
                     <span className="px-2 py-1 rounded-md bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-700 font-mono text-sm text-slate-800 dark:text-slate-100 block max-w-[12rem] md:max-w-[16rem] break-all md:truncate">
-                      {(() => {
-                        const a = sandwichAttack.attacker_address || "";
-                        return a ? `${a.slice(0, 8)}...${a.slice(-6)}` : "-";
-                      })()}
+                      {omitAddress(sandwichAttack.attacker_address)}
                     </span>
                   </a>
                 </div>
@@ -110,10 +108,7 @@ export const SandwichAttackDetails: FC<SandwichAttackDetailsProps> = ({
                     className="min-w-0"
                   >
                     <span className="px-2 py-1 rounded-md bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-700 font-mono text-sm text-slate-800 dark:text-slate-100 block max-w-[12rem] md:max-w-[16rem] break-all md:truncate">
-                      {(() => {
-                        const a = sandwichAttack.victim_address || "";
-                        return a ? `${a.slice(0, 8)}...${a.slice(-6)}` : "-";
-                      })()}
+                      {omitAddress(sandwichAttack.victim_address)}
                     </span>
                   </a>
                 </div>
