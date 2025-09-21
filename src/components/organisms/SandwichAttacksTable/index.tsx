@@ -10,6 +10,7 @@ import { useSandwichAttacks } from "@/features/hooks/swr/fetcher/sandwich_attack
 import type { SandwichAttackListRequestQuery } from "@/types/api/sandwich_attack/sandwich_attack";
 import { buildColumns } from "./columns";
 import { useChains } from "@/features/hooks/swr/fetcher/chains/useChains";
+import { useDefiVersions } from "@/features/hooks/swr/fetcher/defi_versions/useDefiVersions";
 import { FilterInput } from "./filterInput";
 import { SandwichAttackSectionCards } from "@/components/organisms/SandwichAttackSectionCards";
 
@@ -28,7 +29,6 @@ export const SandwichAttacksTable: React.FC<Props> = ({
     pageIndex: 0,
     pageSize: 10,
   });
-  console.log("walletAddress:", walletAddress);
 
   const [filters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [query, setQuery] = useState<SandwichAttackListRequestQuery>({
@@ -38,6 +38,7 @@ export const SandwichAttacksTable: React.FC<Props> = ({
     offset: pagination.pageIndex * pagination.pageSize,
   });
   const { chains } = useChains();
+  const { defi_versions } = useDefiVersions();
 
   const { sandwich_attacks, meta, isLoading } = useSandwichAttacks(query);
   const totalCount = meta?.total_count || 0;
@@ -62,9 +63,9 @@ export const SandwichAttacksTable: React.FC<Props> = ({
       victim_address__exact__or__attacker_address__exact: walletAddress,
       ...filterObj,
     }));
-  }, [pagination, filters]);
+  }, [pagination, filters, walletAddress, defaultSort]);
 
-  const columns = buildColumns({ chains });
+  const columns = buildColumns({ chains, defi_versions });
 
   return (
     <>

@@ -1,6 +1,7 @@
 import type { ColumnDef } from "@tanstack/react-table";
 import type { SandwichAttackRead } from "@/types/api/sandwich_attack/sandwich_attack";
 import type { ChainRead } from "@/types/api/chain/chain";
+import type { DefiVersionRead } from "@/types/api/defi_version/defi_version";
 import { Button } from "@/components/atoms/Button";
 import { Eye } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -9,8 +10,10 @@ type Row = SandwichAttackRead;
 
 export const buildColumns = ({
   chains,
+  defi_versions,
 }: {
   chains: ChainRead[];
+  defi_versions: DefiVersionRead[];
 }): ColumnDef<Row>[] => [
   {
     id: "attacker_address",
@@ -72,6 +75,30 @@ export const buildColumns = ({
       new Date(
         row.original.front_attack_swap.transaction.block_timestamp
       ).toLocaleString(),
+  },
+  {
+    id: "defi_version",
+    header: "DeFi Version",
+    accessorKey: "defi_version",
+    meta: {
+      filterType: "checkbox",
+      filterKey: "defi_version_id__in",
+      filterOptions:
+        defi_versions.map((defi_version) => ({
+          label: defi_version.name,
+          value: defi_version.id,
+        })) || [],
+    },
+    cell: ({ row }) => (
+      <div>
+        <img
+          src={row.original.defi_version.defi.logo_url}
+          alt={row.original.defi_version.name}
+          className="inline size-5 mr-1 rounded-full"
+        />
+        {row.original.defi_version.name}
+      </div>
+    ),
   },
   {
     id: "chain.name",

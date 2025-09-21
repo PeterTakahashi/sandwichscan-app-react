@@ -1234,6 +1234,18 @@
             }
           },
           {
+            "name": "defi_version_id__in",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "array", "items": { "type": "string" } },
+                { "type": "null" }
+              ],
+              "title": "Defi Version Id  In"
+            }
+          },
+          {
             "name": "victim_address__exact__or__attacker_address__exact",
             "in": "query",
             "required": false,

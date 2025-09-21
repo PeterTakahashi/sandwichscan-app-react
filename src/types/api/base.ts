@@ -1459,6 +1459,7 @@ export interface operations {
                 sorted_by?: string;
                 sorted_order?: string;
                 chain_id__in?: string[] | null;
+                defi_version_id__in?: string[] | null;
                 victim_address__exact__or__attacker_address__exact?: string | null;
                 victim_address__exact?: string | null;
                 attacker_address__exact?: string | null;
