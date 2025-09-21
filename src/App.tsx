@@ -11,6 +11,7 @@ import { DefiPoolsPage } from "@/pages/DefiPoolsPage";
 import { TokensPage } from "@/pages/TokensPage";
 import { SandwichAttacksPage } from "@/pages/SandwichAttacksPage";
 import { SandwichAttackPage } from "@/pages/SandwichAttackPage";
+import { MySandwichAttacksPage } from "@/pages/MySandwichAttacksPage";
 
 const routes = [
   { path: "/", element: <HomePage /> },
@@ -41,6 +42,10 @@ const routes = [
   {
     path: "/sandwich-attacks/:id",
     element: <SandwichAttackPage />,
+  },
+  {
+    path: "/my-sandwich-attacks",
+    element: <MySandwichAttacksPage />,
   },
 ];
 

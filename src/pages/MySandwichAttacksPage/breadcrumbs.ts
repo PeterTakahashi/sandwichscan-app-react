@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { useBreadcrumb } from "@/features/hooks/context/useBreadcrumb";
 
-export function useSandwichAttacksPageBreadcrumbs() {
+export function useMySandwichAttacksPageBreadcrumbs() {
   const { setBreadcrumbs } = useBreadcrumb();
 
   useEffect(() => {
-    setBreadcrumbs([{ label: "Sandwich Attack" }]);
+    setBreadcrumbs([{ label: "My Sandwich Attacks" }]);
     return () => setBreadcrumbs([]);
   }, [setBreadcrumbs]);
 }

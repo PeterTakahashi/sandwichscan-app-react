@@ -1,4 +1,4 @@
-import { BadgeCheck, ChevronsUpDown, Wallet, LogOut } from "lucide-react";
+import { ChevronsUpDown, Wallet, LogOut, Logs } from "lucide-react";
 
 import { Avatar, AvatarFallback } from "@/components/atoms/Avatar";
 import {
@@ -58,7 +58,6 @@ export function NavUser() {
               <DropdownMenuLabel className="p-0 font-normal">
                 <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                   <Avatar className="h-8 w-8 rounded-lg">
-                    {/* <AvatarImage src={user.avatar} /> */}
                     <AvatarFallback className="rounded-lg text-slate-500">
                       <Wallet />
                     </AvatarFallback>
@@ -73,10 +72,10 @@ export function NavUser() {
               <DropdownMenuGroup>
                 <DropdownMenuItem
                   onClick={() => {
-                    navigate("/");
+                    navigate("/my-sandwich-attacks");
                   }}
                 >
-                  <BadgeCheck />
+                  <Logs />
                   My Sandwich Attacks
                 </DropdownMenuItem>
               </DropdownMenuGroup>

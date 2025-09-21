@@ -13,15 +13,22 @@ import { useChains } from "@/features/hooks/swr/fetcher/chains/useChains";
 import { FilterInput } from "./filterInput";
 import { SandwichAttackSectionCards } from "@/components/organisms/SandwichAttackSectionCards";
 
-const tableName = "sandwich_attacksTable";
+type Props = {
+  tableName: string;
+  walletAddress?: string;
+};
 
-export const SandwichAttacksTable: React.FC = () => {
+export const SandwichAttacksTable: React.FC<Props> = ({
+  tableName = "sandwich_attacksTable",
+  walletAddress,
+}) => {
   const [defaultSort, setDefaultSortOnLocalStorage] =
     useDefaultSortOnLocalStorage(tableName, sorts, sorts[0]);
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
     pageSize: 10,
   });
+  console.log("walletAddress:", walletAddress);
 
   const [filters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [query, setQuery] = useState<SandwichAttackListRequestQuery>({
@@ -52,6 +59,7 @@ export const SandwichAttacksTable: React.FC = () => {
       sorted_order: prev?.sorted_order,
       limit: pagination.pageSize,
       offset: pagination.pageIndex * pagination.pageSize,
+      victim_address__exact__or__attacker_address__exact: walletAddress,
       ...filterObj,
     }));
   }, [pagination, filters]);
@@ -69,7 +77,11 @@ export const SandwichAttacksTable: React.FC = () => {
       <DataTable
         tableName={tableName}
         columns={columns}
-        filterInput={<FilterInput setColumnFilters={setColumnFilters} />}
+        filterInput={
+          walletAddress ? null : (
+            <FilterInput setColumnFilters={setColumnFilters} />
+          )
+        }
         data={sandwich_attacks}
         pagination={pagination}
         totalCount={totalCount}
