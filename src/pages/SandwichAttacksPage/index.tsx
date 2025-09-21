@@ -11,7 +11,7 @@ export const SandwichAttacksPage: FC = () => {
         <h1 className="text-2xl sm:text-2xl font-bold">Sandwich Attack</h1>
       </div>
 
-      <SandwichAttacksTable />
+      <SandwichAttacksTable tableName="AllSandwichAttacksTable" />
     </div>
   );
 };
