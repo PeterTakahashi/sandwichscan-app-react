@@ -30,6 +30,16 @@ export const sorts = [
     name: "Lowest Profit",
   },
   {
+    sorted_by: "cost_usd",
+    sorted_order: "desc",
+    name: "Highest Cost",
+  },
+  {
+    sorted_by: "cost_usd",
+    sorted_order: "asc",
+    name: "Lowest Cost",
+  },
+  {
     sorted_by: "harm_usd",
     sorted_order: "desc",
     name: "Highest Harm",

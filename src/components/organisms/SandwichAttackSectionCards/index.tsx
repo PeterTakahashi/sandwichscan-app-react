@@ -1,5 +1,5 @@
 import { SectionCard } from "@/components/molecules/SectionCard";
-
+import { numberToUSD } from "@/lib/utils/numberToUSD";
 type Props = {
   totalCount: number;
   totalRevenueUsd: number;
@@ -25,25 +25,19 @@ const SandwichAttackSectionCards = ({
           />
           <SectionCard
             description="Total Revenue"
-            value={`$${totalRevenueUsd.toLocaleString(undefined, {
-              maximumFractionDigits: 0,
-            })}`}
+            value={numberToUSD(totalRevenueUsd)}
             footNote="Total revenue generated from all sandwich attacks"
             footNoteDescription=""
           />
           <SectionCard
             description="Total Profit"
-            value={`$${totalProfitUsd.toLocaleString(undefined, {
-              maximumFractionDigits: 0,
-            })}`}
+            value={numberToUSD(totalProfitUsd)}
             footNote="Total profit from sandwich attacks after costs"
             footNoteDescription=""
           />
           <SectionCard
             description="Total Harm"
-            value={`$${totalHarmUsd.toLocaleString(undefined, {
-              maximumFractionDigits: 0,
-            })}`}
+            value={numberToUSD(totalHarmUsd)}
             footNote="Estimated total harm to victims from sandwich attacks"
             footNoteDescription=""
           />

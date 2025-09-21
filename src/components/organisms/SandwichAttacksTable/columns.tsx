@@ -5,6 +5,7 @@ import type { DefiVersionRead } from "@/types/api/defi_version/defi_version";
 import { Button } from "@/components/atoms/Button";
 import { Eye } from "lucide-react";
 import { Link } from "react-router-dom";
+import { numberToUSD } from "@/lib/utils/numberToUSD";
 
 type Row = SandwichAttackRead;
 
@@ -42,25 +43,25 @@ export const buildColumns = ({
     id: "revenue_usd",
     header: "Revenue (USD)",
     accessorKey: "revenue_usd",
-    cell: ({ row }) => `$${row.original.revenue_usd}`,
+    cell: ({ row }) => numberToUSD(row.original.revenue_usd),
   },
   {
     id: "cost_usd",
     header: "Cost (USD)",
     accessorKey: "cost_usd",
-    cell: ({ row }) => `$${row.original.cost_usd}`,
+    cell: ({ row }) => numberToUSD(row.original.cost_usd),
   },
   {
     id: "profit_usd",
     header: "Profit (USD)",
     accessorKey: "profit_usd",
-    cell: ({ row }) => `$${row.original.profit_usd}`,
+    cell: ({ row }) => numberToUSD(row.original.profit_usd),
   },
   {
     id: "harm_usd",
     header: "Harm (USD)",
     accessorKey: "harm_usd",
-    cell: ({ row }) => `$${row.original.harm_usd}`,
+    cell: ({ row }) => numberToUSD(row.original.harm_usd),
   },
   {
     id: "block_timestamp",

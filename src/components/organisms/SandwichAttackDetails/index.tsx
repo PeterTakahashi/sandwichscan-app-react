@@ -12,6 +12,7 @@ import {
 import { SwapCard } from "@/components/molecules/SwapCard";
 import { TokenIcon } from "@/components/atoms/TokenIcon";
 import { omitAddress } from "@/lib/utils/omitAddress";
+import { numberToUSD } from "@/lib/utils/numberToUSD";
 
 interface SandwichAttackDetailsProps {
   sandwichAttack: SandwichAttackRead;
@@ -165,11 +166,7 @@ export const SandwichAttackDetails: FC<SandwichAttackDetailsProps> = ({
                     Attacker's Revenue
                   </div>
                   <div className="text-base font-semibold text-slate-800 dark:text-slate-100 truncate">
-                    {new Intl.NumberFormat("en-US", {
-                      style: "currency",
-                      currency: "USD",
-                      maximumFractionDigits: 2,
-                    }).format(Number(sandwichAttack.revenue_usd || 0))}
+                    {numberToUSD(sandwichAttack.revenue_usd)}
                   </div>
                 </div>
               </div>
@@ -184,11 +181,7 @@ export const SandwichAttackDetails: FC<SandwichAttackDetailsProps> = ({
                     Attacker's Profit
                   </div>
                   <div className="text-base font-semibold text-slate-800 dark:text-slate-100 truncate">
-                    {new Intl.NumberFormat("en-US", {
-                      style: "currency",
-                      currency: "USD",
-                      maximumFractionDigits: 2,
-                    }).format(Number(sandwichAttack.profit_usd || 0))}
+                    {numberToUSD(sandwichAttack.profit_usd)}
                   </div>
                 </div>
               </div>
@@ -203,11 +196,7 @@ export const SandwichAttackDetails: FC<SandwichAttackDetailsProps> = ({
                     Victim's Harm
                   </div>
                   <div className="text-base font-semibold text-slate-800 dark:text-slate-100 truncate">
-                    {new Intl.NumberFormat("en-US", {
-                      style: "currency",
-                      currency: "USD",
-                      maximumFractionDigits: 2,
-                    }).format(Number(sandwichAttack.harm_usd || 0))}
+                    {numberToUSD(sandwichAttack.harm_usd)}
                   </div>
                 </div>
               </div>
