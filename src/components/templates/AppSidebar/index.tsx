@@ -1,10 +1,5 @@
 import * as React from "react";
-import {
-  BookOpen,
-  Database,
-  SquareTerminal,
-  ChartBarIncreasing,
-} from "lucide-react";
+import { BookOpen, Database, ChartBarIncreasing } from "lucide-react";
 import Logo from "@/assets/img/logo.png";
 import { serviceName } from "@/config";
 import { NavMain } from "@/components/organisms/NavMain";
