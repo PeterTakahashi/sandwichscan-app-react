@@ -224,6 +224,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/sandwich_attacks/by_month": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Sandwich Attacks:Read By Month
+         * @description Retrieve a list of sandwich_attacks with filtering, sorting, and pagination.
+         */
+        get: operations["sandwich_attacks_read_by_month_sandwich_attacks_by_month_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/sandwich_attacks/{sandwich_attack_id}": {
         parameters: {
             query?: never;
@@ -653,6 +673,35 @@ export interface components {
              * @description Record update timestamp.
              */
             updated_at: string;
+        };
+        /** SandwichAttackReadByMonth */
+        SandwichAttackReadByMonth: {
+            /**
+             * Month
+             * Format: date-time
+             * @description The month of the sandwich attacks.
+             */
+            month: string;
+            /**
+             * Total Attacks
+             * @description Total number of sandwich attacks in the month.
+             */
+            total_attacks: number;
+            /**
+             * Total Revenue Usd
+             * @description Total revenue in USD for the month.
+             */
+            total_revenue_usd: number;
+            /**
+             * Total Profit Usd
+             * @description Total profit in USD for the month.
+             */
+            total_profit_usd: number;
+            /**
+             * Total Harm Usd
+             * @description Total harm in USD for the month.
+             */
+            total_harm_usd: number;
         };
         /** TokenListRead */
         TokenListRead: {
@@ -1491,6 +1540,59 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["SandwichAttackListRead"];
+                };
+            };
+            /** @description Validation error. */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+        };
+    };
+    sandwich_attacks_read_by_month_sandwich_attacks_by_month_get: {
+        parameters: {
+            query?: {
+                limit?: number;
+                offset?: number;
+                sorted_by?: string;
+                sorted_order?: string;
+                chain_id__in?: string[] | null;
+                defi_version_id__in?: string[] | null;
+                victim_address__exact__or__attacker_address__exact?: string | null;
+                victim_address__exact?: string | null;
+                attacker_address__exact?: string | null;
+                revenue_base_raw__gte?: number | null;
+                revenue_base_raw__lte?: number | null;
+                profit_base_raw__gte?: number | null;
+                profit_base_raw__lte?: number | null;
+                harm_base_raw__gte?: number | null;
+                harm_base_raw__lte?: number | null;
+                gas_fee_wei_attacker__gte?: number | null;
+                gas_fee_wei_attacker__lte?: number | null;
+                created_at__gte?: string | null;
+                created_at__lte?: string | null;
+                updated_at__gte?: string | null;
+                updated_at__lte?: string | null;
+                block_timestamp__gte?: string | null;
+                block_timestamp__lte?: string | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SandwichAttackReadByMonth"][];
                 };
             };
             /** @description Validation error. */

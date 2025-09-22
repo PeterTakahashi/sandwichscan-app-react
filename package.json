@@ -54,6 +54,7 @@
     "react-hook-form": "^7.57.0",
     "react-hot-toast": "^2.5.2",
     "react-router-dom": "^7.6.0",
+    "recharts": "^2.15.4",
     "swr": "^2.3.3",
     "tailwind-merge": "^3.3.0",
     "viem": "^2.37.7",

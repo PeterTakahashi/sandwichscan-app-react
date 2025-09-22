@@ -13,12 +13,13 @@ import { useChains } from "@/features/hooks/swr/fetcher/chains/useChains";
 import { useDefiVersions } from "@/features/hooks/swr/fetcher/defi_versions/useDefiVersions";
 import { FilterInput } from "./filterInput";
 import { SandwichAttackSectionCards } from "@/components/organisms/SandwichAttackSectionCards";
+import { ChartAreaInteractive } from "@/components/organisms/ChartInteractive";
+import { useSandwichAttackByMonth } from "@/features/hooks/swr/fetcher/sandwich_attacks/useSandwichAttackByMonth";
 
 type Props = {
   tableName: string;
   walletAddress?: string;
 };
-
 export const SandwichAttacksTable: React.FC<Props> = ({
   tableName = "sandwich_attacksTable",
   walletAddress,
@@ -43,6 +44,8 @@ export const SandwichAttacksTable: React.FC<Props> = ({
   const { sandwich_attacks, meta, isLoading } = useSandwichAttacks(query);
   const totalCount = meta?.total_count || 0;
   const pageCount = Math.ceil(totalCount / pagination.pageSize);
+
+  const { result: chartDataByMonth } = useSandwichAttackByMonth(query);
 
   useEffect(() => {
     const filterObj = filters.reduce(
@@ -75,6 +78,7 @@ export const SandwichAttacksTable: React.FC<Props> = ({
         totalProfitUsd={meta?.total_profit_usd || 0}
         totalHarmUsd={meta?.total_harm_usd || 0}
       />
+      <ChartAreaInteractive chartData={chartDataByMonth} />
       <DataTable
         tableName={tableName}
         columns={columns}

@@ -7,3 +7,5 @@ export type SandwichAttackRead = components["schemas"]["SandwichAttackRead"];
 
 export type SandwichAttackListRequestQuery =
   operations["sandwich_attacks_list_sandwich_attacks_sandwich_attacks_get"]["parameters"]["query"];
+
+export type SandwichAttackReadByMonth = components["schemas"]["SandwichAttackReadByMonth"];

@@ -1483,6 +1483,322 @@
         }
       }
     },
+    "/sandwich_attacks/by_month": {
+      "get": {
+        "tags": ["Sandwich Attacks"],
+        "summary": "Sandwich Attacks:Read By Month",
+        "description": "Retrieve a list of sandwich_attacks with filtering, sorting, and pagination.",
+        "operationId": "sandwich_attacks_read_by_month_sandwich_attacks_by_month_get",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 10,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0,
+              "title": "Offset"
+            }
+          },
+          {
+            "name": "sorted_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "block_timestamp",
+              "title": "Sorted By"
+            }
+          },
+          {
+            "name": "sorted_order",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "desc",
+              "title": "Sorted Order"
+            }
+          },
+          {
+            "name": "chain_id__in",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "array", "items": { "type": "string" } },
+                { "type": "null" }
+              ],
+              "title": "Chain Id  In"
+            }
+          },
+          {
+            "name": "defi_version_id__in",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "array", "items": { "type": "string" } },
+                { "type": "null" }
+              ],
+              "title": "Defi Version Id  In"
+            }
+          },
+          {
+            "name": "victim_address__exact__or__attacker_address__exact",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [{ "type": "string" }, { "type": "null" }],
+              "title": "Victim Address  Exact  Or  Attacker Address  Exact"
+            }
+          },
+          {
+            "name": "victim_address__exact",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [{ "type": "string" }, { "type": "null" }],
+              "title": "Victim Address  Exact"
+            }
+          },
+          {
+            "name": "attacker_address__exact",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [{ "type": "string" }, { "type": "null" }],
+              "title": "Attacker Address  Exact"
+            }
+          },
+          {
+            "name": "revenue_base_raw__gte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "integer", "minimum": 0 },
+                { "type": "null" }
+              ],
+              "title": "Revenue Base Raw  Gte"
+            }
+          },
+          {
+            "name": "revenue_base_raw__lte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "integer", "minimum": 0 },
+                { "type": "null" }
+              ],
+              "title": "Revenue Base Raw  Lte"
+            }
+          },
+          {
+            "name": "profit_base_raw__gte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "integer", "minimum": 0 },
+                { "type": "null" }
+              ],
+              "title": "Profit Base Raw  Gte"
+            }
+          },
+          {
+            "name": "profit_base_raw__lte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "integer", "minimum": 0 },
+                { "type": "null" }
+              ],
+              "title": "Profit Base Raw  Lte"
+            }
+          },
+          {
+            "name": "harm_base_raw__gte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "integer", "minimum": 0 },
+                { "type": "null" }
+              ],
+              "title": "Harm Base Raw  Gte"
+            }
+          },
+          {
+            "name": "harm_base_raw__lte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "integer", "minimum": 0 },
+                { "type": "null" }
+              ],
+              "title": "Harm Base Raw  Lte"
+            }
+          },
+          {
+            "name": "gas_fee_wei_attacker__gte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "integer", "minimum": 0 },
+                { "type": "null" }
+              ],
+              "title": "Gas Fee Wei Attacker  Gte"
+            }
+          },
+          {
+            "name": "gas_fee_wei_attacker__lte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "integer", "minimum": 0 },
+                { "type": "null" }
+              ],
+              "title": "Gas Fee Wei Attacker  Lte"
+            }
+          },
+          {
+            "name": "created_at__gte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "string", "format": "date-time" },
+                { "type": "null" }
+              ],
+              "title": "Created At  Gte"
+            }
+          },
+          {
+            "name": "created_at__lte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "string", "format": "date-time" },
+                { "type": "null" }
+              ],
+              "title": "Created At  Lte"
+            }
+          },
+          {
+            "name": "updated_at__gte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "string", "format": "date-time" },
+                { "type": "null" }
+              ],
+              "title": "Updated At  Gte"
+            }
+          },
+          {
+            "name": "updated_at__lte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "string", "format": "date-time" },
+                { "type": "null" }
+              ],
+              "title": "Updated At  Lte"
+            }
+          },
+          {
+            "name": "block_timestamp__gte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "string", "format": "date-time" },
+                { "type": "null" }
+              ],
+              "title": "Block Timestamp  Gte"
+            }
+          },
+          {
+            "name": "block_timestamp__lte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "string", "format": "date-time" },
+                { "type": "null" }
+              ],
+              "title": "Block Timestamp  Lte"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SandwichAttackReadByMonth"
+                  },
+                  "title": "Response Sandwich Attacks Read By Month Sandwich Attacks By Month Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "validation_error": {
+                    "summary": "Validation failed on input data.",
+                    "value": {
+                      "type": "about:blank",
+                      "title": "Unprocessable Entity",
+                      "status": 422,
+                      "instance": "http://127.0.0.1:8000/app/v1/sandwich_attacks/by_month",
+                      "errors": [
+                        {
+                          "status": "422",
+                          "code": "validation_error",
+                          "title": "Validation Error",
+                          "detail": "The input data did not pass validation checks.",
+                          "source": { "pointer": "#/body" }
+                        }
+                      ]
+                    }
+                  }
+                },
+                "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
     "/sandwich_attacks/{sandwich_attack_id}": {
       "get": {
         "tags": ["Sandwich Attacks"],
@@ -2134,6 +2450,45 @@
           "updated_at"
         ],
         "title": "SandwichAttackRead"
+      },
+      "SandwichAttackReadByMonth": {
+        "properties": {
+          "month": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Month",
+            "description": "The month of the sandwich attacks."
+          },
+          "total_attacks": {
+            "type": "integer",
+            "title": "Total Attacks",
+            "description": "Total number of sandwich attacks in the month."
+          },
+          "total_revenue_usd": {
+            "type": "number",
+            "title": "Total Revenue Usd",
+            "description": "Total revenue in USD for the month."
+          },
+          "total_profit_usd": {
+            "type": "number",
+            "title": "Total Profit Usd",
+            "description": "Total profit in USD for the month."
+          },
+          "total_harm_usd": {
+            "type": "number",
+            "title": "Total Harm Usd",
+            "description": "Total harm in USD for the month."
+          }
+        },
+        "type": "object",
+        "required": [
+          "month",
+          "total_attacks",
+          "total_revenue_usd",
+          "total_profit_usd",
+          "total_harm_usd"
+        ],
+        "title": "SandwichAttackReadByMonth"
       },
       "TokenListRead": {
         "properties": {

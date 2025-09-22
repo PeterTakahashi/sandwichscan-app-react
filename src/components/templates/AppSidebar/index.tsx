@@ -63,8 +63,8 @@ const data = {
       icon: BookOpen,
       items: [
         {
-          title: "Introduction",
-          url: "#",
+          title: "What is Sandwich Attack?",
+          url: `${import.meta.env.VITE_DOCS_DOMAIN}/docs/category/what-is-sandwich-attack`,
         },
       ],
     },
