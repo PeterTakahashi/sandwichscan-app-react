@@ -1,4 +1,4 @@
-import { BadgeCheck, ChevronsUpDown, CreditCard, LogOut } from "lucide-react";
+import { ChevronsUpDown, Wallet, LogOut, Logs } from "lucide-react";
 
 import { Avatar, AvatarFallback } from "@/components/atoms/Avatar";
 import {
@@ -17,76 +17,84 @@ import {
 } from "@/components/atoms/Sidebar";
 import { useNavigate } from "react-router-dom";
 import { useSidebar } from "@/features/hooks/context/useSidebar";
+import { useAccount, useDisconnect } from "wagmi";
+import { WalletConnectDialogButton } from "@/components/organisms/WalletConnectDialogButton";
 
 export function NavUser() {
   const { isMobile } = useSidebar();
   const navigate = useNavigate();
+  const { address, isConnected } = useAccount();
+  const { disconnect } = useDisconnect();
 
   return (
     <SidebarMenu>
       <SidebarMenuItem>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <SidebarMenuButton
-              size="lg"
-              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+        {isConnected ? (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <SidebarMenuButton
+                size="lg"
+                className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+              >
+                <>
+                  <Avatar className="h-8 w-8 rounded-lg">
+                    <AvatarFallback className="rounded-lg text-slate-500">
+                      <Wallet />
+                    </AvatarFallback>
+                  </Avatar>
+                  <div className="grid flex-1 text-left text-sm leading-tight">
+                    <span className="truncate">{address}</span>
+                  </div>
+                  <ChevronsUpDown className="ml-auto size-4" />
+                </>
+              </SidebarMenuButton>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent
+              className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
+              side={isMobile ? "bottom" : "right"}
+              align="end"
+              sideOffset={4}
             >
-              <>
-                <Avatar className="h-8 w-8 rounded-lg">
-                  {/* <AvatarImage src={user.avatar} /> */}
-                  <AvatarFallback className="rounded-lg">0</AvatarFallback>
-                </Avatar>
-                <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate">{"testuser"}</span>
+              <DropdownMenuLabel className="p-0 font-normal">
+                <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
+                  <Avatar className="h-8 w-8 rounded-lg">
+                    <AvatarFallback className="rounded-lg text-slate-500">
+                      <Wallet />
+                    </AvatarFallback>
+                  </Avatar>
+                  <div className="grid flex-1 text-left text-sm leading-tight">
+                    <span className="truncate">{address}</span>
+                  </div>
                 </div>
-                <ChevronsUpDown className="ml-auto size-4" />
-              </>
-            </SidebarMenuButton>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent
-            className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
-            side={isMobile ? "bottom" : "right"}
-            align="end"
-            sideOffset={4}
-          >
-            <DropdownMenuLabel className="p-0 font-normal">
-              <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                <Avatar className="h-8 w-8 rounded-lg">
-                  {/* <AvatarImage src={user.avatar} /> */}
-                  <AvatarFallback className="rounded-lg">0</AvatarFallback>
-                </Avatar>
-                <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate">{"testuser"}</span>
-                </div>
-              </div>
-            </DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuSeparator />
+              <DropdownMenuGroup>
+                <DropdownMenuItem
+                  onClick={() => {
+                    navigate("/my-sandwich-attacks");
+                  }}
+                >
+                  <Logs />
+                  My Sandwich Attacks
+                </DropdownMenuItem>
+              </DropdownMenuGroup>
+              <DropdownMenuSeparator />
               <DropdownMenuItem
                 onClick={() => {
-                  navigate("/");
+                  disconnect();
                 }}
               >
-                <BadgeCheck />
-                Account
+                <LogOut />
+                Disconnect
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => navigate("/")}>
-                <CreditCard />
-                Wallet
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem
-              onClick={() => {
-                navigate("/");
-              }}
-            >
-              <LogOut />
-              Log out
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        ) : (
+          <DropdownMenu>
+            <WalletConnectDialogButton />
+          </DropdownMenu>
+        )}
       </SidebarMenuItem>
     </SidebarMenu>
   );

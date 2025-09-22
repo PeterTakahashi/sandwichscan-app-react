@@ -4,258 +4,1668 @@
  */
 
 export interface paths {
-  "/chains": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/chains": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Chains:List Chains
+         * @description Retrieve a list of chains with filtering, sorting, and pagination.
+         */
+        get: operations["chains_list_chains_chains_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /**
-     * Chains:List Chains
-     * @description Retrieve a list of chains with filtering, sorting, and pagination.
-     */
-    get: operations["chains_list_chains_chains_get"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/chains/{chain_id}": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/chains/{chain_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Chains:Get Chain
+         * @description Retrieve an chain by its ID.
+         */
+        get: operations["chains_get_chain_chains__chain_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /**
-     * Chains:Get Chain
-     * @description Retrieve an chain by its ID.
-     */
-    get: operations["chains_get_chain_chains__chain_id__get"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
+    "/defis": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Defis:List Defis
+         * @description Retrieve a list of defis with filtering, sorting, and pagination.
+         */
+        get: operations["defis_list_defis_defis_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/defis/{defi_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Defis:Get Defi
+         * @description Retrieve an defi by its ID.
+         */
+        get: operations["defis_get_defi_defis__defi_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/defi_versions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Defi Versions:List Defi Versions
+         * @description Retrieve a list of defi_versions with filtering, sorting, and pagination.
+         */
+        get: operations["defi_versions_list_defi_versions_defi_versions_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/defi_versions/{defi_version_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Defi Versions:Get Defi Version
+         * @description Retrieve an defi_version by its ID.
+         */
+        get: operations["defi_versions_get_defi_version_defi_versions__defi_version_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/defi_pools": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Defi Pools:List Defi Pools
+         * @description Retrieve a list of defi_pools with filtering, sorting, and pagination.
+         */
+        get: operations["defi_pools_list_defi_pools_defi_pools_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/defi_pools/{defi_pool_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Defi Pools:Get Defi Pool
+         * @description Retrieve an defi_pool by its ID.
+         */
+        get: operations["defi_pools_get_defi_pool_defi_pools__defi_pool_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tokens": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Tokens:List Tokens
+         * @description Retrieve a list of tokens with filtering, sorting, and pagination.
+         */
+        get: operations["tokens_list_tokens_tokens_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/tokens/{token_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Tokens:Get Token
+         * @description Retrieve an token by its ID.
+         */
+        get: operations["tokens_get_token_tokens__token_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/sandwich_attacks": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Sandwich Attacks:List Sandwich Attacks
+         * @description Retrieve a list of sandwich_attacks with filtering, sorting, and pagination.
+         */
+        get: operations["sandwich_attacks_list_sandwich_attacks_sandwich_attacks_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/sandwich_attacks/by_month": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Sandwich Attacks:Read By Month
+         * @description Retrieve a list of sandwich_attacks with filtering, sorting, and pagination.
+         */
+        get: operations["sandwich_attacks_read_by_month_sandwich_attacks_by_month_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/sandwich_attacks/{sandwich_attack_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Sandwich Attacks:Get Sandwich Attack
+         * @description Retrieve an sandwich_attack by its ID.
+         */
+        get: operations["sandwich_attacks_get_sandwich_attack_sandwich_attacks__sandwich_attack_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/swaps/{swap_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Swaps:Get Swap
+         * @description Retrieve an swap by its ID.
+         */
+        get: operations["swaps_get_swap_swaps__swap_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
-  schemas: {
-    /** ChainListRead */
-    ChainListRead: {
-      meta: components["schemas"]["ListResponseMeta"];
-      /** Data */
-      data: components["schemas"]["ChainRead"][];
+    schemas: {
+        /** ChainListRead */
+        ChainListRead: {
+            meta: components["schemas"]["ListResponseMeta"];
+            /** Data */
+            data: components["schemas"]["ChainRead"][];
+        };
+        /** ChainRead */
+        ChainRead: {
+            /**
+             * Id
+             * @description The ID of the object
+             * @example abcd1234xyzc
+             */
+            id: string;
+            /**
+             * Chain Id
+             * @description Chain ID.
+             */
+            chain_id: number;
+            /**
+             * Name
+             * @description Chain name.
+             */
+            name: string;
+            /**
+             * Native Symbol
+             * @description Native currency symbol.
+             */
+            native_symbol: string;
+            /**
+             * Native Decimals
+             * @description Native currency decimals.
+             */
+            native_decimals: number;
+            /**
+             * Logo Url
+             * @description URL of the chain logo.
+             */
+            logo_url: string;
+            /**
+             * Explorer Url
+             * @description URL of the chain explorer.
+             */
+            explorer_url: string;
+            /**
+             * Created At
+             * Format: date-time
+             * @description Record creation timestamp.
+             */
+            created_at: string;
+            /**
+             * Updated At
+             * Format: date-time
+             * @description Record update timestamp.
+             */
+            updated_at: string;
+        };
+        /** DefiFactoryRead */
+        DefiFactoryRead: {
+            /**
+             * Id
+             * @description The ID of the object
+             * @example abcd1234xyzc
+             */
+            id: string;
+            /**
+             * Address
+             * @description The contract address of the DeFi factory.
+             */
+            address: string;
+            /**
+             * Created Block Number
+             * @description The block number when the DeFi factory was created.
+             */
+            created_block_number: number;
+            /** @description The DeFi version this factory is associated with. */
+            defi_version: components["schemas"]["DefiVersionRead"];
+            /**
+             * Created At
+             * Format: date-time
+             * @description Record creation timestamp.
+             */
+            created_at: string;
+            /**
+             * Updated At
+             * Format: date-time
+             * @description Record update timestamp.
+             */
+            updated_at: string;
+        };
+        /** DefiListRead */
+        DefiListRead: {
+            meta: components["schemas"]["ListResponseMeta"];
+            /** Data */
+            data: components["schemas"]["DefiRead"][];
+        };
+        /** DefiPoolListRead */
+        DefiPoolListRead: {
+            meta: components["schemas"]["ListResponseMeta"];
+            /** Data */
+            data: components["schemas"]["app__v1__schemas__defi_pool__read__DefiPoolRead"][];
+        };
+        /** DefiRead */
+        DefiRead: {
+            /**
+             * Id
+             * @description The ID of the object
+             * @example abcd1234xyzc
+             */
+            id: string;
+            /**
+             * Name
+             * @description The name of the DeFi protocol.
+             */
+            name: string;
+            /**
+             * Logo Url
+             * @description URL of the DeFi protocol logo.
+             */
+            logo_url: string;
+            /**
+             * Created At
+             * Format: date-time
+             * @description Record creation timestamp.
+             */
+            created_at: string;
+            /**
+             * Updated At
+             * Format: date-time
+             * @description Record update timestamp.
+             */
+            updated_at: string;
+        };
+        /** DefiVersionListRead */
+        DefiVersionListRead: {
+            meta: components["schemas"]["ListResponseMeta"];
+            /** Data */
+            data: components["schemas"]["DefiVersionRead"][];
+        };
+        /** DefiVersionRead */
+        DefiVersionRead: {
+            /**
+             * Id
+             * @description The ID of the object
+             * @example abcd1234xyzc
+             */
+            id: string;
+            /**
+             * Name
+             * @description The name of the DeFi protocol.
+             */
+            name: string;
+            /** @description The DeFi protocol this version belongs to. */
+            defi: components["schemas"]["DefiRead"];
+            /**
+             * Created At
+             * Format: date-time
+             * @description Record creation timestamp.
+             */
+            created_at: string;
+            /**
+             * Updated At
+             * Format: date-time
+             * @description Record update timestamp.
+             */
+            updated_at: string;
+        };
+        /** ErrorDetail */
+        ErrorDetail: {
+            /** Status */
+            status: string;
+            /** Code */
+            code: string;
+            /** Title */
+            title: string;
+            /** Detail */
+            detail: string;
+            source?: components["schemas"]["ErrorSource"] | null;
+        };
+        /** ErrorResponse */
+        ErrorResponse: {
+            /**
+             * Type
+             * @default about:blank
+             */
+            type: string;
+            /** Title */
+            title: string;
+            /** Status */
+            status: number;
+            /** Instance */
+            instance: string;
+            /** Errors */
+            errors: components["schemas"]["ErrorDetail"][];
+        };
+        /** ErrorSource */
+        ErrorSource: {
+            /** Pointer */
+            pointer?: string | null;
+        };
+        /** ListResponseMeta */
+        ListResponseMeta: {
+            /**
+             * Limit
+             * @description Maximum number of items to retrieve
+             * @default 100
+             */
+            limit: number;
+            /**
+             * Offset
+             * @description Starting position for retrieval
+             * @default 0
+             */
+            offset: number;
+            /**
+             * Sorted By
+             * @description Field name to sort by
+             * @default id
+             */
+            sorted_by: string | null;
+            /**
+             * Sorted Order
+             * @description Sort order: asc or desc
+             * @default asc
+             */
+            sorted_order: string;
+            /**
+             * Total Count
+             * @description Total number of items matching the search criteria.
+             * @example 100
+             */
+            total_count: number;
+        };
+        /** SandwichAttackListRead */
+        SandwichAttackListRead: {
+            meta: components["schemas"]["SandwichAttackListResponseMeta"];
+            /** Data */
+            data: components["schemas"]["SandwichAttackRead"][];
+        };
+        /** SandwichAttackListResponseMeta */
+        SandwichAttackListResponseMeta: {
+            /**
+             * Limit
+             * @description Maximum number of items to retrieve
+             * @default 100
+             */
+            limit: number;
+            /**
+             * Offset
+             * @description Starting position for retrieval
+             * @default 0
+             */
+            offset: number;
+            /**
+             * Sorted By
+             * @description Field name to sort by
+             * @default id
+             */
+            sorted_by: string | null;
+            /**
+             * Sorted Order
+             * @description Sort order: asc or desc
+             * @default asc
+             */
+            sorted_order: string;
+            /**
+             * Total Count
+             * @description Total number of items matching the search criteria.
+             * @example 100
+             */
+            total_count: number;
+            /**
+             * Total Revenue Usd
+             * @description Total revenue in USD for the current query.
+             * @example 100
+             */
+            total_revenue_usd: number;
+            /**
+             * Total Profit Usd
+             * @description Total profit in USD for the current query.
+             * @example 100
+             */
+            total_profit_usd: number;
+            /**
+             * Total Harm Usd
+             * @description Total harm in USD for the current query.
+             * @example 100
+             */
+            total_harm_usd: number;
+        };
+        /** SandwichAttackRead */
+        SandwichAttackRead: {
+            /**
+             * Id
+             * @description The ID of the object
+             * @example abcd1234xyzc
+             */
+            id: string;
+            /** @description The chain this pool belongs to. */
+            chain: components["schemas"]["ChainRead"];
+            /** @description The front-running swap of the sandwich attack. */
+            front_attack_swap: components["schemas"]["app__v1__schemas__sandwich_attack__swap__read__SwapRead"];
+            /** @description The victim swap of the sandwich attack. */
+            victim_swap: components["schemas"]["app__v1__schemas__sandwich_attack__swap__read__SwapRead"];
+            /** @description The back-running swap of the sandwich attack. */
+            back_attack_swap: components["schemas"]["app__v1__schemas__sandwich_attack__swap__read__SwapRead"];
+            /**
+             * Attacker Address
+             * @description The address of the attacker.
+             */
+            attacker_address: string;
+            /**
+             * Victim Address
+             * @description The address of the victim.
+             */
+            victim_address: string;
+            /** @description The base token of the sandwich attack. */
+            base_token?: components["schemas"]["app__v1__schemas__token__read__TokenRead"] | null;
+            /** @description The DeFi version associated with the sandwich attack. */
+            defi_version: components["schemas"]["DefiVersionRead"];
+            /** @description The DeFi pool where the sandwich attack occurred. */
+            defi_pool: components["schemas"]["app__v1__schemas__sandwich_attack__defi_pool__read__DefiPoolRead"] | null;
+            /**
+             * Revenue Base Raw
+             * @description The revenue of the sandwich attack in base token (raw amount).
+             */
+            revenue_base_raw: number;
+            /**
+             * Gas Fee Base Raw
+             * @description The gas fee paid by the attacker in base token (raw amount).
+             */
+            gas_fee_base_raw: number;
+            /**
+             * Gas Fee Wei Attacker
+             * @description The gas fee paid by the attacker in wei.
+             */
+            gas_fee_wei_attacker: number;
+            /**
+             * Profit Base Raw
+             * @description The profit of the sandwich attack in base token (raw amount).
+             */
+            profit_base_raw: number;
+            /**
+             * Harm Base Raw
+             * @description The harm caused to the victim in base token (raw amount).
+             */
+            harm_base_raw: number;
+            /**
+             * Revenue Usd
+             * @description The revenue of the sandwich attack in USD.
+             */
+            revenue_usd?: number | null;
+            /**
+             * Cost Usd
+             * @description The cost of the sandwich attack in USD.
+             */
+            cost_usd?: number | null;
+            /**
+             * Profit Usd
+             * @description The profit of the sandwich attack in USD.
+             */
+            profit_usd?: number | null;
+            /**
+             * Harm Usd
+             * @description The harm caused to the victim in USD.
+             */
+            harm_usd?: number | null;
+            /**
+             * Block Timestamp
+             * Format: date-time
+             * @description The block timestamp of the sandwich attack (from the front-running swap).
+             */
+            block_timestamp: string;
+            /**
+             * Created At
+             * Format: date-time
+             * @description Record creation timestamp.
+             */
+            created_at: string;
+            /**
+             * Updated At
+             * Format: date-time
+             * @description Record update timestamp.
+             */
+            updated_at: string;
+        };
+        /** SandwichAttackReadByMonth */
+        SandwichAttackReadByMonth: {
+            /**
+             * Month
+             * Format: date-time
+             * @description The month of the sandwich attacks.
+             */
+            month: string;
+            /**
+             * Total Attacks
+             * @description Total number of sandwich attacks in the month.
+             */
+            total_attacks: number;
+            /**
+             * Total Revenue Usd
+             * @description Total revenue in USD for the month.
+             */
+            total_revenue_usd: number;
+            /**
+             * Total Profit Usd
+             * @description Total profit in USD for the month.
+             */
+            total_profit_usd: number;
+            /**
+             * Total Harm Usd
+             * @description Total harm in USD for the month.
+             */
+            total_harm_usd: number;
+        };
+        /** TokenListRead */
+        TokenListRead: {
+            meta: components["schemas"]["ListResponseMeta"];
+            /** Data */
+            data: components["schemas"]["app__v1__schemas__token__read__TokenRead"][];
+        };
+        /**
+         * TokenType
+         * @enum {string}
+         */
+        TokenType: "ERC20" | "NATIVE";
+        /** TransactionRead */
+        TransactionRead: {
+            /**
+             * Id
+             * @description The ID of the object
+             * @example abcd1234xyzc
+             */
+            id: string;
+            /**
+             * Block Number
+             * @description The block number of the transaction.
+             */
+            block_number: number;
+            /**
+             * Block Timestamp
+             * Format: date-time
+             * @description The timestamp of the block containing the transaction.
+             */
+            block_timestamp: string;
+            /**
+             * Tx Hash
+             * @description The hash of the transaction.
+             */
+            tx_hash: string;
+            /**
+             * Tx Index
+             * @description The index of the transaction in the block.
+             */
+            tx_index: number;
+            /**
+             * From Address
+             * @description The address of the sender.
+             */
+            from_address: string;
+            /**
+             * To Address
+             * @description The address of the recipient.
+             */
+            to_address?: string | null;
+            /**
+             * Gas Used
+             * @description The amount of gas used by the transaction.
+             */
+            gas_used?: number | null;
+            /**
+             * Gas Price Wei
+             * @description The gas price of the transaction in wei.
+             */
+            gas_price_wei?: number | null;
+            /**
+             * Effective Gas Price Wei
+             * @description The effective gas price of the transaction in wei.
+             */
+            effective_gas_price_wei?: number | null;
+            /**
+             * Value Wei
+             * @description The value of the transaction in wei.
+             */
+            value_wei: number;
+            /**
+             * Created At
+             * Format: date-time
+             * @description Record creation timestamp.
+             */
+            created_at: string;
+            /**
+             * Updated At
+             * Format: date-time
+             * @description Record update timestamp.
+             */
+            updated_at: string;
+        };
+        /** DefiPoolRead */
+        app__v1__schemas__defi_pool__read__DefiPoolRead: {
+            /**
+             * Id
+             * @description The ID of the object
+             * @example abcd1234xyzc
+             */
+            id: string;
+            /**
+             * Address
+             * @description The contract address of the DeFi protocol.
+             */
+            address: string;
+            /**
+             * Created Block Number
+             * @description The block number when the DeFi protocol was created.
+             */
+            created_block_number: number;
+            /**
+             * Tick Spacing
+             * @description The tick spacing of the DeFi pool.
+             */
+            tick_spacing: number;
+            /**
+             * Fee Tier Bps
+             * @description The fee tier in basis points of the DeFi pool.
+             */
+            fee_tier_bps: number;
+            /** @description The chain this pool belongs to. */
+            chain: components["schemas"]["ChainRead"];
+            /** @description The factory this pool belongs to. */
+            defi_factory: components["schemas"]["DefiFactoryRead"];
+            /** @description The first token of the pool. */
+            token0: components["schemas"]["app__v1__schemas__defi_pool__token__read__TokenRead"];
+            /** @description The second token of the pool. */
+            token1: components["schemas"]["app__v1__schemas__defi_pool__token__read__TokenRead"];
+            /**
+             * Created At
+             * Format: date-time
+             * @description Record creation timestamp.
+             */
+            created_at: string;
+            /**
+             * Updated At
+             * Format: date-time
+             * @description Record update timestamp.
+             */
+            updated_at: string;
+        };
+        /** TokenRead */
+        app__v1__schemas__defi_pool__token__read__TokenRead: {
+            /**
+             * Id
+             * @description The ID of the object
+             * @example abcd1234xyzc
+             */
+            id: string;
+            /** @description Type of the token (e.g., ERC20). */
+            token_type: components["schemas"]["TokenType"];
+            /**
+             * Address
+             * @description Token contract address.
+             */
+            address: string;
+            /**
+             * Symbol
+             * @description Token symbol.
+             */
+            symbol: string;
+            /**
+             * Decimals
+             * @description Token decimals.
+             */
+            decimals: number;
+            /**
+             * Decimals Invalid
+             * @description Indicates if the token decimals are invalid.
+             */
+            decimals_invalid: boolean;
+            /**
+             * Logo Url
+             * @description URL of the token logo.
+             */
+            logo_url?: string | null;
+            /**
+             * Created At
+             * Format: date-time
+             * @description Record creation timestamp.
+             */
+            created_at: string;
+            /**
+             * Updated At
+             * Format: date-time
+             * @description Record update timestamp.
+             */
+            updated_at: string;
+        };
+        /** DefiPoolRead */
+        app__v1__schemas__sandwich_attack__defi_pool__read__DefiPoolRead: {
+            /**
+             * Id
+             * @description The ID of the object
+             * @example abcd1234xyzc
+             */
+            id: string;
+            /**
+             * Address
+             * @description The contract address of the DeFi protocol.
+             */
+            address: string;
+            /**
+             * Created Block Number
+             * @description The block number when the DeFi protocol was created.
+             */
+            created_block_number: number;
+            /**
+             * Tick Spacing
+             * @description The tick spacing of the DeFi pool.
+             */
+            tick_spacing: number;
+            /**
+             * Fee Tier Bps
+             * @description The fee tier in basis points of the DeFi pool.
+             */
+            fee_tier_bps: number;
+            /**
+             * Token0 Id
+             * @description The ID of token0.
+             */
+            token0_id: string;
+            /**
+             * Token1 Id
+             * @description The ID of token1.
+             */
+            token1_id: string;
+        };
+        /** SwapRead */
+        app__v1__schemas__sandwich_attack__swap__read__SwapRead: {
+            /**
+             * Id
+             * @description The ID of the object
+             * @example abcd1234xyzc
+             */
+            id: string;
+            /**
+             * Log Index
+             * @description The log index of the swap event.
+             */
+            log_index: number;
+            /**
+             * Sender
+             * @description The address of the sender.
+             */
+            sender?: string | null;
+            /**
+             * Recipient
+             * @description The address of the recipient.
+             */
+            recipient?: string | null;
+            /**
+             * Amount0 In Raw
+             * @description The raw amount of token0 input.
+             */
+            amount0_in_raw: number;
+            /**
+             * Amount1 In Raw
+             * @description The raw amount of token1 input.
+             */
+            amount1_in_raw: number;
+            /**
+             * Amount0 Out Raw
+             * @description The raw amount of token0 output.
+             */
+            amount0_out_raw: number;
+            /**
+             * Amount1 Out Raw
+             * @description The raw amount of token1 output.
+             */
+            amount1_out_raw: number;
+            /**
+             * Sqrt Price X96
+             * @description The square root price in Q96 format.
+             */
+            sqrt_price_x96?: number | null;
+            /**
+             * Liquidity Raw
+             * @description The liquidity of the pool (raw units).
+             */
+            liquidity_raw?: number | null;
+            /**
+             * Tick
+             * @description The tick of the pool.
+             */
+            tick?: number | null;
+            /** @description The token being sold in the swap. */
+            sell_token?: components["schemas"]["app__v1__schemas__token__read__TokenRead"] | null;
+            /** @description The token being bought in the swap. */
+            buy_token?: components["schemas"]["app__v1__schemas__token__read__TokenRead"] | null;
+            /** @description The transaction associated with the swap. */
+            transaction: components["schemas"]["TransactionRead"];
+            /**
+             * Created At
+             * Format: date-time
+             * @description Record creation timestamp.
+             */
+            created_at: string;
+            /**
+             * Updated At
+             * Format: date-time
+             * @description Record update timestamp.
+             */
+            updated_at: string;
+        };
+        /** SwapRead */
+        app__v1__schemas__swap__read__SwapRead: {
+            /**
+             * Id
+             * @description The ID of the object
+             * @example abcd1234xyzc
+             */
+            id: string;
+            /**
+             * Log Index
+             * @description The log index of the swap event.
+             */
+            log_index: number;
+            /**
+             * Sender
+             * @description The address of the sender.
+             */
+            sender?: string | null;
+            /**
+             * Recipient
+             * @description The address of the recipient.
+             */
+            recipient?: string | null;
+            /**
+             * Amount0 In Raw
+             * @description The raw amount of token0 input.
+             */
+            amount0_in_raw: number;
+            /**
+             * Amount1 In Raw
+             * @description The raw amount of token1 input.
+             */
+            amount1_in_raw: number;
+            /**
+             * Amount0 Out Raw
+             * @description The raw amount of token0 output.
+             */
+            amount0_out_raw: number;
+            /**
+             * Amount1 Out Raw
+             * @description The raw amount of token1 output.
+             */
+            amount1_out_raw: number;
+            /**
+             * Sqrt Price X96
+             * @description The square root price in Q96 format.
+             */
+            sqrt_price_x96?: number | null;
+            /**
+             * Liquidity Raw
+             * @description The liquidity of the pool (raw units).
+             */
+            liquidity_raw?: number | null;
+            /**
+             * Tick
+             * @description The tick of the pool.
+             */
+            tick?: number | null;
+            /** @description The token being sold in the swap. */
+            sell_token?: components["schemas"]["app__v1__schemas__defi_pool__token__read__TokenRead"] | null;
+            /** @description The token being bought in the swap. */
+            buy_token?: components["schemas"]["app__v1__schemas__defi_pool__token__read__TokenRead"] | null;
+            /** @description The transaction associated with the swap. */
+            transaction: components["schemas"]["TransactionRead"];
+            /** @description The chain this swap belongs to. */
+            chain: components["schemas"]["ChainRead"];
+            /**
+             * Created At
+             * Format: date-time
+             * @description Record creation timestamp.
+             */
+            created_at: string;
+            /**
+             * Updated At
+             * Format: date-time
+             * @description Record update timestamp.
+             */
+            updated_at: string;
+        };
+        /** TokenRead */
+        app__v1__schemas__token__read__TokenRead: {
+            /**
+             * Id
+             * @description The ID of the object
+             * @example abcd1234xyzc
+             */
+            id: string;
+            /** @description Type of the token (e.g., ERC20). */
+            token_type: components["schemas"]["TokenType"];
+            /**
+             * Address
+             * @description Token contract address.
+             */
+            address: string;
+            /**
+             * Symbol
+             * @description Token symbol.
+             */
+            symbol: string;
+            /**
+             * Decimals
+             * @description Token decimals.
+             */
+            decimals: number;
+            /**
+             * Decimals Invalid
+             * @description Indicates if the token decimals are invalid.
+             */
+            decimals_invalid: boolean;
+            /**
+             * Logo Url
+             * @description URL of the token logo.
+             */
+            logo_url?: string | null;
+            /** @description The chain this token belongs to. */
+            chain: components["schemas"]["ChainRead"];
+            /**
+             * Created At
+             * Format: date-time
+             * @description Record creation timestamp.
+             */
+            created_at: string;
+            /**
+             * Updated At
+             * Format: date-time
+             * @description Record update timestamp.
+             */
+            updated_at: string;
+        };
     };
-    /** ChainRead */
-    ChainRead: {
-      /**
-       * Id
-       * @description The ID of the object
-       * @example abcd1234xyzc
-       */
-      id: string;
-      /**
-       * Chain Id
-       * @description Chain ID.
-       */
-      chain_id: number;
-      /**
-       * Name
-       * @description Chain name.
-       */
-      name: string;
-      /**
-       * Native Symbol
-       * @description Native currency symbol.
-       */
-      native_symbol: string;
-      /**
-       * Native Decimals
-       * @description Native currency decimals.
-       */
-      native_decimals: number;
-      /**
-       * Created At
-       * Format: date-time
-       * @description Record creation timestamp.
-       */
-      created_at: string;
-      /**
-       * Updated At
-       * Format: date-time
-       * @description Record update timestamp.
-       */
-      updated_at: string;
-    };
-    /** ErrorDetail */
-    ErrorDetail: {
-      /** Status */
-      status: string;
-      /** Code */
-      code: string;
-      /** Title */
-      title: string;
-      /** Detail */
-      detail: string;
-      source?: components["schemas"]["ErrorSource"] | null;
-    };
-    /** ErrorResponse */
-    ErrorResponse: {
-      /**
-       * Type
-       * @default about:blank
-       */
-      type: string;
-      /** Title */
-      title: string;
-      /** Status */
-      status: number;
-      /** Instance */
-      instance: string;
-      /** Errors */
-      errors: components["schemas"]["ErrorDetail"][];
-    };
-    /** ErrorSource */
-    ErrorSource: {
-      /** Pointer */
-      pointer?: string | null;
-    };
-    /** ListResponseMeta */
-    ListResponseMeta: {
-      /**
-       * Limit
-       * @description Maximum number of items to retrieve
-       * @default 100
-       */
-      limit: number;
-      /**
-       * Offset
-       * @description Starting position for retrieval
-       * @default 0
-       */
-      offset: number;
-      /**
-       * Sorted By
-       * @description Field name to sort by
-       * @default id
-       */
-      sorted_by: string | null;
-      /**
-       * Sorted Order
-       * @description Sort order: asc or desc
-       * @default asc
-       */
-      sorted_order: string;
-      /**
-       * Total Count
-       * @description Total number of items matching the search criteria.
-       * @example 100
-       */
-      total_count: number;
-    };
-  };
-  responses: never;
-  parameters: never;
-  requestBodies: never;
-  headers: never;
-  pathItems: never;
+    responses: never;
+    parameters: never;
+    requestBodies: never;
+    headers: never;
+    pathItems: never;
 }
 export type $defs = Record<string, never>;
 export interface operations {
-  chains_list_chains_chains_get: {
-    parameters: {
-      query?: {
-        limit?: number;
-        offset?: number;
-        sorted_by?: string | null;
-        sorted_order?: string;
-        name__icontains?: string | null;
-        created_at__gte?: string | null;
-        created_at__lte?: string | null;
-        updated_at__gte?: string | null;
-        updated_at__lte?: string | null;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
+    chains_list_chains_chains_get: {
+        parameters: {
+            query?: {
+                limit?: number;
+                offset?: number;
+                sorted_by?: string | null;
+                sorted_order?: string;
+                name__icontains?: string | null;
+                created_at__gte?: string | null;
+                created_at__lte?: string | null;
+                updated_at__gte?: string | null;
+                updated_at__lte?: string | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ChainListRead"];
+                };
+            };
+            /** @description Validation error. */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+        };
     };
-    requestBody?: never;
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown;
+    chains_get_chain_chains__chain_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                chain_id: string;
+            };
+            cookie?: never;
         };
-        content: {
-          "application/json": components["schemas"]["ChainListRead"];
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ChainRead"];
+                };
+            };
+            /** @description Validation error. */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
         };
-      };
-      /** @description Unauthorized access. */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorResponse"];
-        };
-      };
-      /** @description Validation error. */
-      422: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorResponse"];
-        };
-      };
     };
-  };
-  chains_get_chain_chains__chain_id__get: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        chain_id: string;
-      };
-      cookie?: never;
+    defis_list_defis_defis_get: {
+        parameters: {
+            query?: {
+                limit?: number;
+                offset?: number;
+                sorted_by?: string | null;
+                sorted_order?: string;
+                name__icontains?: string | null;
+                created_at__gte?: string | null;
+                created_at__lte?: string | null;
+                updated_at__gte?: string | null;
+                updated_at__lte?: string | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DefiListRead"];
+                };
+            };
+            /** @description Validation error. */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+        };
     };
-    requestBody?: never;
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown;
+    defis_get_defi_defis__defi_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                defi_id: string;
+            };
+            cookie?: never;
         };
-        content: {
-          "application/json": components["schemas"]["ChainRead"];
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DefiRead"];
+                };
+            };
+            /** @description Validation error. */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
         };
-      };
-      /** @description Unauthorized access. */
-      401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorResponse"];
-        };
-      };
-      /** @description Validation error. */
-      422: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ErrorResponse"];
-        };
-      };
     };
-  };
+    defi_versions_list_defi_versions_defi_versions_get: {
+        parameters: {
+            query?: {
+                limit?: number;
+                offset?: number;
+                sorted_by?: string | null;
+                sorted_order?: string;
+                name__icontains?: string | null;
+                defi_id__exact?: number | null;
+                created_at__gte?: string | null;
+                created_at__lte?: string | null;
+                updated_at__gte?: string | null;
+                updated_at__lte?: string | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DefiVersionListRead"];
+                };
+            };
+            /** @description Validation error. */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+        };
+    };
+    defi_versions_get_defi_version_defi_versions__defi_version_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                defi_version_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DefiVersionRead"];
+                };
+            };
+            /** @description Validation error. */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+        };
+    };
+    defi_pools_list_defi_pools_defi_pools_get: {
+        parameters: {
+            query?: {
+                limit?: number;
+                offset?: number;
+                sorted_by?: string;
+                sorted_order?: string;
+                address__exact?: string | null;
+                created_block_number__gte?: number | null;
+                created_block_number__lte?: number | null;
+                chain_id__in?: string[] | null;
+                token0_id__exact?: number | null;
+                token1_id__exact?: number | null;
+                fee_tier_bps__gte?: number | null;
+                fee_tier_bps__lte?: number | null;
+                created_at__gte?: string | null;
+                created_at__lte?: string | null;
+                updated_at__gte?: string | null;
+                updated_at__lte?: string | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DefiPoolListRead"];
+                };
+            };
+            /** @description Validation error. */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+        };
+    };
+    defi_pools_get_defi_pool_defi_pools__defi_pool_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                defi_pool_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["app__v1__schemas__defi_pool__read__DefiPoolRead"];
+                };
+            };
+            /** @description Validation error. */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+        };
+    };
+    tokens_list_tokens_tokens_get: {
+        parameters: {
+            query?: {
+                limit?: number;
+                offset?: number;
+                sorted_by?: string;
+                sorted_order?: string;
+                token_type__in?: components["schemas"]["TokenType"][] | null;
+                address__exact?: string | null;
+                symbol__exact?: string | null;
+                chain_id__in?: string[] | null;
+                token0_id__exact?: number | null;
+                token1_id__exact?: number | null;
+                created_at__gte?: string | null;
+                created_at__lte?: string | null;
+                updated_at__gte?: string | null;
+                updated_at__lte?: string | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TokenListRead"];
+                };
+            };
+            /** @description Validation error. */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+        };
+    };
+    tokens_get_token_tokens__token_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                token_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["app__v1__schemas__token__read__TokenRead"];
+                };
+            };
+            /** @description Validation error. */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+        };
+    };
+    sandwich_attacks_list_sandwich_attacks_sandwich_attacks_get: {
+        parameters: {
+            query?: {
+                limit?: number;
+                offset?: number;
+                sorted_by?: string;
+                sorted_order?: string;
+                chain_id__in?: string[] | null;
+                defi_version_id__in?: string[] | null;
+                victim_address__exact__or__attacker_address__exact?: string | null;
+                victim_address__exact?: string | null;
+                attacker_address__exact?: string | null;
+                revenue_base_raw__gte?: number | null;
+                revenue_base_raw__lte?: number | null;
+                profit_base_raw__gte?: number | null;
+                profit_base_raw__lte?: number | null;
+                harm_base_raw__gte?: number | null;
+                harm_base_raw__lte?: number | null;
+                gas_fee_wei_attacker__gte?: number | null;
+                gas_fee_wei_attacker__lte?: number | null;
+                created_at__gte?: string | null;
+                created_at__lte?: string | null;
+                updated_at__gte?: string | null;
+                updated_at__lte?: string | null;
+                block_timestamp__gte?: string | null;
+                block_timestamp__lte?: string | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SandwichAttackListRead"];
+                };
+            };
+            /** @description Validation error. */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+        };
+    };
+    sandwich_attacks_read_by_month_sandwich_attacks_by_month_get: {
+        parameters: {
+            query?: {
+                limit?: number;
+                offset?: number;
+                sorted_by?: string;
+                sorted_order?: string;
+                chain_id__in?: string[] | null;
+                defi_version_id__in?: string[] | null;
+                victim_address__exact__or__attacker_address__exact?: string | null;
+                victim_address__exact?: string | null;
+                attacker_address__exact?: string | null;
+                revenue_base_raw__gte?: number | null;
+                revenue_base_raw__lte?: number | null;
+                profit_base_raw__gte?: number | null;
+                profit_base_raw__lte?: number | null;
+                harm_base_raw__gte?: number | null;
+                harm_base_raw__lte?: number | null;
+                gas_fee_wei_attacker__gte?: number | null;
+                gas_fee_wei_attacker__lte?: number | null;
+                created_at__gte?: string | null;
+                created_at__lte?: string | null;
+                updated_at__gte?: string | null;
+                updated_at__lte?: string | null;
+                block_timestamp__gte?: string | null;
+                block_timestamp__lte?: string | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SandwichAttackReadByMonth"][];
+                };
+            };
+            /** @description Validation error. */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+        };
+    };
+    sandwich_attacks_get_sandwich_attack_sandwich_attacks__sandwich_attack_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                sandwich_attack_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SandwichAttackRead"];
+                };
+            };
+            /** @description Validation error. */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+        };
+    };
+    swaps_get_swap_swaps__swap_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                swap_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["app__v1__schemas__swap__read__SwapRead"];
+                };
+            };
+            /** @description Validation error. */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+        };
+    };
 }

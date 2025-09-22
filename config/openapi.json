@@ -150,33 +150,6 @@
                 "schema": { "$ref": "#/components/schemas/ErrorResponse" }
               }
             }
-          },
-          "401": {
-            "description": "Unauthorized access.",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "unauthorized": {
-                    "summary": "Authentication credentials missing or invalid.",
-                    "value": {
-                      "type": "about:blank",
-                      "title": "Unauthorized",
-                      "status": 401,
-                      "instance": "http://127.0.0.1:8000/app/v1/chains",
-                      "errors": [
-                        {
-                          "status": "401",
-                          "code": "unauthorized",
-                          "title": "Unauthorized",
-                          "detail": "Authentication credentials were not provided or are invalid."
-                        }
-                      ]
-                    }
-                  }
-                },
-                "schema": { "$ref": "#/components/schemas/ErrorResponse" }
-              }
-            }
           }
         }
       }
@@ -231,25 +204,1699 @@
                 "schema": { "$ref": "#/components/schemas/ErrorResponse" }
               }
             }
+          }
+        }
+      }
+    },
+    "/defis": {
+      "get": {
+        "tags": ["Defis"],
+        "summary": "Defis:List Defis",
+        "description": "Retrieve a list of defis with filtering, sorting, and pagination.",
+        "operationId": "defis_list_defis_defis_get",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 100,
+              "title": "Limit"
+            }
           },
-          "401": {
-            "description": "Unauthorized access.",
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0,
+              "title": "Offset"
+            }
+          },
+          {
+            "name": "sorted_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [{ "type": "string" }, { "type": "null" }],
+              "default": "id",
+              "title": "Sorted By"
+            }
+          },
+          {
+            "name": "sorted_order",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "asc",
+              "title": "Sorted Order"
+            }
+          },
+          {
+            "name": "name__icontains",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [{ "type": "string" }, { "type": "null" }],
+              "title": "Name  Icontains"
+            }
+          },
+          {
+            "name": "created_at__gte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "string", "format": "date-time" },
+                { "type": "null" }
+              ],
+              "title": "Created At  Gte"
+            }
+          },
+          {
+            "name": "created_at__lte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "string", "format": "date-time" },
+                { "type": "null" }
+              ],
+              "title": "Created At  Lte"
+            }
+          },
+          {
+            "name": "updated_at__gte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "string", "format": "date-time" },
+                { "type": "null" }
+              ],
+              "title": "Updated At  Gte"
+            }
+          },
+          {
+            "name": "updated_at__lte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "string", "format": "date-time" },
+                { "type": "null" }
+              ],
+              "title": "Updated At  Lte"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/DefiListRead" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error.",
             "content": {
               "application/json": {
                 "examples": {
-                  "unauthorized": {
-                    "summary": "Authentication credentials missing or invalid.",
+                  "validation_error": {
+                    "summary": "Validation failed on input data.",
                     "value": {
                       "type": "about:blank",
-                      "title": "Unauthorized",
-                      "status": 401,
-                      "instance": "http://127.0.0.1:8000/app/v1/chains/{chain_id}",
+                      "title": "Unprocessable Entity",
+                      "status": 422,
+                      "instance": "http://127.0.0.1:8000/app/v1/defis",
                       "errors": [
                         {
-                          "status": "401",
-                          "code": "unauthorized",
-                          "title": "Unauthorized",
-                          "detail": "Authentication credentials were not provided or are invalid."
+                          "status": "422",
+                          "code": "validation_error",
+                          "title": "Validation Error",
+                          "detail": "The input data did not pass validation checks.",
+                          "source": { "pointer": "#/body" }
+                        }
+                      ]
+                    }
+                  }
+                },
+                "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/defis/{defi_id}": {
+      "get": {
+        "tags": ["Defis"],
+        "summary": "Defis:Get Defi",
+        "description": "Retrieve an defi by its ID.",
+        "operationId": "defis_get_defi_defis__defi_id__get",
+        "parameters": [
+          {
+            "name": "defi_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "Defi Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/DefiRead" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "validation_error": {
+                    "summary": "Validation failed on input data.",
+                    "value": {
+                      "type": "about:blank",
+                      "title": "Unprocessable Entity",
+                      "status": 422,
+                      "instance": "http://127.0.0.1:8000/app/v1/defis/{defi_id}",
+                      "errors": [
+                        {
+                          "status": "422",
+                          "code": "validation_error",
+                          "title": "Validation Error",
+                          "detail": "The input data did not pass validation checks.",
+                          "source": { "pointer": "#/body" }
+                        }
+                      ]
+                    }
+                  }
+                },
+                "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/defi_versions": {
+      "get": {
+        "tags": ["Defi Versions"],
+        "summary": "Defi Versions:List Defi Versions",
+        "description": "Retrieve a list of defi_versions with filtering, sorting, and pagination.",
+        "operationId": "defi_versions_list_defi_versions_defi_versions_get",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 100,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0,
+              "title": "Offset"
+            }
+          },
+          {
+            "name": "sorted_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [{ "type": "string" }, { "type": "null" }],
+              "default": "id",
+              "title": "Sorted By"
+            }
+          },
+          {
+            "name": "sorted_order",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "asc",
+              "title": "Sorted Order"
+            }
+          },
+          {
+            "name": "name__icontains",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [{ "type": "string" }, { "type": "null" }],
+              "title": "Name  Icontains"
+            }
+          },
+          {
+            "name": "defi_id__exact",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [{ "type": "integer" }, { "type": "null" }],
+              "title": "Defi Id  Exact"
+            }
+          },
+          {
+            "name": "created_at__gte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "string", "format": "date-time" },
+                { "type": "null" }
+              ],
+              "title": "Created At  Gte"
+            }
+          },
+          {
+            "name": "created_at__lte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "string", "format": "date-time" },
+                { "type": "null" }
+              ],
+              "title": "Created At  Lte"
+            }
+          },
+          {
+            "name": "updated_at__gte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "string", "format": "date-time" },
+                { "type": "null" }
+              ],
+              "title": "Updated At  Gte"
+            }
+          },
+          {
+            "name": "updated_at__lte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "string", "format": "date-time" },
+                { "type": "null" }
+              ],
+              "title": "Updated At  Lte"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/DefiVersionListRead" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "validation_error": {
+                    "summary": "Validation failed on input data.",
+                    "value": {
+                      "type": "about:blank",
+                      "title": "Unprocessable Entity",
+                      "status": 422,
+                      "instance": "http://127.0.0.1:8000/app/v1/defi_versions",
+                      "errors": [
+                        {
+                          "status": "422",
+                          "code": "validation_error",
+                          "title": "Validation Error",
+                          "detail": "The input data did not pass validation checks.",
+                          "source": { "pointer": "#/body" }
+                        }
+                      ]
+                    }
+                  }
+                },
+                "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/defi_versions/{defi_version_id}": {
+      "get": {
+        "tags": ["Defi Versions"],
+        "summary": "Defi Versions:Get Defi Version",
+        "description": "Retrieve an defi_version by its ID.",
+        "operationId": "defi_versions_get_defi_version_defi_versions__defi_version_id__get",
+        "parameters": [
+          {
+            "name": "defi_version_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "Defi Version Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/DefiVersionRead" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "validation_error": {
+                    "summary": "Validation failed on input data.",
+                    "value": {
+                      "type": "about:blank",
+                      "title": "Unprocessable Entity",
+                      "status": 422,
+                      "instance": "http://127.0.0.1:8000/app/v1/defi_versions/{defi_version_id}",
+                      "errors": [
+                        {
+                          "status": "422",
+                          "code": "validation_error",
+                          "title": "Validation Error",
+                          "detail": "The input data did not pass validation checks.",
+                          "source": { "pointer": "#/body" }
+                        }
+                      ]
+                    }
+                  }
+                },
+                "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/defi_pools": {
+      "get": {
+        "tags": ["DefiPools"],
+        "summary": "Defi Pools:List Defi Pools",
+        "description": "Retrieve a list of defi_pools with filtering, sorting, and pagination.",
+        "operationId": "defi_pools_list_defi_pools_defi_pools_get",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 10,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0,
+              "title": "Offset"
+            }
+          },
+          {
+            "name": "sorted_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "created_at",
+              "title": "Sorted By"
+            }
+          },
+          {
+            "name": "sorted_order",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "desc",
+              "title": "Sorted Order"
+            }
+          },
+          {
+            "name": "address__exact",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [{ "type": "string" }, { "type": "null" }],
+              "title": "Address  Exact"
+            }
+          },
+          {
+            "name": "created_block_number__gte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "integer", "minimum": 0 },
+                { "type": "null" }
+              ],
+              "title": "Created Block Number  Gte"
+            }
+          },
+          {
+            "name": "created_block_number__lte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "integer", "minimum": 0 },
+                { "type": "null" }
+              ],
+              "title": "Created Block Number  Lte"
+            }
+          },
+          {
+            "name": "chain_id__in",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "array", "items": { "type": "string" } },
+                { "type": "null" }
+              ],
+              "title": "Chain Id  In"
+            }
+          },
+          {
+            "name": "token0_id__exact",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "integer", "minimum": 0 },
+                { "type": "null" }
+              ],
+              "title": "Token0 Id  Exact"
+            }
+          },
+          {
+            "name": "token1_id__exact",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "integer", "minimum": 0 },
+                { "type": "null" }
+              ],
+              "title": "Token1 Id  Exact"
+            }
+          },
+          {
+            "name": "fee_tier_bps__gte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "integer", "minimum": 0 },
+                { "type": "null" }
+              ],
+              "title": "Fee Tier Bps  Gte"
+            }
+          },
+          {
+            "name": "fee_tier_bps__lte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "integer", "minimum": 0 },
+                { "type": "null" }
+              ],
+              "title": "Fee Tier Bps  Lte"
+            }
+          },
+          {
+            "name": "created_at__gte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "string", "format": "date-time" },
+                { "type": "null" }
+              ],
+              "title": "Created At  Gte"
+            }
+          },
+          {
+            "name": "created_at__lte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "string", "format": "date-time" },
+                { "type": "null" }
+              ],
+              "title": "Created At  Lte"
+            }
+          },
+          {
+            "name": "updated_at__gte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "string", "format": "date-time" },
+                { "type": "null" }
+              ],
+              "title": "Updated At  Gte"
+            }
+          },
+          {
+            "name": "updated_at__lte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "string", "format": "date-time" },
+                { "type": "null" }
+              ],
+              "title": "Updated At  Lte"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/DefiPoolListRead" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "validation_error": {
+                    "summary": "Validation failed on input data.",
+                    "value": {
+                      "type": "about:blank",
+                      "title": "Unprocessable Entity",
+                      "status": 422,
+                      "instance": "http://127.0.0.1:8000/app/v1/defi_pools",
+                      "errors": [
+                        {
+                          "status": "422",
+                          "code": "validation_error",
+                          "title": "Validation Error",
+                          "detail": "The input data did not pass validation checks.",
+                          "source": { "pointer": "#/body" }
+                        }
+                      ]
+                    }
+                  }
+                },
+                "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/defi_pools/{defi_pool_id}": {
+      "get": {
+        "tags": ["DefiPools"],
+        "summary": "Defi Pools:Get Defi Pool",
+        "description": "Retrieve an defi_pool by its ID.",
+        "operationId": "defi_pools_get_defi_pool_defi_pools__defi_pool_id__get",
+        "parameters": [
+          {
+            "name": "defi_pool_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "Defi Pool Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/app__v1__schemas__defi_pool__read__DefiPoolRead"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "validation_error": {
+                    "summary": "Validation failed on input data.",
+                    "value": {
+                      "type": "about:blank",
+                      "title": "Unprocessable Entity",
+                      "status": 422,
+                      "instance": "http://127.0.0.1:8000/app/v1/defi_pools/{defi_pool_id}",
+                      "errors": [
+                        {
+                          "status": "422",
+                          "code": "validation_error",
+                          "title": "Validation Error",
+                          "detail": "The input data did not pass validation checks.",
+                          "source": { "pointer": "#/body" }
+                        }
+                      ]
+                    }
+                  }
+                },
+                "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tokens": {
+      "get": {
+        "tags": ["Tokens"],
+        "summary": "Tokens:List Tokens",
+        "description": "Retrieve a list of tokens with filtering, sorting, and pagination.",
+        "operationId": "tokens_list_tokens_tokens_get",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 10,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0,
+              "title": "Offset"
+            }
+          },
+          {
+            "name": "sorted_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "created_at",
+              "title": "Sorted By"
+            }
+          },
+          {
+            "name": "sorted_order",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "desc",
+              "title": "Sorted Order"
+            }
+          },
+          {
+            "name": "token_type__in",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/TokenType" }
+                },
+                { "type": "null" }
+              ],
+              "title": "Token Type  In"
+            }
+          },
+          {
+            "name": "address__exact",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [{ "type": "string" }, { "type": "null" }],
+              "title": "Address  Exact"
+            }
+          },
+          {
+            "name": "symbol__exact",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [{ "type": "string" }, { "type": "null" }],
+              "title": "Symbol  Exact"
+            }
+          },
+          {
+            "name": "chain_id__in",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "array", "items": { "type": "string" } },
+                { "type": "null" }
+              ],
+              "title": "Chain Id  In"
+            }
+          },
+          {
+            "name": "token0_id__exact",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "integer", "minimum": 0 },
+                { "type": "null" }
+              ],
+              "title": "Token0 Id  Exact"
+            }
+          },
+          {
+            "name": "token1_id__exact",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "integer", "minimum": 0 },
+                { "type": "null" }
+              ],
+              "title": "Token1 Id  Exact"
+            }
+          },
+          {
+            "name": "created_at__gte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "string", "format": "date-time" },
+                { "type": "null" }
+              ],
+              "title": "Created At  Gte"
+            }
+          },
+          {
+            "name": "created_at__lte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "string", "format": "date-time" },
+                { "type": "null" }
+              ],
+              "title": "Created At  Lte"
+            }
+          },
+          {
+            "name": "updated_at__gte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "string", "format": "date-time" },
+                { "type": "null" }
+              ],
+              "title": "Updated At  Gte"
+            }
+          },
+          {
+            "name": "updated_at__lte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "string", "format": "date-time" },
+                { "type": "null" }
+              ],
+              "title": "Updated At  Lte"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/TokenListRead" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "validation_error": {
+                    "summary": "Validation failed on input data.",
+                    "value": {
+                      "type": "about:blank",
+                      "title": "Unprocessable Entity",
+                      "status": 422,
+                      "instance": "http://127.0.0.1:8000/app/v1/tokens",
+                      "errors": [
+                        {
+                          "status": "422",
+                          "code": "validation_error",
+                          "title": "Validation Error",
+                          "detail": "The input data did not pass validation checks.",
+                          "source": { "pointer": "#/body" }
+                        }
+                      ]
+                    }
+                  }
+                },
+                "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tokens/{token_id}": {
+      "get": {
+        "tags": ["Tokens"],
+        "summary": "Tokens:Get Token",
+        "description": "Retrieve an token by its ID.",
+        "operationId": "tokens_get_token_tokens__token_id__get",
+        "parameters": [
+          {
+            "name": "token_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "Token Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/app__v1__schemas__token__read__TokenRead"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "validation_error": {
+                    "summary": "Validation failed on input data.",
+                    "value": {
+                      "type": "about:blank",
+                      "title": "Unprocessable Entity",
+                      "status": 422,
+                      "instance": "http://127.0.0.1:8000/app/v1/tokens/{token_id}",
+                      "errors": [
+                        {
+                          "status": "422",
+                          "code": "validation_error",
+                          "title": "Validation Error",
+                          "detail": "The input data did not pass validation checks.",
+                          "source": { "pointer": "#/body" }
+                        }
+                      ]
+                    }
+                  }
+                },
+                "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sandwich_attacks": {
+      "get": {
+        "tags": ["Sandwich Attacks"],
+        "summary": "Sandwich Attacks:List Sandwich Attacks",
+        "description": "Retrieve a list of sandwich_attacks with filtering, sorting, and pagination.",
+        "operationId": "sandwich_attacks_list_sandwich_attacks_sandwich_attacks_get",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 10,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0,
+              "title": "Offset"
+            }
+          },
+          {
+            "name": "sorted_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "block_timestamp",
+              "title": "Sorted By"
+            }
+          },
+          {
+            "name": "sorted_order",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "desc",
+              "title": "Sorted Order"
+            }
+          },
+          {
+            "name": "chain_id__in",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "array", "items": { "type": "string" } },
+                { "type": "null" }
+              ],
+              "title": "Chain Id  In"
+            }
+          },
+          {
+            "name": "defi_version_id__in",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "array", "items": { "type": "string" } },
+                { "type": "null" }
+              ],
+              "title": "Defi Version Id  In"
+            }
+          },
+          {
+            "name": "victim_address__exact__or__attacker_address__exact",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [{ "type": "string" }, { "type": "null" }],
+              "title": "Victim Address  Exact  Or  Attacker Address  Exact"
+            }
+          },
+          {
+            "name": "victim_address__exact",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [{ "type": "string" }, { "type": "null" }],
+              "title": "Victim Address  Exact"
+            }
+          },
+          {
+            "name": "attacker_address__exact",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [{ "type": "string" }, { "type": "null" }],
+              "title": "Attacker Address  Exact"
+            }
+          },
+          {
+            "name": "revenue_base_raw__gte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "integer", "minimum": 0 },
+                { "type": "null" }
+              ],
+              "title": "Revenue Base Raw  Gte"
+            }
+          },
+          {
+            "name": "revenue_base_raw__lte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "integer", "minimum": 0 },
+                { "type": "null" }
+              ],
+              "title": "Revenue Base Raw  Lte"
+            }
+          },
+          {
+            "name": "profit_base_raw__gte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "integer", "minimum": 0 },
+                { "type": "null" }
+              ],
+              "title": "Profit Base Raw  Gte"
+            }
+          },
+          {
+            "name": "profit_base_raw__lte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "integer", "minimum": 0 },
+                { "type": "null" }
+              ],
+              "title": "Profit Base Raw  Lte"
+            }
+          },
+          {
+            "name": "harm_base_raw__gte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "integer", "minimum": 0 },
+                { "type": "null" }
+              ],
+              "title": "Harm Base Raw  Gte"
+            }
+          },
+          {
+            "name": "harm_base_raw__lte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "integer", "minimum": 0 },
+                { "type": "null" }
+              ],
+              "title": "Harm Base Raw  Lte"
+            }
+          },
+          {
+            "name": "gas_fee_wei_attacker__gte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "integer", "minimum": 0 },
+                { "type": "null" }
+              ],
+              "title": "Gas Fee Wei Attacker  Gte"
+            }
+          },
+          {
+            "name": "gas_fee_wei_attacker__lte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "integer", "minimum": 0 },
+                { "type": "null" }
+              ],
+              "title": "Gas Fee Wei Attacker  Lte"
+            }
+          },
+          {
+            "name": "created_at__gte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "string", "format": "date-time" },
+                { "type": "null" }
+              ],
+              "title": "Created At  Gte"
+            }
+          },
+          {
+            "name": "created_at__lte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "string", "format": "date-time" },
+                { "type": "null" }
+              ],
+              "title": "Created At  Lte"
+            }
+          },
+          {
+            "name": "updated_at__gte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "string", "format": "date-time" },
+                { "type": "null" }
+              ],
+              "title": "Updated At  Gte"
+            }
+          },
+          {
+            "name": "updated_at__lte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "string", "format": "date-time" },
+                { "type": "null" }
+              ],
+              "title": "Updated At  Lte"
+            }
+          },
+          {
+            "name": "block_timestamp__gte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "string", "format": "date-time" },
+                { "type": "null" }
+              ],
+              "title": "Block Timestamp  Gte"
+            }
+          },
+          {
+            "name": "block_timestamp__lte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "string", "format": "date-time" },
+                { "type": "null" }
+              ],
+              "title": "Block Timestamp  Lte"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SandwichAttackListRead"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "validation_error": {
+                    "summary": "Validation failed on input data.",
+                    "value": {
+                      "type": "about:blank",
+                      "title": "Unprocessable Entity",
+                      "status": 422,
+                      "instance": "http://127.0.0.1:8000/app/v1/sandwich_attacks",
+                      "errors": [
+                        {
+                          "status": "422",
+                          "code": "validation_error",
+                          "title": "Validation Error",
+                          "detail": "The input data did not pass validation checks.",
+                          "source": { "pointer": "#/body" }
+                        }
+                      ]
+                    }
+                  }
+                },
+                "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sandwich_attacks/by_month": {
+      "get": {
+        "tags": ["Sandwich Attacks"],
+        "summary": "Sandwich Attacks:Read By Month",
+        "description": "Retrieve a list of sandwich_attacks with filtering, sorting, and pagination.",
+        "operationId": "sandwich_attacks_read_by_month_sandwich_attacks_by_month_get",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 10,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0,
+              "title": "Offset"
+            }
+          },
+          {
+            "name": "sorted_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "block_timestamp",
+              "title": "Sorted By"
+            }
+          },
+          {
+            "name": "sorted_order",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "desc",
+              "title": "Sorted Order"
+            }
+          },
+          {
+            "name": "chain_id__in",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "array", "items": { "type": "string" } },
+                { "type": "null" }
+              ],
+              "title": "Chain Id  In"
+            }
+          },
+          {
+            "name": "defi_version_id__in",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "array", "items": { "type": "string" } },
+                { "type": "null" }
+              ],
+              "title": "Defi Version Id  In"
+            }
+          },
+          {
+            "name": "victim_address__exact__or__attacker_address__exact",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [{ "type": "string" }, { "type": "null" }],
+              "title": "Victim Address  Exact  Or  Attacker Address  Exact"
+            }
+          },
+          {
+            "name": "victim_address__exact",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [{ "type": "string" }, { "type": "null" }],
+              "title": "Victim Address  Exact"
+            }
+          },
+          {
+            "name": "attacker_address__exact",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [{ "type": "string" }, { "type": "null" }],
+              "title": "Attacker Address  Exact"
+            }
+          },
+          {
+            "name": "revenue_base_raw__gte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "integer", "minimum": 0 },
+                { "type": "null" }
+              ],
+              "title": "Revenue Base Raw  Gte"
+            }
+          },
+          {
+            "name": "revenue_base_raw__lte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "integer", "minimum": 0 },
+                { "type": "null" }
+              ],
+              "title": "Revenue Base Raw  Lte"
+            }
+          },
+          {
+            "name": "profit_base_raw__gte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "integer", "minimum": 0 },
+                { "type": "null" }
+              ],
+              "title": "Profit Base Raw  Gte"
+            }
+          },
+          {
+            "name": "profit_base_raw__lte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "integer", "minimum": 0 },
+                { "type": "null" }
+              ],
+              "title": "Profit Base Raw  Lte"
+            }
+          },
+          {
+            "name": "harm_base_raw__gte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "integer", "minimum": 0 },
+                { "type": "null" }
+              ],
+              "title": "Harm Base Raw  Gte"
+            }
+          },
+          {
+            "name": "harm_base_raw__lte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "integer", "minimum": 0 },
+                { "type": "null" }
+              ],
+              "title": "Harm Base Raw  Lte"
+            }
+          },
+          {
+            "name": "gas_fee_wei_attacker__gte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "integer", "minimum": 0 },
+                { "type": "null" }
+              ],
+              "title": "Gas Fee Wei Attacker  Gte"
+            }
+          },
+          {
+            "name": "gas_fee_wei_attacker__lte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "integer", "minimum": 0 },
+                { "type": "null" }
+              ],
+              "title": "Gas Fee Wei Attacker  Lte"
+            }
+          },
+          {
+            "name": "created_at__gte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "string", "format": "date-time" },
+                { "type": "null" }
+              ],
+              "title": "Created At  Gte"
+            }
+          },
+          {
+            "name": "created_at__lte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "string", "format": "date-time" },
+                { "type": "null" }
+              ],
+              "title": "Created At  Lte"
+            }
+          },
+          {
+            "name": "updated_at__gte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "string", "format": "date-time" },
+                { "type": "null" }
+              ],
+              "title": "Updated At  Gte"
+            }
+          },
+          {
+            "name": "updated_at__lte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "string", "format": "date-time" },
+                { "type": "null" }
+              ],
+              "title": "Updated At  Lte"
+            }
+          },
+          {
+            "name": "block_timestamp__gte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "string", "format": "date-time" },
+                { "type": "null" }
+              ],
+              "title": "Block Timestamp  Gte"
+            }
+          },
+          {
+            "name": "block_timestamp__lte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "string", "format": "date-time" },
+                { "type": "null" }
+              ],
+              "title": "Block Timestamp  Lte"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SandwichAttackReadByMonth"
+                  },
+                  "title": "Response Sandwich Attacks Read By Month Sandwich Attacks By Month Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "validation_error": {
+                    "summary": "Validation failed on input data.",
+                    "value": {
+                      "type": "about:blank",
+                      "title": "Unprocessable Entity",
+                      "status": 422,
+                      "instance": "http://127.0.0.1:8000/app/v1/sandwich_attacks/by_month",
+                      "errors": [
+                        {
+                          "status": "422",
+                          "code": "validation_error",
+                          "title": "Validation Error",
+                          "detail": "The input data did not pass validation checks.",
+                          "source": { "pointer": "#/body" }
+                        }
+                      ]
+                    }
+                  }
+                },
+                "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sandwich_attacks/{sandwich_attack_id}": {
+      "get": {
+        "tags": ["Sandwich Attacks"],
+        "summary": "Sandwich Attacks:Get Sandwich Attack",
+        "description": "Retrieve an sandwich_attack by its ID.",
+        "operationId": "sandwich_attacks_get_sandwich_attack_sandwich_attacks__sandwich_attack_id__get",
+        "parameters": [
+          {
+            "name": "sandwich_attack_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "Sandwich Attack Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SandwichAttackRead" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "validation_error": {
+                    "summary": "Validation failed on input data.",
+                    "value": {
+                      "type": "about:blank",
+                      "title": "Unprocessable Entity",
+                      "status": 422,
+                      "instance": "http://127.0.0.1:8000/app/v1/sandwich_attacks/{sandwich_attack_id}",
+                      "errors": [
+                        {
+                          "status": "422",
+                          "code": "validation_error",
+                          "title": "Validation Error",
+                          "detail": "The input data did not pass validation checks.",
+                          "source": { "pointer": "#/body" }
+                        }
+                      ]
+                    }
+                  }
+                },
+                "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/swaps/{swap_id}": {
+      "get": {
+        "tags": ["Swaps"],
+        "summary": "Swaps:Get Swap",
+        "description": "Retrieve an swap by its ID.",
+        "operationId": "swaps_get_swap_swaps__swap_id__get",
+        "parameters": [
+          {
+            "name": "swap_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "title": "Swap Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/app__v1__schemas__swap__read__SwapRead"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "validation_error": {
+                    "summary": "Validation failed on input data.",
+                    "value": {
+                      "type": "about:blank",
+                      "title": "Unprocessable Entity",
+                      "status": 422,
+                      "instance": "http://127.0.0.1:8000/app/v1/swaps/{swap_id}",
+                      "errors": [
+                        {
+                          "status": "422",
+                          "code": "validation_error",
+                          "title": "Validation Error",
+                          "detail": "The input data did not pass validation checks.",
+                          "source": { "pointer": "#/body" }
                         }
                       ]
                     }
@@ -306,6 +1953,16 @@
             "title": "Native Decimals",
             "description": "Native currency decimals."
           },
+          "logo_url": {
+            "type": "string",
+            "title": "Logo Url",
+            "description": "URL of the chain logo."
+          },
+          "explorer_url": {
+            "type": "string",
+            "title": "Explorer Url",
+            "description": "URL of the chain explorer."
+          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -326,10 +1983,168 @@
           "name",
           "native_symbol",
           "native_decimals",
+          "logo_url",
+          "explorer_url",
           "created_at",
           "updated_at"
         ],
         "title": "ChainRead"
+      },
+      "DefiFactoryRead": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "The ID of the object",
+            "example": "abcd1234xyzc"
+          },
+          "address": {
+            "type": "string",
+            "title": "Address",
+            "description": "The contract address of the DeFi factory."
+          },
+          "created_block_number": {
+            "type": "integer",
+            "title": "Created Block Number",
+            "description": "The block number when the DeFi factory was created."
+          },
+          "defi_version": {
+            "$ref": "#/components/schemas/DefiVersionRead",
+            "description": "The DeFi version this factory is associated with."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Record creation timestamp."
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At",
+            "description": "Record update timestamp."
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "address",
+          "created_block_number",
+          "defi_version",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "DefiFactoryRead"
+      },
+      "DefiListRead": {
+        "properties": {
+          "meta": { "$ref": "#/components/schemas/ListResponseMeta" },
+          "data": {
+            "items": { "$ref": "#/components/schemas/DefiRead" },
+            "type": "array",
+            "title": "Data"
+          }
+        },
+        "type": "object",
+        "required": ["meta", "data"],
+        "title": "DefiListRead"
+      },
+      "DefiPoolListRead": {
+        "properties": {
+          "meta": { "$ref": "#/components/schemas/ListResponseMeta" },
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/app__v1__schemas__defi_pool__read__DefiPoolRead"
+            },
+            "type": "array",
+            "title": "Data"
+          }
+        },
+        "type": "object",
+        "required": ["meta", "data"],
+        "title": "DefiPoolListRead"
+      },
+      "DefiRead": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "The ID of the object",
+            "example": "abcd1234xyzc"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "The name of the DeFi protocol."
+          },
+          "logo_url": {
+            "type": "string",
+            "title": "Logo Url",
+            "description": "URL of the DeFi protocol logo."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Record creation timestamp."
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At",
+            "description": "Record update timestamp."
+          }
+        },
+        "type": "object",
+        "required": ["id", "name", "logo_url", "created_at", "updated_at"],
+        "title": "DefiRead"
+      },
+      "DefiVersionListRead": {
+        "properties": {
+          "meta": { "$ref": "#/components/schemas/ListResponseMeta" },
+          "data": {
+            "items": { "$ref": "#/components/schemas/DefiVersionRead" },
+            "type": "array",
+            "title": "Data"
+          }
+        },
+        "type": "object",
+        "required": ["meta", "data"],
+        "title": "DefiVersionListRead"
+      },
+      "DefiVersionRead": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "The ID of the object",
+            "example": "abcd1234xyzc"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "The name of the DeFi protocol."
+          },
+          "defi": {
+            "$ref": "#/components/schemas/DefiRead",
+            "description": "The DeFi protocol this version belongs to."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Record creation timestamp."
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At",
+            "description": "Record update timestamp."
+          }
+        },
+        "type": "object",
+        "required": ["id", "name", "defi", "created_at", "updated_at"],
+        "title": "DefiVersionRead"
       },
       "ErrorDetail": {
         "properties": {
@@ -416,6 +2231,844 @@
         "type": "object",
         "required": ["total_count"],
         "title": "ListResponseMeta"
+      },
+      "SandwichAttackListRead": {
+        "properties": {
+          "meta": {
+            "$ref": "#/components/schemas/SandwichAttackListResponseMeta"
+          },
+          "data": {
+            "items": { "$ref": "#/components/schemas/SandwichAttackRead" },
+            "type": "array",
+            "title": "Data"
+          }
+        },
+        "type": "object",
+        "required": ["meta", "data"],
+        "title": "SandwichAttackListRead"
+      },
+      "SandwichAttackListResponseMeta": {
+        "properties": {
+          "limit": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Limit",
+            "description": "Maximum number of items to retrieve",
+            "default": 100
+          },
+          "offset": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Offset",
+            "description": "Starting position for retrieval",
+            "default": 0
+          },
+          "sorted_by": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Sorted By",
+            "description": "Field name to sort by",
+            "default": "id"
+          },
+          "sorted_order": {
+            "type": "string",
+            "title": "Sorted Order",
+            "description": "Sort order: asc or desc",
+            "default": "asc"
+          },
+          "total_count": {
+            "type": "integer",
+            "title": "Total Count",
+            "description": "Total number of items matching the search criteria.",
+            "example": 100
+          },
+          "total_revenue_usd": {
+            "type": "number",
+            "title": "Total Revenue Usd",
+            "description": "Total revenue in USD for the current query.",
+            "example": 100.0
+          },
+          "total_profit_usd": {
+            "type": "number",
+            "title": "Total Profit Usd",
+            "description": "Total profit in USD for the current query.",
+            "example": 100.0
+          },
+          "total_harm_usd": {
+            "type": "number",
+            "title": "Total Harm Usd",
+            "description": "Total harm in USD for the current query.",
+            "example": 100.0
+          }
+        },
+        "type": "object",
+        "required": [
+          "total_count",
+          "total_revenue_usd",
+          "total_profit_usd",
+          "total_harm_usd"
+        ],
+        "title": "SandwichAttackListResponseMeta"
+      },
+      "SandwichAttackRead": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "The ID of the object",
+            "example": "abcd1234xyzc"
+          },
+          "chain": {
+            "$ref": "#/components/schemas/ChainRead",
+            "description": "The chain this pool belongs to."
+          },
+          "front_attack_swap": {
+            "$ref": "#/components/schemas/app__v1__schemas__sandwich_attack__swap__read__SwapRead",
+            "description": "The front-running swap of the sandwich attack."
+          },
+          "victim_swap": {
+            "$ref": "#/components/schemas/app__v1__schemas__sandwich_attack__swap__read__SwapRead",
+            "description": "The victim swap of the sandwich attack."
+          },
+          "back_attack_swap": {
+            "$ref": "#/components/schemas/app__v1__schemas__sandwich_attack__swap__read__SwapRead",
+            "description": "The back-running swap of the sandwich attack."
+          },
+          "attacker_address": {
+            "type": "string",
+            "title": "Attacker Address",
+            "description": "The address of the attacker."
+          },
+          "victim_address": {
+            "type": "string",
+            "title": "Victim Address",
+            "description": "The address of the victim."
+          },
+          "base_token": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/app__v1__schemas__token__read__TokenRead"
+              },
+              { "type": "null" }
+            ],
+            "description": "The base token of the sandwich attack."
+          },
+          "defi_version": {
+            "$ref": "#/components/schemas/DefiVersionRead",
+            "description": "The DeFi version associated with the sandwich attack."
+          },
+          "defi_pool": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/app__v1__schemas__sandwich_attack__defi_pool__read__DefiPoolRead"
+              },
+              { "type": "null" }
+            ],
+            "description": "The DeFi pool where the sandwich attack occurred."
+          },
+          "revenue_base_raw": {
+            "type": "integer",
+            "title": "Revenue Base Raw",
+            "description": "The revenue of the sandwich attack in base token (raw amount)."
+          },
+          "gas_fee_base_raw": {
+            "type": "integer",
+            "title": "Gas Fee Base Raw",
+            "description": "The gas fee paid by the attacker in base token (raw amount)."
+          },
+          "gas_fee_wei_attacker": {
+            "type": "integer",
+            "title": "Gas Fee Wei Attacker",
+            "description": "The gas fee paid by the attacker in wei."
+          },
+          "profit_base_raw": {
+            "type": "integer",
+            "title": "Profit Base Raw",
+            "description": "The profit of the sandwich attack in base token (raw amount)."
+          },
+          "harm_base_raw": {
+            "type": "integer",
+            "title": "Harm Base Raw",
+            "description": "The harm caused to the victim in base token (raw amount)."
+          },
+          "revenue_usd": {
+            "anyOf": [{ "type": "number" }, { "type": "null" }],
+            "title": "Revenue Usd",
+            "description": "The revenue of the sandwich attack in USD."
+          },
+          "cost_usd": {
+            "anyOf": [{ "type": "number" }, { "type": "null" }],
+            "title": "Cost Usd",
+            "description": "The cost of the sandwich attack in USD."
+          },
+          "profit_usd": {
+            "anyOf": [{ "type": "number" }, { "type": "null" }],
+            "title": "Profit Usd",
+            "description": "The profit of the sandwich attack in USD."
+          },
+          "harm_usd": {
+            "anyOf": [{ "type": "number" }, { "type": "null" }],
+            "title": "Harm Usd",
+            "description": "The harm caused to the victim in USD."
+          },
+          "block_timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Block Timestamp",
+            "description": "The block timestamp of the sandwich attack (from the front-running swap)."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Record creation timestamp."
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At",
+            "description": "Record update timestamp."
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "chain",
+          "front_attack_swap",
+          "victim_swap",
+          "back_attack_swap",
+          "attacker_address",
+          "victim_address",
+          "defi_version",
+          "defi_pool",
+          "revenue_base_raw",
+          "gas_fee_base_raw",
+          "gas_fee_wei_attacker",
+          "profit_base_raw",
+          "harm_base_raw",
+          "block_timestamp",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "SandwichAttackRead"
+      },
+      "SandwichAttackReadByMonth": {
+        "properties": {
+          "month": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Month",
+            "description": "The month of the sandwich attacks."
+          },
+          "total_attacks": {
+            "type": "integer",
+            "title": "Total Attacks",
+            "description": "Total number of sandwich attacks in the month."
+          },
+          "total_revenue_usd": {
+            "type": "number",
+            "title": "Total Revenue Usd",
+            "description": "Total revenue in USD for the month."
+          },
+          "total_profit_usd": {
+            "type": "number",
+            "title": "Total Profit Usd",
+            "description": "Total profit in USD for the month."
+          },
+          "total_harm_usd": {
+            "type": "number",
+            "title": "Total Harm Usd",
+            "description": "Total harm in USD for the month."
+          }
+        },
+        "type": "object",
+        "required": [
+          "month",
+          "total_attacks",
+          "total_revenue_usd",
+          "total_profit_usd",
+          "total_harm_usd"
+        ],
+        "title": "SandwichAttackReadByMonth"
+      },
+      "TokenListRead": {
+        "properties": {
+          "meta": { "$ref": "#/components/schemas/ListResponseMeta" },
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/app__v1__schemas__token__read__TokenRead"
+            },
+            "type": "array",
+            "title": "Data"
+          }
+        },
+        "type": "object",
+        "required": ["meta", "data"],
+        "title": "TokenListRead"
+      },
+      "TokenType": {
+        "type": "string",
+        "enum": ["ERC20", "NATIVE"],
+        "title": "TokenType"
+      },
+      "TransactionRead": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "The ID of the object",
+            "example": "abcd1234xyzc"
+          },
+          "block_number": {
+            "type": "integer",
+            "title": "Block Number",
+            "description": "The block number of the transaction."
+          },
+          "block_timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Block Timestamp",
+            "description": "The timestamp of the block containing the transaction."
+          },
+          "tx_hash": {
+            "type": "string",
+            "title": "Tx Hash",
+            "description": "The hash of the transaction."
+          },
+          "tx_index": {
+            "type": "integer",
+            "title": "Tx Index",
+            "description": "The index of the transaction in the block."
+          },
+          "from_address": {
+            "type": "string",
+            "title": "From Address",
+            "description": "The address of the sender."
+          },
+          "to_address": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "To Address",
+            "description": "The address of the recipient."
+          },
+          "gas_used": {
+            "anyOf": [{ "type": "integer" }, { "type": "null" }],
+            "title": "Gas Used",
+            "description": "The amount of gas used by the transaction."
+          },
+          "gas_price_wei": {
+            "anyOf": [{ "type": "integer" }, { "type": "null" }],
+            "title": "Gas Price Wei",
+            "description": "The gas price of the transaction in wei."
+          },
+          "effective_gas_price_wei": {
+            "anyOf": [{ "type": "integer" }, { "type": "null" }],
+            "title": "Effective Gas Price Wei",
+            "description": "The effective gas price of the transaction in wei."
+          },
+          "value_wei": {
+            "type": "integer",
+            "title": "Value Wei",
+            "description": "The value of the transaction in wei."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Record creation timestamp."
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At",
+            "description": "Record update timestamp."
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "block_number",
+          "block_timestamp",
+          "tx_hash",
+          "tx_index",
+          "from_address",
+          "value_wei",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "TransactionRead"
+      },
+      "app__v1__schemas__defi_pool__read__DefiPoolRead": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "The ID of the object",
+            "example": "abcd1234xyzc"
+          },
+          "address": {
+            "type": "string",
+            "title": "Address",
+            "description": "The contract address of the DeFi protocol."
+          },
+          "created_block_number": {
+            "type": "integer",
+            "title": "Created Block Number",
+            "description": "The block number when the DeFi protocol was created."
+          },
+          "tick_spacing": {
+            "type": "integer",
+            "title": "Tick Spacing",
+            "description": "The tick spacing of the DeFi pool."
+          },
+          "fee_tier_bps": {
+            "type": "integer",
+            "title": "Fee Tier Bps",
+            "description": "The fee tier in basis points of the DeFi pool."
+          },
+          "chain": {
+            "$ref": "#/components/schemas/ChainRead",
+            "description": "The chain this pool belongs to."
+          },
+          "defi_factory": {
+            "$ref": "#/components/schemas/DefiFactoryRead",
+            "description": "The factory this pool belongs to."
+          },
+          "token0": {
+            "$ref": "#/components/schemas/app__v1__schemas__defi_pool__token__read__TokenRead",
+            "description": "The first token of the pool."
+          },
+          "token1": {
+            "$ref": "#/components/schemas/app__v1__schemas__defi_pool__token__read__TokenRead",
+            "description": "The second token of the pool."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Record creation timestamp."
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At",
+            "description": "Record update timestamp."
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "address",
+          "created_block_number",
+          "tick_spacing",
+          "fee_tier_bps",
+          "chain",
+          "defi_factory",
+          "token0",
+          "token1",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "DefiPoolRead"
+      },
+      "app__v1__schemas__defi_pool__token__read__TokenRead": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "The ID of the object",
+            "example": "abcd1234xyzc"
+          },
+          "token_type": {
+            "$ref": "#/components/schemas/TokenType",
+            "description": "Type of the token (e.g., ERC20)."
+          },
+          "address": {
+            "type": "string",
+            "title": "Address",
+            "description": "Token contract address."
+          },
+          "symbol": {
+            "type": "string",
+            "title": "Symbol",
+            "description": "Token symbol."
+          },
+          "decimals": {
+            "type": "integer",
+            "title": "Decimals",
+            "description": "Token decimals."
+          },
+          "decimals_invalid": {
+            "type": "boolean",
+            "title": "Decimals Invalid",
+            "description": "Indicates if the token decimals are invalid."
+          },
+          "logo_url": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Logo Url",
+            "description": "URL of the token logo."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Record creation timestamp."
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At",
+            "description": "Record update timestamp."
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "token_type",
+          "address",
+          "symbol",
+          "decimals",
+          "decimals_invalid",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "TokenRead"
+      },
+      "app__v1__schemas__sandwich_attack__defi_pool__read__DefiPoolRead": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "The ID of the object",
+            "example": "abcd1234xyzc"
+          },
+          "address": {
+            "type": "string",
+            "title": "Address",
+            "description": "The contract address of the DeFi protocol."
+          },
+          "created_block_number": {
+            "type": "integer",
+            "title": "Created Block Number",
+            "description": "The block number when the DeFi protocol was created."
+          },
+          "tick_spacing": {
+            "type": "integer",
+            "title": "Tick Spacing",
+            "description": "The tick spacing of the DeFi pool."
+          },
+          "fee_tier_bps": {
+            "type": "integer",
+            "title": "Fee Tier Bps",
+            "description": "The fee tier in basis points of the DeFi pool."
+          },
+          "token0_id": {
+            "type": "string",
+            "title": "Token0 Id",
+            "description": "The ID of token0."
+          },
+          "token1_id": {
+            "type": "string",
+            "title": "Token1 Id",
+            "description": "The ID of token1."
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "address",
+          "created_block_number",
+          "tick_spacing",
+          "fee_tier_bps",
+          "token0_id",
+          "token1_id"
+        ],
+        "title": "DefiPoolRead"
+      },
+      "app__v1__schemas__sandwich_attack__swap__read__SwapRead": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "The ID of the object",
+            "example": "abcd1234xyzc"
+          },
+          "log_index": {
+            "type": "integer",
+            "title": "Log Index",
+            "description": "The log index of the swap event."
+          },
+          "sender": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Sender",
+            "description": "The address of the sender."
+          },
+          "recipient": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Recipient",
+            "description": "The address of the recipient."
+          },
+          "amount0_in_raw": {
+            "type": "integer",
+            "title": "Amount0 In Raw",
+            "description": "The raw amount of token0 input."
+          },
+          "amount1_in_raw": {
+            "type": "integer",
+            "title": "Amount1 In Raw",
+            "description": "The raw amount of token1 input."
+          },
+          "amount0_out_raw": {
+            "type": "integer",
+            "title": "Amount0 Out Raw",
+            "description": "The raw amount of token0 output."
+          },
+          "amount1_out_raw": {
+            "type": "integer",
+            "title": "Amount1 Out Raw",
+            "description": "The raw amount of token1 output."
+          },
+          "sqrt_price_x96": {
+            "anyOf": [{ "type": "integer" }, { "type": "null" }],
+            "title": "Sqrt Price X96",
+            "description": "The square root price in Q96 format."
+          },
+          "liquidity_raw": {
+            "anyOf": [{ "type": "integer" }, { "type": "null" }],
+            "title": "Liquidity Raw",
+            "description": "The liquidity of the pool (raw units)."
+          },
+          "tick": {
+            "anyOf": [{ "type": "integer" }, { "type": "null" }],
+            "title": "Tick",
+            "description": "The tick of the pool."
+          },
+          "sell_token": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/app__v1__schemas__token__read__TokenRead"
+              },
+              { "type": "null" }
+            ],
+            "description": "The token being sold in the swap."
+          },
+          "buy_token": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/app__v1__schemas__token__read__TokenRead"
+              },
+              { "type": "null" }
+            ],
+            "description": "The token being bought in the swap."
+          },
+          "transaction": {
+            "$ref": "#/components/schemas/TransactionRead",
+            "description": "The transaction associated with the swap."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Record creation timestamp."
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At",
+            "description": "Record update timestamp."
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "log_index",
+          "amount0_in_raw",
+          "amount1_in_raw",
+          "amount0_out_raw",
+          "amount1_out_raw",
+          "transaction",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "SwapRead"
+      },
+      "app__v1__schemas__swap__read__SwapRead": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "The ID of the object",
+            "example": "abcd1234xyzc"
+          },
+          "log_index": {
+            "type": "integer",
+            "title": "Log Index",
+            "description": "The log index of the swap event."
+          },
+          "sender": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Sender",
+            "description": "The address of the sender."
+          },
+          "recipient": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Recipient",
+            "description": "The address of the recipient."
+          },
+          "amount0_in_raw": {
+            "type": "integer",
+            "title": "Amount0 In Raw",
+            "description": "The raw amount of token0 input."
+          },
+          "amount1_in_raw": {
+            "type": "integer",
+            "title": "Amount1 In Raw",
+            "description": "The raw amount of token1 input."
+          },
+          "amount0_out_raw": {
+            "type": "integer",
+            "title": "Amount0 Out Raw",
+            "description": "The raw amount of token0 output."
+          },
+          "amount1_out_raw": {
+            "type": "integer",
+            "title": "Amount1 Out Raw",
+            "description": "The raw amount of token1 output."
+          },
+          "sqrt_price_x96": {
+            "anyOf": [{ "type": "integer" }, { "type": "null" }],
+            "title": "Sqrt Price X96",
+            "description": "The square root price in Q96 format."
+          },
+          "liquidity_raw": {
+            "anyOf": [{ "type": "integer" }, { "type": "null" }],
+            "title": "Liquidity Raw",
+            "description": "The liquidity of the pool (raw units)."
+          },
+          "tick": {
+            "anyOf": [{ "type": "integer" }, { "type": "null" }],
+            "title": "Tick",
+            "description": "The tick of the pool."
+          },
+          "sell_token": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/app__v1__schemas__defi_pool__token__read__TokenRead"
+              },
+              { "type": "null" }
+            ],
+            "description": "The token being sold in the swap."
+          },
+          "buy_token": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/app__v1__schemas__defi_pool__token__read__TokenRead"
+              },
+              { "type": "null" }
+            ],
+            "description": "The token being bought in the swap."
+          },
+          "transaction": {
+            "$ref": "#/components/schemas/TransactionRead",
+            "description": "The transaction associated with the swap."
+          },
+          "chain": {
+            "$ref": "#/components/schemas/ChainRead",
+            "description": "The chain this swap belongs to."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Record creation timestamp."
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At",
+            "description": "Record update timestamp."
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "log_index",
+          "amount0_in_raw",
+          "amount1_in_raw",
+          "amount0_out_raw",
+          "amount1_out_raw",
+          "transaction",
+          "chain",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "SwapRead"
+      },
+      "app__v1__schemas__token__read__TokenRead": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "The ID of the object",
+            "example": "abcd1234xyzc"
+          },
+          "token_type": {
+            "$ref": "#/components/schemas/TokenType",
+            "description": "Type of the token (e.g., ERC20)."
+          },
+          "address": {
+            "type": "string",
+            "title": "Address",
+            "description": "Token contract address."
+          },
+          "symbol": {
+            "type": "string",
+            "title": "Symbol",
+            "description": "Token symbol."
+          },
+          "decimals": {
+            "type": "integer",
+            "title": "Decimals",
+            "description": "Token decimals."
+          },
+          "decimals_invalid": {
+            "type": "boolean",
+            "title": "Decimals Invalid",
+            "description": "Indicates if the token decimals are invalid."
+          },
+          "logo_url": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Logo Url",
+            "description": "URL of the token logo."
+          },
+          "chain": {
+            "$ref": "#/components/schemas/ChainRead",
+            "description": "The chain this token belongs to."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Record creation timestamp."
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At",
+            "description": "Record update timestamp."
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "token_type",
+          "address",
+          "symbol",
+          "decimals",
+          "decimals_invalid",
+          "chain",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "TokenRead"
       }
     }
   }

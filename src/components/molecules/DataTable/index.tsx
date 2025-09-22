@@ -118,10 +118,10 @@ export function DataTable<TData, TValue>({
   return (
     <div>
       {(filterInput || enableColumnFilters || sorts.length > 0) && (
-        <div className="flex items-center py-4">
-          {filterInput}
-          <div className="flex-1" />
-          <div className="flex items-center space-x-2">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center py-4 gap-2">
+          {filterInput && <div className="w-full sm:w-auto">{filterInput}</div>}
+          <div className="hidden sm:block sm:flex-1" />
+          <div className="flex items-center justify-end gap-2">
             {sorts.length > 0 && (
               <SortSelect
                 sorts={sorts}

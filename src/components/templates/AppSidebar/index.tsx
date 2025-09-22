@@ -1,13 +1,7 @@
 import * as React from "react";
-import {
-  BookOpen,
-  Bot,
-  Database,
-  Settings2,
-  SquareTerminal,
-} from "lucide-react";
+import { BookOpen, Database, ChartBarIncreasing } from "lucide-react";
+import Logo from "@/assets/img/logo.png";
 import { serviceName } from "@/config";
-
 import { NavMain } from "@/components/organisms/NavMain";
 import { NavUser } from "@/components/organisms/NavUser";
 import {
@@ -24,33 +18,42 @@ import { Link } from "react-router-dom";
 const data = {
   navMain: [
     {
-      title: "Playground",
+      title: "Dashboard",
       url: "#",
-      icon: SquareTerminal,
       isActive: true,
+      icon: ChartBarIncreasing,
       items: [
         {
-          title: "Chains",
-          url: "/chains",
+          title: "Sandwich Attacks",
+          url: "/sandwich-attacks",
         },
       ],
     },
     {
-      title: "Models",
+      title: "Target Data",
       url: "#",
-      icon: Bot,
+      icon: Database,
+      isActive: true,
       items: [
         {
-          title: "Genesis",
-          url: "#",
+          title: "Chain",
+          url: "/chains",
         },
         {
-          title: "Explorer",
-          url: "#",
+          title: "Defi",
+          url: "/defis",
         },
         {
-          title: "Quantum",
-          url: "#",
+          title: "Defi Version",
+          url: "/defi-versions",
+        },
+        {
+          title: "Defi Pool",
+          url: "/defi-pools",
+        },
+        {
+          title: "Token",
+          url: "/tokens",
         },
       ],
     },
@@ -60,43 +63,12 @@ const data = {
       icon: BookOpen,
       items: [
         {
-          title: "Introduction",
-          url: "#",
+          title: "What is Sandwich Attack?",
+          url: `${import.meta.env.VITE_DOCS_DOMAIN}/docs/category/what-is-sandwich-attack`,
         },
         {
-          title: "Get Started",
-          url: "#",
-        },
-        {
-          title: "Tutorials",
-          url: "#",
-        },
-        {
-          title: "Changelog",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Settings",
-      url: "#",
-      icon: Settings2,
-      items: [
-        {
-          title: "General",
-          url: "#",
-        },
-        {
-          title: "Team",
-          url: "#",
-        },
-        {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
-          url: "#",
+          title: "API Reference",
+          url: `${import.meta.env.VITE_API_URL}/scalar`,
         },
       ],
     },
@@ -113,7 +85,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
           >
             <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
-              <Database className="size-4" />
+              <img
+                src={Logo}
+                alt="Logo"
+                className="block mx-auto size-6 rounded-full"
+              />
             </div>
             <div className="grid flex-1 text-left text-sm leading-tight">
               <span className="truncate font-medium">{serviceName}</span>
@@ -125,19 +101,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavMain items={data.navMain} />
       </SidebarContent>
       <SidebarFooter>
-        {/* <Link to="/">
-          <SidebarMenuButton
-            size="lg"
-            className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-          >
-            <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
-              <Database className="size-4" />
-            </div>
-            <div className="grid flex-1 text-left text-sm leading-tight">
-              <span className="truncate font-medium">{serviceName}</span>
-            </div>
-          </SidebarMenuButton>
-        </Link> */}
         <NavUser />
       </SidebarFooter>
       <SidebarRail />
