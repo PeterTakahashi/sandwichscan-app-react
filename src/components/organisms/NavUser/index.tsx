@@ -91,7 +91,9 @@ export function NavUser() {
             </DropdownMenuContent>
           </DropdownMenu>
         ) : (
-          <WalletConnectDialogButton />
+          <DropdownMenu>
+            <WalletConnectDialogButton />
+          </DropdownMenu>
         )}
       </SidebarMenuItem>
     </SidebarMenu>

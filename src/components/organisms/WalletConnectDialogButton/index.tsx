@@ -12,21 +12,30 @@ import {
 import { Wallet } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/atoms/Avatar";
 import { useConnect } from "wagmi";
+import { useSidebar } from "@/features/hooks/context/useSidebar";
 import { SidebarMenuButton } from "@/components/atoms/Sidebar";
 
 export function WalletConnectDialogButton() {
   const { connectors, connect } = useConnect();
+  const { state } = useSidebar();
+
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <SidebarMenuButton className="w-full">
-          <Avatar className="h-8 w-8 rounded-lg">
-            <AvatarFallback className="rounded-lg text-slate-500">
-              <Wallet />
-            </AvatarFallback>
-          </Avatar>
-          <span className="ml-2">Connect Wallet</span>
-        </SidebarMenuButton>
+        {state == "collapsed" ? (
+          <SidebarMenuButton tooltip="Connect Wallet">
+            <Wallet />
+          </SidebarMenuButton>
+        ) : (
+          <SidebarMenuButton className="w-full">
+            <Avatar className="h-8 w-8 rounded-lg">
+              <AvatarFallback className="rounded-lg">
+                <Wallet />
+              </AvatarFallback>
+            </Avatar>
+            <span className="ml-2">Connect Wallet</span>
+          </SidebarMenuButton>
+        )}
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>

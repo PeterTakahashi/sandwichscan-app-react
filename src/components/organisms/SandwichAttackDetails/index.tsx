@@ -227,6 +227,13 @@ export const SandwichAttackDetails: FC<SandwichAttackDetailsProps> = ({
                     )}{" "}
                     wei
                   </div>
+                  <div className="text-xs text-slate-500 dark:text-slate-400">
+                    ≈{" "}
+                    {new Intl.NumberFormat("en-US", {
+                      maximumFractionDigits: 0,
+                    }).format(Number(sandwichAttack.cost_usd ?? 0))}{" "}
+                    USD
+                  </div>
                 </div>
               </div>
             </div>
