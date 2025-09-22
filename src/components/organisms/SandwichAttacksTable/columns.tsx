@@ -72,10 +72,7 @@ export const buildColumns = ({
       filterStartDateKey: "block_timestamp__gte",
       filterEndDateKey: "block_timestamp__lte",
     },
-    cell: ({ row }) =>
-      new Date(
-        row.original.front_attack_swap.transaction.block_timestamp
-      ).toLocaleString(),
+    cell: ({ row }) => new Date(row.original.block_timestamp).toLocaleString(),
   },
   {
     id: "defi_version",

@@ -1,5 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-import { HomePage } from "@/pages/HomePage";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 import { ToastMessageHandler } from "@/components/common/ToastMessageHandler";
 import { PublicRoute } from "@/components/routes/PublicRoute";
@@ -14,7 +13,7 @@ import { SandwichAttackPage } from "@/pages/SandwichAttackPage";
 import { MySandwichAttacksPage } from "@/pages/MySandwichAttacksPage";
 
 const routes = [
-  { path: "/", element: <HomePage /> },
+  { path: "/", element: <SandwichAttacksPage /> },
   {
     path: "/chains",
     element: <ChainsPage />,

@@ -122,29 +122,39 @@ function SwapCard({ title, chain, swap, base_token0 = true }: Props) {
         </div>
 
         <div className="mt-4">
-          <div className="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-300">
-            <span className="px-2 py-1 rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono">
-              {omitAddress(swap.transaction.tx_hash)}
-            </span>
-            <a
-              href={`${chain.explorer_url}/tx/${swap.transaction.tx_hash}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-gray-600 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-200"
-            >
-              Explorer
-              <svg
-                className="size-3.5"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+          <div className="flex items-center text-xs text-slate-600 dark:text-slate-300 justify-between">
+            <div className="flex items-center gap-2">
+              <span className="px-2 py-1 rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono">
+                {omitAddress(swap.transaction.tx_hash)}
+              </span>
+              <a
+                href={`${chain.explorer_url}/tx/${swap.transaction.tx_hash}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-gray-600 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-200"
               >
-                <path d="M7 17 17 7M7 7h10v10" />
-              </svg>
-            </a>
+                Explorer
+                <svg
+                  className="size-3.5"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M7 17 17 7M7 7h10v10" />
+                </svg>
+              </a>
+            </div>
+
+            <div className="hidden sm:block">
+              {new Date(swap.transaction.block_timestamp).toLocaleString()}
+            </div>
+          </div>
+
+          <div className="block text-right sm:hidden mt-2 text-xs text-slate-600 dark:text-slate-300">
+            {new Date(swap.transaction.block_timestamp).toLocaleString()}
           </div>
         </div>
       </div>
