@@ -66,6 +66,10 @@ const data = {
           title: "What is Sandwich Attack?",
           url: `${import.meta.env.VITE_DOCS_DOMAIN}/docs/category/what-is-sandwich-attack`,
         },
+        {
+          title: "API Reference",
+          url: `${import.meta.env.VITE_API_URL}/scalar`,
+        },
       ],
     },
   ],
