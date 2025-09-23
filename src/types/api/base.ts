@@ -525,7 +525,7 @@ export interface components {
         SandwichAttackListRead: {
             meta: components["schemas"]["SandwichAttackListResponseMeta"];
             /** Data */
-            data: components["schemas"]["SandwichAttackRead"][];
+            data: components["schemas"]["SandwichAttackReadOnList"][];
         };
         /** SandwichAttackListResponseMeta */
         SandwichAttackListResponseMeta: {
@@ -702,6 +702,82 @@ export interface components {
              * @description Total harm in USD for the month.
              */
             total_harm_usd: number;
+        };
+        /** SandwichAttackReadOnList */
+        SandwichAttackReadOnList: {
+            /**
+             * Id
+             * @description The ID of the object
+             * @example abcd1234xyzc
+             */
+            id: string;
+            /** @description The chain this pool belongs to. */
+            chain: components["schemas"]["ChainRead"];
+            /** @description The front-running swap of the sandwich attack. */
+            front_attack_swap: components["schemas"]["SwapReadOnList"];
+            /**
+             * Attacker Address
+             * @description The address of the attacker.
+             */
+            attacker_address: string;
+            /**
+             * Victim Address
+             * @description The address of the victim.
+             */
+            victim_address: string;
+            /** @description The DeFi version associated with the sandwich attack. */
+            defi_version: components["schemas"]["DefiVersionRead"];
+            /**
+             * Revenue Usd
+             * @description The revenue of the sandwich attack in USD.
+             */
+            revenue_usd?: number | null;
+            /**
+             * Cost Usd
+             * @description The cost of the sandwich attack in USD.
+             */
+            cost_usd?: number | null;
+            /**
+             * Profit Usd
+             * @description The profit of the sandwich attack in USD.
+             */
+            profit_usd?: number | null;
+            /**
+             * Harm Usd
+             * @description The harm caused to the victim in USD.
+             */
+            harm_usd?: number | null;
+            /**
+             * Block Timestamp
+             * Format: date-time
+             * @description The block timestamp of the sandwich attack (from the front-running swap).
+             */
+            block_timestamp: string;
+            /**
+             * Created At
+             * Format: date-time
+             * @description Record creation timestamp.
+             */
+            created_at: string;
+            /**
+             * Updated At
+             * Format: date-time
+             * @description Record update timestamp.
+             */
+            updated_at: string;
+        };
+        /** SwapReadOnList */
+        SwapReadOnList: {
+            /**
+             * Id
+             * @description The ID of the object
+             * @example abcd1234xyzc
+             */
+            id: string;
+            /** @description The token being sold in the swap. */
+            sell_token?: components["schemas"]["app__v1__schemas__token__read__TokenRead"] | null;
+            /** @description The token being bought in the swap. */
+            buy_token?: components["schemas"]["app__v1__schemas__token__read__TokenRead"] | null;
         };
         /** TokenListRead */
         TokenListRead: {

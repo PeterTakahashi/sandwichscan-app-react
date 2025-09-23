@@ -1,5 +1,5 @@
 import type { ColumnDef } from "@tanstack/react-table";
-import type { SandwichAttackRead } from "@/types/api/sandwich_attack/sandwich_attack";
+import type { SandwichAttackReadOnList } from "@/types/api/sandwich_attack/sandwich_attack";
 import type { ChainRead } from "@/types/api/chain/chain";
 import type { DefiVersionRead } from "@/types/api/defi_version/defi_version";
 import { Button } from "@/components/atoms/Button";
@@ -7,7 +7,7 @@ import { Eye } from "lucide-react";
 import { Link } from "react-router-dom";
 import { numberToUSD } from "@/lib/utils/numberToUSD";
 
-type Row = SandwichAttackRead;
+type Row = SandwichAttackReadOnList;
 
 export const buildColumns = ({
   chains,

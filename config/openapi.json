@@ -1990,52 +1990,6 @@
         ],
         "title": "ChainRead"
       },
-      "DefiFactoryRead": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "title": "Id",
-            "description": "The ID of the object",
-            "example": "abcd1234xyzc"
-          },
-          "address": {
-            "type": "string",
-            "title": "Address",
-            "description": "The contract address of the DeFi factory."
-          },
-          "created_block_number": {
-            "type": "integer",
-            "title": "Created Block Number",
-            "description": "The block number when the DeFi factory was created."
-          },
-          "defi_version": {
-            "$ref": "#/components/schemas/DefiVersionRead",
-            "description": "The DeFi version this factory is associated with."
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time",
-            "title": "Created At",
-            "description": "Record creation timestamp."
-          },
-          "updated_at": {
-            "type": "string",
-            "format": "date-time",
-            "title": "Updated At",
-            "description": "Record update timestamp."
-          }
-        },
-        "type": "object",
-        "required": [
-          "id",
-          "address",
-          "created_block_number",
-          "defi_version",
-          "created_at",
-          "updated_at"
-        ],
-        "title": "DefiFactoryRead"
-      },
       "DefiListRead": {
         "properties": {
           "meta": { "$ref": "#/components/schemas/ListResponseMeta" },
@@ -2238,7 +2192,9 @@
             "$ref": "#/components/schemas/SandwichAttackListResponseMeta"
           },
           "data": {
-            "items": { "$ref": "#/components/schemas/SandwichAttackRead" },
+            "items": {
+              "$ref": "#/components/schemas/SandwichAttackReadOnList"
+            },
             "type": "array",
             "title": "Data"
           }
@@ -2490,6 +2446,120 @@
         ],
         "title": "SandwichAttackReadByMonth"
       },
+      "SandwichAttackReadOnList": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "The ID of the object",
+            "example": "abcd1234xyzc"
+          },
+          "chain": {
+            "$ref": "#/components/schemas/ChainRead",
+            "description": "The chain this pool belongs to."
+          },
+          "front_attack_swap": {
+            "$ref": "#/components/schemas/SwapReadOnList",
+            "description": "The front-running swap of the sandwich attack."
+          },
+          "attacker_address": {
+            "type": "string",
+            "title": "Attacker Address",
+            "description": "The address of the attacker."
+          },
+          "victim_address": {
+            "type": "string",
+            "title": "Victim Address",
+            "description": "The address of the victim."
+          },
+          "defi_version": {
+            "$ref": "#/components/schemas/DefiVersionRead",
+            "description": "The DeFi version associated with the sandwich attack."
+          },
+          "revenue_usd": {
+            "anyOf": [{ "type": "number" }, { "type": "null" }],
+            "title": "Revenue Usd",
+            "description": "The revenue of the sandwich attack in USD."
+          },
+          "cost_usd": {
+            "anyOf": [{ "type": "number" }, { "type": "null" }],
+            "title": "Cost Usd",
+            "description": "The cost of the sandwich attack in USD."
+          },
+          "profit_usd": {
+            "anyOf": [{ "type": "number" }, { "type": "null" }],
+            "title": "Profit Usd",
+            "description": "The profit of the sandwich attack in USD."
+          },
+          "harm_usd": {
+            "anyOf": [{ "type": "number" }, { "type": "null" }],
+            "title": "Harm Usd",
+            "description": "The harm caused to the victim in USD."
+          },
+          "block_timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Block Timestamp",
+            "description": "The block timestamp of the sandwich attack (from the front-running swap)."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Record creation timestamp."
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At",
+            "description": "Record update timestamp."
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "chain",
+          "front_attack_swap",
+          "attacker_address",
+          "victim_address",
+          "defi_version",
+          "block_timestamp",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "SandwichAttackReadOnList"
+      },
+      "SwapReadOnList": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "The ID of the object",
+            "example": "abcd1234xyzc"
+          },
+          "sell_token": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/app__v1__schemas__token__read__TokenRead"
+              },
+              { "type": "null" }
+            ],
+            "description": "The token being sold in the swap."
+          },
+          "buy_token": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/app__v1__schemas__token__read__TokenRead"
+              },
+              { "type": "null" }
+            ],
+            "description": "The token being bought in the swap."
+          }
+        },
+        "type": "object",
+        "required": ["id"],
+        "title": "SwapReadOnList"
+      },
       "TokenListRead": {
         "properties": {
           "meta": { "$ref": "#/components/schemas/ListResponseMeta" },
@@ -2628,10 +2698,6 @@
             "$ref": "#/components/schemas/ChainRead",
             "description": "The chain this pool belongs to."
           },
-          "defi_factory": {
-            "$ref": "#/components/schemas/DefiFactoryRead",
-            "description": "The factory this pool belongs to."
-          },
           "token0": {
             "$ref": "#/components/schemas/app__v1__schemas__defi_pool__token__read__TokenRead",
             "description": "The first token of the pool."
@@ -2639,18 +2705,6 @@
           "token1": {
             "$ref": "#/components/schemas/app__v1__schemas__defi_pool__token__read__TokenRead",
             "description": "The second token of the pool."
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time",
-            "title": "Created At",
-            "description": "Record creation timestamp."
-          },
-          "updated_at": {
-            "type": "string",
-            "format": "date-time",
-            "title": "Updated At",
-            "description": "Record update timestamp."
           }
         },
         "type": "object",
@@ -2661,11 +2715,8 @@
           "tick_spacing",
           "fee_tier_bps",
           "chain",
-          "defi_factory",
           "token0",
-          "token1",
-          "created_at",
-          "updated_at"
+          "token1"
         ],
         "title": "DefiPoolRead"
       },
@@ -2705,18 +2756,6 @@
             "anyOf": [{ "type": "string" }, { "type": "null" }],
             "title": "Logo Url",
             "description": "URL of the token logo."
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time",
-            "title": "Created At",
-            "description": "Record creation timestamp."
-          },
-          "updated_at": {
-            "type": "string",
-            "format": "date-time",
-            "title": "Updated At",
-            "description": "Record update timestamp."
           }
         },
         "type": "object",
@@ -2726,9 +2765,7 @@
           "address",
           "symbol",
           "decimals",
-          "decimals_invalid",
-          "created_at",
-          "updated_at"
+          "decimals_invalid"
         ],
         "title": "TokenRead"
       },
